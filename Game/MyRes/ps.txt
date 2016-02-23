@@ -1,0 +1,64 @@
+
+sampler   g_baseTex;
+
+float g_fOriWeight;
+
+float g_fFinWeight;
+
+bool  g_bNoTexture;
+
+float g_light;	//光照
+float g_duibi;	//对比度
+
+float g_devLine; //明暗分割值
+
+
+//后处理的类型
+int g_PostProcessType;
+
+struct PS_INPUT
+{
+		float4 COL : COLOR0;
+		float2 Tex : TEXCOORD0;
+};
+
+//float3 LuminanceConv = { 0.2125f, 0.7154f, 0.0721f };
+float3 LuminanceConv = { 0.2125f, 0.7154f, 0.0721f };
+//黑屏系统
+float3 BlackConv     = {0.0f,0.0f,0.0f};
+
+float4 Done( PS_INPUT  input ) : COLOR0
+{
+	  float4 oriColor; 
+	  float3 nowcolor;
+	  float4 temp;
+	  
+	  if(g_bNoTexture == true)
+	  {
+	  		oriColor = input.COL;
+	  }
+	  else
+	  {
+		temp = tex2D( g_baseTex, input.Tex );
+		oriColor = temp * input.COL * g_light; //调整亮度
+		/// 其实 input.COL 也可以不加
+
+
+		// 对比度
+		float3 avgcolor = float3(0.5 ,0.5 ,0.5);
+		float3 localcolor = float3(oriColor.r, oriColor.g, oriColor.b);
+		nowcolor = lerp(avgcolor, localcolor, g_duibi);
+	  }
+    
+    
+    float4 OutPutColor = oriColor;
+
+    // 对比度
+    OutPutColor.r = nowcolor.r;
+    OutPutColor.g = nowcolor.g;
+    OutPutColor.b = nowcolor.b;
+    
+    OutPutColor.a = temp.a;	 
+  
+    return OutPutColor;
+}
