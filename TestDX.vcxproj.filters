@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Particle">
+      <UniqueIdentifier>{81de2db7-c38f-4f24-9ff1-6983877cadf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mine">
+      <UniqueIdentifier>{fb0c0a56-0241-4f38-84bc-c89185a7dda5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YanZheng">
+      <UniqueIdentifier>{a667064c-343b-4017-ac7b-eb82df57ca25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Color">
+      <UniqueIdentifier>{d21be6b7-5083-4891-b698-55449b391ab4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lua">
+      <UniqueIdentifier>{e18c2f61-5a4d-424b-aab9-a1d7747fa064}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyLua">
+      <UniqueIdentifier>{918d6f5a-3094-4cc2-842c-c8b3780f4f21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{12aa3f9f-7007-46c1-afaf-1a5403ade0d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\GuiControl">
+      <UniqueIdentifier>{4ad4f955-d5bf-4a18-a7de-68cd08ff7d39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Manager">
+      <UniqueIdentifier>{5b07257e-b11a-437b-a8fc-22deff38d363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Logic">
+      <UniqueIdentifier>{df3369bb-5472-4229-9bbe-a5a61d9298a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Text">
+      <UniqueIdentifier>{73b451a2-8f17-4598-a4e0-bb37bc5c2a46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Table">
+      <UniqueIdentifier>{c5ed7123-31f3-4344-ba11-3469c80661cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device">
+      <UniqueIdentifier>{0782cd5d-c790-43d8-ba9c-db42d9f0530b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FileStore">
+      <UniqueIdentifier>{c5ec2264-0b5c-457f-86e5-3955284517a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FileStore\json">
+      <UniqueIdentifier>{082f9804-49a3-47cb-9cb2-85016375752d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{89702b58-bbaf-4c2b-9dc5-60d7fbb32ec4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="hsb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MsgMgr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Spec\RoundProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDX.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Spec\TestLogicDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="CMSprite.cpp">
+      <Filter>Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="CSprite.cpp">
+      <Filter>Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawFlow.cpp">
+      <Filter>Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMain.cpp">
+      <Filter>Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureMgr.cpp">
+      <Filter>Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="WndMessageDetailHandle.cpp">
+      <Filter>Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="WndMessageHandle.cpp">
+      <Filter>Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="YanZhengMa\YanZheng.cpp">
+      <Filter>YanZheng</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lapi.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lauxlib.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lbaselib.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lcode.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\ldblib.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\ldebug.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\ldo.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\ldump.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lfunc.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lgc.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\linit.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\liolib.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\llex.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lmathlib.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lmem.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\loadlib.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lobject.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lopcodes.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\loslib.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lparser.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lstate.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lstring.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lstrlib.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\ltable.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\ltablib.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\ltm.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lua.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\luac.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lundump.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lvm.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\lzio.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\print.c">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaMgr.cpp">
+      <Filter>MyLua</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\cGuiButton.cpp">
+      <Filter>GUI\GuiControl</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\cGuiControl.cpp">
+      <Filter>GUI\GuiControl</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\cGuiForm.cpp">
+      <Filter>GUI\GuiControl</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\cGuiLable.cpp">
+      <Filter>GUI\GuiControl</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\cGuiMgr.cpp">
+      <Filter>GUI\GuiControl</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\cGuiProgress.cpp">
+      <Filter>GUI\GuiControl</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\Manager\GameGuiManager.cpp">
+      <Filter>GUI\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\Manager\GuiContainer.cpp">
+      <Filter>GUI\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\Manager\GuiLayoutFileMgr.cpp">
+      <Filter>GUI\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\Manager\RegisterGui.cpp">
+      <Filter>GUI\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\BusinessLogic\TestDlg.cpp">
+      <Filter>GUI\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\Text\TextInterface.cpp">
+      <Filter>GUI\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\Text\TextMgr.cpp">
+      <Filter>GUI\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Table\Table.cpp">
+      <Filter>Table</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\DeviceCap.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolLib\json\src\lib_json\json_reader.cpp">
+      <Filter>FileStore\json</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolLib\json\src\lib_json\json_value.cpp">
+      <Filter>FileStore\json</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolLib\json\src\lib_json\json_writer.cpp">
+      <Filter>FileStore\json</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKwavefile.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="hsb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Spec\RoundProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestDX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Spec\TestLogicDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="CMSprite.h">
+      <Filter>Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="CSprite.h">
+      <Filter>Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawFlow.h">
+      <Filter>Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMain.h">
+      <Filter>Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="iSprite.h">
+      <Filter>Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="MsgMgr.h">
+      <Filter>Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureMgr.h">
+      <Filter>Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="WndMessageHandle.h">
+      <Filter>Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="YanZhengMa\YanZheng.h">
+      <Filter>YanZheng</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\lapi.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\lauxlib.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\lcode.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\ldebug.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\ldo.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\lfunc.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\lgc.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\llex.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\llimits.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\lmem.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\lobject.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\lopcodes.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\lparser.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\lstate.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\lstring.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\ltable.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\ltm.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\lua.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\luaconf.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\lualib.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\lundump.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\lvm.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\lzio.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaMgr.h">
+      <Filter>MyLua</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\cCommonGuiHead.h">
+      <Filter>GUI\GuiControl</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\cGuiButton.h">
+      <Filter>GUI\GuiControl</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\cGuiControl.h">
+      <Filter>GUI\GuiControl</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\cGuiForm.h">
+      <Filter>GUI\GuiControl</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\cGuiLable.h">
+      <Filter>GUI\GuiControl</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\cGuiMgr.h">
+      <Filter>GUI\GuiControl</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\cGuiProgress.h">
+      <Filter>GUI\GuiControl</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\Manager\GameGuiManager.h">
+      <Filter>GUI\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\Manager\GuiContainer.h">
+      <Filter>GUI\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\Manager\GuiLayoutFileMgr.h">
+      <Filter>GUI\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\Manager\RegisterGui.h">
+      <Filter>GUI\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BusinessLogic\TestDlg.h">
+      <Filter>GUI\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\Text\TextInterface.h">
+      <Filter>GUI\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\Text\TextMgr.h">
+      <Filter>GUI\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Table\Table.h">
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\DeviceCap.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolLib\json\include\json\autolink.h">
+      <Filter>FileStore\json</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolLib\json\include\json\config.h">
+      <Filter>FileStore\json</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolLib\json\include\json\features.h">
+      <Filter>FileStore\json</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolLib\json\include\json\forwards.h">
+      <Filter>FileStore\json</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolLib\json\include\json\json.h">
+      <Filter>FileStore\json</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolLib\json\src\lib_json\json_batchallocator.h">
+      <Filter>FileStore\json</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolLib\json\include\json\reader.h">
+      <Filter>FileStore\json</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolLib\json\include\json\value.h">
+      <Filter>FileStore\json</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolLib\json\include\json\writer.h">
+      <Filter>FileStore\json</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKwavefile.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="TestDX.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TestDX.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ToolLib\json\src\lib_json\json_internalarray.inl">
+      <Filter>FileStore\json</Filter>
+    </None>
+    <None Include="ToolLib\json\src\lib_json\json_internalmap.inl">
+      <Filter>FileStore\json</Filter>
+    </None>
+    <None Include="ToolLib\json\src\lib_json\json_valueiterator.inl">
+      <Filter>FileStore\json</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+</Project>

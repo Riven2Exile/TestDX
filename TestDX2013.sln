@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestDX", "TestDX.vcxproj", "{2DC02081-B096-4FAB-B25A-FEADF9304785}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tetris", "Tetris\Tetris.vcxproj", "{C848079A-376B-4CD7-9541-BD824513680F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tinyXML", "ToolLib\tinyXML\tinyXML.vcxproj", "{F5CCCFA2-4ECD-4855-B9A3-C139136A4D7B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UIEditorHelper", "UIEditorHelper\UIEditorHelper.vcxproj", "{39F82AE0-838E-42B7-B4C3-5D6A87D0A4F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2DC02081-B096-4FAB-B25A-FEADF9304785}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2DC02081-B096-4FAB-B25A-FEADF9304785}.Debug|Win32.Build.0 = Debug|Win32
+		{2DC02081-B096-4FAB-B25A-FEADF9304785}.Release|Win32.ActiveCfg = Release|Win32
+		{2DC02081-B096-4FAB-B25A-FEADF9304785}.Release|Win32.Build.0 = Release|Win32
+		{C848079A-376B-4CD7-9541-BD824513680F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C848079A-376B-4CD7-9541-BD824513680F}.Debug|Win32.Build.0 = Debug|Win32
+		{C848079A-376B-4CD7-9541-BD824513680F}.Release|Win32.ActiveCfg = Release|Win32
+		{C848079A-376B-4CD7-9541-BD824513680F}.Release|Win32.Build.0 = Release|Win32
+		{F5CCCFA2-4ECD-4855-B9A3-C139136A4D7B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F5CCCFA2-4ECD-4855-B9A3-C139136A4D7B}.Debug|Win32.Build.0 = Debug|Win32
+		{F5CCCFA2-4ECD-4855-B9A3-C139136A4D7B}.Release|Win32.ActiveCfg = Release|Win32
+		{F5CCCFA2-4ECD-4855-B9A3-C139136A4D7B}.Release|Win32.Build.0 = Release|Win32
+		{39F82AE0-838E-42B7-B4C3-5D6A87D0A4F5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{39F82AE0-838E-42B7-B4C3-5D6A87D0A4F5}.Debug|Win32.Build.0 = Debug|Win32
+		{39F82AE0-838E-42B7-B4C3-5D6A87D0A4F5}.Release|Win32.ActiveCfg = Release|Win32
+		{39F82AE0-838E-42B7-B4C3-5D6A87D0A4F5}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
