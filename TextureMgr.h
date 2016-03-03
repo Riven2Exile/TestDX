@@ -8,7 +8,20 @@
 #include <string>
 #include <map>
 
+
 struct IDirect3DTexture9;
+
+struct stTexInfo
+{
+	IDirect3DTexture9* pTex;
+	int weight;	//¿í¶È
+	int height;	//¸ß¶È
+
+	stTexInfo():pTex(0),weight(0),height(0){
+
+	}
+};
+
 
 // BKDR Hash Function
 unsigned int BKDRHash(const char *str);
@@ -35,7 +48,7 @@ public:
     IDirect3DTexture9* getTexture(std::string strKey);
 
 private:
-    typedef std::map<unsigned int, IDirect3DTexture9*> MAP_TEX;
+	typedef std::map<unsigned int, stTexInfo> MAP_TEX;
     MAP_TEX m_data;
 };
 

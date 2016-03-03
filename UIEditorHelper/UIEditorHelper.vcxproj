@@ -56,7 +56,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader />
-      <ObjectFileName>rubbish\$(ProjectName)\$(IntDir)</ObjectFileName>
+      <ObjectFileName>..\rubbish\$(ProjectName)\$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>..\rubbish\$(ProjectName)\$(IntDir)vc80.pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>

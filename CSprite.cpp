@@ -22,6 +22,10 @@ CSprite::CSprite(): m_bVisible(true)
 , m_h(0.0f)
 , m_iw(0.0f)
 , m_ih(0.0f)
+, m_tl(0.0f)
+, m_tt(0.0f)
+, m_tr(1.0f)
+, m_tb(1.0f)
 , m_StretchX(1.0f)
 , m_StretchY(1.0f)
 , m_color(0)
@@ -225,6 +229,23 @@ void CSprite::setTexture(IDirect3DTexture9* pTexture)
     m_pTexture = pTexture;
 }
 
+void CSprite::setTextureU1(const float& t){
+	m_tl = t;
+	m_bDirty = true;
+}
+void CSprite::setTextureU2(const float& t){
+	m_tr = t;
+	m_bDirty = true;
+}
+void CSprite::setTextureV1(const float& t){
+	m_tt = t;
+	m_bDirty = true;
+}
+void CSprite::setTextureV2(const float& t){
+	m_tb = t;
+	m_bDirty = true;
+}
+
 void CSprite::setClipRect(FRECT& cf)
 {
     m_reClip = cf;
@@ -280,10 +301,10 @@ void CSprite::Update()
         //纹理坐标
 
 		// 用于裁剪
-		float tl = 0.0f; 
-		float tr = 1.0f;
-		float tt = 0.0f;
-		float td = 1.0f;
+		float tl = m_tl /*0.0f*/; 
+		float tr = m_tr /*1.0f*/;
+		float tt = m_tt /*0.0f*/;
+		float td = m_tb /*1.0f*/;
 
 
         // 最后再裁剪? (注意缩放)

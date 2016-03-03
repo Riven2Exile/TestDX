@@ -64,6 +64,12 @@ public:
     void setStretchY(float y); //1.0f表示不缩放
 
     void setTexture(IDirect3DTexture9* pTexture); //设置纹理
+
+	// 设置纹理坐标
+	virtual void setTextureU1(const float& t);
+	virtual void setTextureU2(const float& t);
+	virtual void setTextureV1(const float& t);
+	virtual void setTextureV2(const float& t);
     
     bool isClip();
     void setClip(bool bClip);
@@ -86,6 +92,13 @@ private:
 
     float m_iw; //纹理的宽度
     float m_ih; //纹理的高度
+
+	//纹理坐标
+	float m_tl; // left
+	float m_tt;	// top
+	float m_tr;	// right
+	float m_tb;	// bottom
+
 
     //缩放
     float m_StretchX;

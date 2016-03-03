@@ -15,6 +15,7 @@
 #include "Tetris\TetrisWorld.h"
 #include "Camera.h"
 #include "UIEditorHelper\UIEditorHelper.h"
+#include "GUI\Text\TextInterface.h"
 
 
 extern IDirect3DDevice9 *g_pDevice;
@@ -78,7 +79,7 @@ void CGameMain::init()
 
     _gui.Init();
 
-    m_pTest = CreateSprite(ST_3D /*ST_MX*/);
+    m_pTest = CreateSprite(/*ST_3D*/ ST_MX);
 
     for (int i = 0; i < TEST_SIZE; ++i)
     {
@@ -89,6 +90,13 @@ void CGameMain::init()
 
 
     //m_test.Clip();
+
+	// 一些编码
+	
+	byte a = 0x41;
+	byte a2[2] = {0x80, 0x41};
+	printf("%s  %s \n", &a, a2);
+
 
     //// 加载一些纹理..
     CTextureMgr& T = CTextureMgr::instance();
@@ -128,15 +136,19 @@ void CGameMain::init()
     T.addTexture("MyRes/cube.tga", "cube");
     T.addTexture("MyRes/cubeBlend.tga", "cubeBlend");
 
+	T.addTexture("MyRes/font_kai.bmp", "font_kai");	// 楷体字体
+
     // 加载纹理 end
     m_pTest->LoadAImage("", g_pDevice);
     m_pTest->setTexture(T.getTexture( "moxia"/*"Riven"*/));
     m_pTest->setWidth(1024);
     m_pTest->setHeight(768); //画正到屏幕
+	m_pTest->setVisible(false);
     // //     m_test.SetX(100.f);
     // //     m_test.SetY(200.f);
     //     m_pTest->setStretchX(0.8f);
     //     m_pTest->setStretchY(0.8f);
+	//m_pTest->setTextureU1(0.5f);
 
     // 动画
     initAnimation();
@@ -189,10 +201,10 @@ void CGameMain::init()
     m_pCtrlTest->SetHeight(27);
     m_pCtrlTest->SetTexture("close1");
     m_pCtrlTest->SetID(110);
-    m_pCtrlTest->SetBtnStateImage(cGuiButton.kBS_Normal, "close1");
-    m_pCtrlTest->SetBtnStateImage(cGuiButton.kBS_MouseOn, "close2");
-    m_pCtrlTest->SetBtnStateImage(cGuiButton.kBS_Clicked, "close3");
-    m_pCtrlTest->SetBtnStateImage(cGuiButton.kBS_Disable, "close4");
+    m_pCtrlTest->SetBtnStateImage(cGuiButton::kBS_Normal, "close1");
+    m_pCtrlTest->SetBtnStateImage(cGuiButton::kBS_MouseOn, "close2");
+    m_pCtrlTest->SetBtnStateImage(cGuiButton::kBS_Clicked, "close3");
+    m_pCtrlTest->SetBtnStateImage(cGuiButton::kBS_Disable, "close4");
     m_pCtrlTest->Show();
 
 	cGuiProgress* pPro = new cGuiProgress(m_pDlgTest);
@@ -209,10 +221,10 @@ void CGameMain::init()
     pBtnTemp->SetWidth(18);
     pBtnTemp->SetHeight(18);
     pBtnTemp->SetTexture("+1");
-    pBtnTemp->SetBtnStateImage(cGuiButton.kBS_Normal, "+1");
-    pBtnTemp->SetBtnStateImage(cGuiButton.kBS_MouseOn, "+2");
-    pBtnTemp->SetBtnStateImage(cGuiButton.kBS_Clicked, "+3");
-    pBtnTemp->SetBtnStateImage(cGuiButton.kBS_Disable, "+4");
+    pBtnTemp->SetBtnStateImage(cGuiButton::kBS_Normal, "+1");
+    pBtnTemp->SetBtnStateImage(cGuiButton::kBS_MouseOn, "+2");
+    pBtnTemp->SetBtnStateImage(cGuiButton::kBS_Clicked, "+3");
+    pBtnTemp->SetBtnStateImage(cGuiButton::kBS_Disable, "+4");
     pBtnTemp->Show();
     //pBtnTemp->SetPos(100, 90);
 	pBtnTemp->SetOffSet(100, 90);
@@ -338,6 +350,10 @@ void CGameMain::draw()
 
         _pTWorld->draw();
 
+		// 测试字体
+		//test font;
+		const char* pstr = "f";
+		TextOutput(100, 100, pstr, strlen(pstr));
 
 
         CDrawFlow::Instance().draw(); //绘制流

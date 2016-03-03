@@ -59,6 +59,10 @@ public:
     virtual void setStretchY(float y) ; //1.0f表示不缩放
 
     virtual void setTexture(IDirect3DTexture9* pTexture) ; //设置纹理
+	virtual void setTextureU1(const float& t) {}
+	virtual void setTextureU2(const float& t) {}
+	virtual void setTextureV1(const float& t) {}
+	virtual void setTextureV2(const float& t) {}
 
     virtual bool isClip();
     virtual void setClip(bool bClip);

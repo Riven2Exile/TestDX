@@ -58,6 +58,12 @@ public:
 
     virtual void setTexture(IDirect3DTexture9* pTexture) = 0; //设置纹理
 
+	// 设置纹理坐标
+	virtual void setTextureU1(const float& t) = 0;
+	virtual void setTextureU2(const float& t) = 0;
+	virtual void setTextureV1(const float& t) = 0;
+	virtual void setTextureV2(const float& t) = 0;
+
     virtual bool isClip() = 0;
     virtual void setClip(bool bClip) = 0;
     virtual void setClipRect(FRECT& rc) = 0; //test 裁剪

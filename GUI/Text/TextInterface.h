@@ -9,7 +9,7 @@
 
 
 //要不要返回值?
-void TextOut(const int& x, const int &y, const char* str);
+void TextOutput(const int& x, const int &y, const char* str, const int& len);
 
 
 

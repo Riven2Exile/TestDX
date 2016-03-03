@@ -47,6 +47,11 @@ void CTextureMgr::addTexture(const char* szName, std::string strKey)
         info.MipLevels, usage, info.Format, (D3DPOOL)pool, D3DX_FILTER_NONE/*D3DX_FILTER_TRIANGLE*/,  // D3DPOOL_DEFAULT才可行。。
         D3DX_FILTER_NONE/*D3DX_FILTER_TRIANGLE*/, 0/*D3DCOLOR_ARGB(255,255,255,255)*/, NULL, NULL, &pTexture); //坑.. D3DCOLOR_ARGB(255,255,255,255) --> 会将纹理中白色的点替换成黑色,0 禁用之
 
+	stTexInfo tInfo;
+	tInfo.pTex = pTexture;
+	tInfo.weight = info.Width;
+	tInfo.height = info.Height;
+
 	const unsigned int& n = BKDRHash(strKey.c_str());
 
     if (pTexture)
@@ -58,16 +63,16 @@ void CTextureMgr::addTexture(const char* szName, std::string strKey)
 		}
 #endif
 
-        m_data[n] = pTexture;
+		m_data[n] = tInfo;
     }
 }
 
 void CTextureMgr::addTexture(IDirect3DTexture9* pTex, std::string strKey)
 {
-    if (pTex)
-    {
-        m_data[BKDRHash(strKey.c_str())] = pTex;
-    }
+//     if (pTex)
+//     {
+//         m_data[BKDRHash(strKey.c_str())] = pTex;
+//     }
 }
 
 
@@ -76,7 +81,7 @@ IDirect3DTexture9* CTextureMgr::getTexture(const char* szName)
     MAP_TEX::iterator itr = m_data.find(BKDRHash(szName));
     if (itr != m_data.end())
     {
-        return itr->second;
+        return itr->second.pTex;
     }
     else
         return NULL;
@@ -87,7 +92,7 @@ IDirect3DTexture9* CTextureMgr::getTexture(std::string szName)
     MAP_TEX::iterator itr = m_data.find(BKDRHash(szName.c_str()));
     if (itr != m_data.end())
     {
-        return itr->second;
+        return itr->second.pTex;
     }
     else
         return NULL;

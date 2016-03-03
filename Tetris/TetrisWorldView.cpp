@@ -117,7 +117,11 @@ void TetrisWorldView::run(unsigned long dwElapse)
     
 
     // view µÄ update
-    std::for_each(_CCube.begin(), _CCube.end(), std::mem_fun<void,iSprite>(&iSprite::Update) );
+    //std::for_each(_CCube.begin(), _CCube.end(), std::mem_fun<void,iSprite>(&iSprite::Update) );
+	for (const auto& var : _CCube )
+	{
+		(*var).Update();
+	}
 
     /*_pT->_pCurTCube*/
 }
@@ -129,8 +133,17 @@ void TetrisWorldView::draw()
     //////»­±ß¿ò
 
     //////»­Tetris
-    std::for_each(_WCube.begin(), _WCube.end(), std::mem_fun<void, iSprite>(&iSprite::Draw));
+    //std::for_each(_WCube.begin(), _WCube.end(), std::mem_fun<void, iSprite>(&iSprite::Draw));
 
-    std::for_each(_CCube.begin(), _CCube.end(), std::mem_fun<void, iSprite>(&iSprite::Draw));
+    //std::for_each(_CCube.begin(), _CCube.end(), std::mem_fun<void, iSprite>(&iSprite::Draw));
+
+	for (const auto& var : _WCube)
+	{
+		(*var).Draw();
+	}
+
+	for (const auto& var : _CCube){
+		(*var).Draw();
+	}
 }
 
