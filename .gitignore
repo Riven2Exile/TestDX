@@ -7,3 +7,11 @@ Debug/TestDX.tlog/cl.command.1.tlog
 Debug/TestDX.tlog/CL.read.1.tlog
 *.ipch
 *.tlog
+*.obj
+*.idb
+*.ib_pdb_index
+*.suo
+*.suo
+*.sdf
+*.pdb
+*.ilk

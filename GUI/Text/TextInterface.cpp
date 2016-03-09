@@ -18,6 +18,7 @@ void TextOutput(const int& xT, const int &yT, const char* str, const int& nLen)
 	static const byte H = 0x80;
 	int height = 24; //高度
 	int weight = 12; //
+	int x_start = xT; 
 
 	// 2. 找到纹理位置和区域 (需要用到字体size)
 	IDirect3DTexture9* pTex = CTextureMgr::instance().getTexture("font_kai");
@@ -27,12 +28,19 @@ void TextOutput(const int& xT, const int &yT, const char* str, const int& nLen)
 		sp->LoadAImage("", g_pDevice);
 		sp->setTexture(pTex);
 
+		byte b = (byte)str[i];
+		int nRealWeight = height;
+		if (b < 0xff)
+		{
+			nRealWeight = height / 2; //注意英文宽度是减半的
+		}
+
 		//设置纹理坐标
 		int y = str[i] / low;
 		int x = str[i] % low;
 
-		float tu1 = (x * weight) / float(low*height);
-		float tu2 = (x * weight + weight) / float(low*height); //注意英文宽度是减半的
+		float tu1 = (x * nRealWeight) / float(low*height);
+		float tu2 = (x * nRealWeight + nRealWeight) / float(low*height);
 
 		float tv1 = y / (float)H;
 		float tv2 = (y*height + height) / float(H*height);
@@ -41,13 +49,15 @@ void TextOutput(const int& xT, const int &yT, const char* str, const int& nLen)
 		sp->setTextureV1(tv1);
 		sp->setTextureV2(tv2);
 
-		sp->SetX(xT);
+		sp->SetX(x_start);
 		sp->SetY(yT);
-		sp->setWidth(weight);
+		sp->setWidth(nRealWeight);
 		sp->setHeight(height);
 		sp->SetColor(0xffffffff);
 		sp->Update();
 		sp->Draw();
+
+		x_start += nRealWeight;
 	}
 	
 

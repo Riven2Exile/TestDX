@@ -93,9 +93,9 @@ void CGameMain::init()
 
 	// 一些编码
 	
-	byte a = 0x41;
-	byte a2[2] = {0x80, 0x41};
-	printf("%s  %s \n", &a, a2);
+// 	byte a = 0x41;
+// 	byte a2[2] = {0x80, 0x41};
+// 	printf("%s  %s \n", &a, a2);
 
 
     //// 加载一些纹理..
@@ -352,7 +352,7 @@ void CGameMain::draw()
 
 		// 测试字体
 		//test font;
-		const char* pstr = "f";
+		const char* pstr = "fly";
 		TextOutput(100, 100, pstr, strlen(pstr));
 
 
