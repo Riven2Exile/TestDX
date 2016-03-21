@@ -15,3 +15,4 @@ Debug/TestDX.tlog/CL.read.1.tlog
 *.sdf
 *.pdb
 *.ilk
+*.pch

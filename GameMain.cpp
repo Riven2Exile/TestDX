@@ -334,6 +334,8 @@ void CGameMain::draw()
         // 先清空绘制流程
         CDrawFlow::Instance().clear();
 
+		Textinterface_ResetTextoutOneFrame();
+
         g_pDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0xffaaaaaa, 1.0f, 0);
 
         g_pDevice->BeginScene();
@@ -353,7 +355,7 @@ void CGameMain::draw()
 		// 测试字体
 		//test font;
 		const char* pstr = "fly";
-		TextOutput(100, 100, pstr, strlen(pstr));
+		TextOutput(100, 100, pstr);
 
 
         CDrawFlow::Instance().draw(); //绘制流

@@ -1,18 +1,41 @@
 #include "stdafx.h"
 #include "..\..\CSprite.h"
 #include "..\..\TextureMgr.h"
+#include <vector>
 
 ///// 不让外部访问的全局变量 static 
 extern class IDirect3DDevice9 *g_pDevice;
 
+unsigned int BKDRHash(const char *str);
+
+////// 还可能跟字体相关,
+
+int nWordNum = 0;  //记录一帧里面的字数
+int Textinterface_nTextArraySize = 0;
+int Textinterface_nTextIndex = 0;
+int TextInterface_nIncrease = 100;
+std::vector<iSprite*> Textinterface_vecText;
 
 
-void TextOutput(const int& xT, const int &yT, const char* str, const int& nLen)
+void TextInterface_InitText()
 {
-	if (nLen <= 0 || NULL == str)
-		return;
+	
+}
+
+void Textinterface_ResetTextoutOneFrame()
+{
+	Textinterface_nTextIndex = 0;
+	
+	for (auto var : Textinterface_vecText)
+	{
+		var->setVisible(false);
+	}
+}
 
 
+void TextOutput(const int& xT, const int &yT, const char* str)
+{
+	int nLen = strlen(str);
 	// 1. 对str进行词汇的拆解成单个字,英文是单字节(宽度也减半),中文是双字节 (注意效率)
 	static const byte low = 0xff;
 	static const byte H = 0x80;
@@ -24,9 +47,25 @@ void TextOutput(const int& xT, const int &yT, const char* str, const int& nLen)
 	IDirect3DTexture9* pTex = CTextureMgr::instance().getTexture("font_kai");
 	for (int i = 0; i < nLen; ++i)
 	{
-		CSprite *sp = new CSprite; // 先这样泄露
-		sp->LoadAImage("", g_pDevice);
+		iSprite *sp;
+
+		if (Textinterface_nTextIndex < Textinterface_nTextArraySize)
+		{
+			sp = Textinterface_vecText[Textinterface_nTextIndex];
+		}
+		else
+		{
+			sp = new CSprite;
+			sp->LoadAImage("", g_pDevice);
+			Textinterface_vecText.push_back(sp);
+			Textinterface_nTextArraySize = Textinterface_vecText.size();
+		}
+
+		
 		sp->setTexture(pTex);
+		sp->setVisible(true);
+
+		++Textinterface_nTextIndex;
 
 		byte b = (byte)str[i];
 		int nRealWeight = height;
@@ -55,13 +94,10 @@ void TextOutput(const int& xT, const int &yT, const char* str, const int& nLen)
 		sp->setHeight(height);
 		sp->SetColor(0xffffffff);
 		sp->Update();
-		sp->Draw();
+		sp->Draw();		// 3. 压入绘制流
 
 		x_start += nRealWeight;
 	}
 	
-
-	// 3. 压入绘制流
-
 }
 
