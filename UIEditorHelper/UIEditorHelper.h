@@ -47,6 +47,8 @@ namespace UIEditor
 		cGuiControl *CreateCtrl(const char* strCtrlType);
 		void doGenFormFromFile(TiXmlElement* pEle, cGuiControl* &pCtrl);
 
+		void set_normal_attr(TiXmlElement* pEle, cGuiControl* &pCtrl);
+
         std::map<ControlType, UIEditor::CUIAtom*> m_atomUI;
     };
 

@@ -20,7 +20,14 @@ enum ControlType{
     kCT_Num,
 };
 
+static const char* sssssss[] = {
+	"GuiDialog",
+	"GuiLable",
+	"GuiButton",
+	"GuiProcess",
+};
 
+static int aTest[kCT_Num == (sizeof(sssssss) / sizeof(sssssss[0]))];
 
 
 

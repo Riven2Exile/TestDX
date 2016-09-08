@@ -109,18 +109,45 @@ cGuiControl* CUIEditorHelper::GenFormFromFile()
 	//Todo 解析文件..生成Ctrl
 	TiXmlElement* pEleRoot = pDoc->RootElement(); //头结点元素 
 	const char *pStr = pEleRoot->Value();	// liupr
-	
+	TiXmlElement* pChildren = pEleRoot->FirstChildElement();
 
 	cGuiControl *pCtrl = new cGuiForm(NULL);
-	doGenFormFromFile(pEleRoot, pCtrl);
+	doGenFormFromFile(pChildren, pCtrl);
 
-	return NULL;
+	return pCtrl;
+}
+
+void CUIEditorHelper::set_normal_attr(TiXmlElement* pEle, cGuiControl* &pCtrl)
+{
+	const char* s_name = NULL;
+	if (s_name = pEle->Attribute("id")){ pCtrl->SetID(atoi(s_name)); }
+	int x = 0, y = 0;
+	if (s_name = pEle->Attribute("x")) { x = atoi(s_name); }
+	if (s_name = pEle->Attribute("y")) { y = atoi(s_name); }
+	pCtrl->SetPos(x, y);
+
+	if (s_name = pEle->Attribute("type")){
+		for (int i = 0; i < kCT_Num; ++i) {
+			if (strcmp(s_name, sssssss[i]) == 0) {
+				pCtrl->SetCtrlType((ControlType)i);
+				break;
+			}
+		}
+	}
 }
 
 void CUIEditorHelper::doGenFormFromFile(TiXmlElement* pEle, cGuiControl* &pCtrl)
 {
 	// 本层的属性
 	cGuiControl *pSubCtrl = NULL;
+	const char* ctrl_type = pEle->Attribute("type");
+
+	set_normal_attr(pEle, pCtrl);	//设置通用属性
+
+	pCtrl->GetCtrlType(); //再根据控件类型执行其他具体的初始化
+
+
+	/// 下面这个循环之后可以删除掉了， 只是为了测试
 	for (TiXmlAttribute* pAttr = pEle->FirstAttribute(); pAttr; pAttr = pAttr->Next())
 	{
 		printf("(%s:%s) ", pAttr->Name(), pAttr->Value());
