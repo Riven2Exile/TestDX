@@ -12,6 +12,31 @@ namespace UIEditor
         return 0;
     }
 
+	bool CUIAtom::load(TiXmlElement* pEle, cGuiControl* &pCtrl){
+		if (NULL == pEle)
+			return false;
+
+
+		const char* szTemp = NULL;
+
+		
+
+		szTemp = pEle->Attribute("id");
+		if (szTemp) { pCtrl->SetID(atoi(szTemp)); }
+
+		int x = 0, y = 0;
+		if (szTemp = pEle->Attribute("x")) { x = atoi(szTemp); }
+		if (szTemp = pEle->Attribute("y")) { y = atoi(szTemp); }
+		pCtrl->SetPos(x, y);
+
+		if (szTemp = pEle->Attribute("width")) { x = atoi(szTemp); }
+		if (szTemp = pEle->Attribute("height")){ y = atoi(szTemp); }
+		pCtrl->SetWidth(x);
+		pCtrl->SetHeight(y);
+
+		return true;
+	}
+
     /////////// ∂‘ª∞øÚ
     TiXmlElement* CUIAtomForm::Gen( TiXmlElement *pRoot, cGuiControl* pCtrl )
     {
@@ -23,8 +48,8 @@ namespace UIEditor
         pCtrl->GetPos(x, y);
         pEle->SetAttribute("x", x);
         pEle->SetAttribute("y", y);
-//         pEle->SetAttribute("width", pCtrl->);
-//         pEle->SetAttribute("height", pCtrl->GetSize().cy);
+        pEle->SetAttribute("width", pCtrl->get_width());
+		pEle->SetAttribute("height", pCtrl->get_height());
 
         pRoot->LinkEndChild(pEle);
         return pEle;
@@ -41,12 +66,18 @@ namespace UIEditor
         pCtrl->GetPos(x, y);
         pEle->SetAttribute("x", x);
         pEle->SetAttribute("y", y);
+		pEle->SetAttribute("width", pCtrl->get_width());
+		pEle->SetAttribute("height", pCtrl->get_height());
 //         pEle->SetAttribute("width", pCtrl->GetSize().cx);
 //         pEle->SetAttribute("height", pCtrl->GetSize().cy);
 
         pRoot->LinkEndChild(pEle);
         return pEle;
     }
+	bool CUIAtomButton::load(TiXmlElement* pEle, cGuiControl* &pCtrl){
+		__super::load(pEle, pCtrl);
+		return true;
+	}
 
 	// ========>>>>>>> ±Í«©
 	TiXmlElement* CUIAtomLable::Gen(TiXmlElement *pRoot, cGuiControl* pCtrl)

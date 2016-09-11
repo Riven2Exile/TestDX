@@ -111,10 +111,8 @@ cGuiControl* CUIEditorHelper::GenFormFromFile()
 	const char *pStr = pEleRoot->Value();	// liupr
 	TiXmlElement* pChildren = pEleRoot->FirstChildElement();
 
-	cGuiControl *pCtrl = new cGuiForm(NULL);
-	doGenFormFromFile(pChildren, pCtrl);
-
-	return pCtrl;
+	cGuiControl *pCtrl = NULL;// = new cGuiForm(NULL);
+	return doGenFormFromFile(pChildren, pCtrl);
 }
 
 void CUIEditorHelper::set_normal_attr(TiXmlElement* pEle, cGuiControl* &pCtrl)
@@ -136,15 +134,30 @@ void CUIEditorHelper::set_normal_attr(TiXmlElement* pEle, cGuiControl* &pCtrl)
 	}
 }
 
-void CUIEditorHelper::doGenFormFromFile(TiXmlElement* pEle, cGuiControl* &pCtrl)
+cGuiControl* CUIEditorHelper::doGenFormFromFile(TiXmlElement* pEle, cGuiControl* &pCtrl)
 {
 	// 本层的属性
 	cGuiControl *pSubCtrl = NULL;
-	const char* ctrl_type = pEle->Attribute("type");
+	const char* ctrl_type = NULL;
+	//先确定类型
+	if (ctrl_type = pEle->Attribute("type")){ //控件类型 ?
+		for (int i = 0; i < kCT_Num; ++i) {
+			if (strcmp(ctrl_type, sssssss[i]) == 0) {
+				pSubCtrl = CreateCtrl((ControlType)i, pCtrl);
+				pSubCtrl->SetCtrlType((ControlType)i);
 
-	set_normal_attr(pEle, pCtrl);	//设置通用属性
+				break;
+			}
+		}
+	}
 
-	pCtrl->GetCtrlType(); //再根据控件类型执行其他具体的初始化
+	if (NULL == pSubCtrl){
+		return pSubCtrl;
+	}
+	CUIAtom* pAtom = GetAtom(pSubCtrl->GetCtrlType());
+	if (pAtom){
+		pAtom->load(pEle, pSubCtrl);
+	}
 
 
 	/// 下面这个循环之后可以删除掉了， 只是为了测试
@@ -161,30 +174,23 @@ void CUIEditorHelper::doGenFormFromFile(TiXmlElement* pEle, cGuiControl* &pCtrl)
 	// 本层是否有子元素
 	for (TiXmlElement* pSubEle = pEle->FirstChildElement(); pSubEle; pSubEle = pSubEle->NextSiblingElement())
 	{
-		doGenFormFromFile(pSubEle, pCtrl);
+		doGenFormFromFile(pSubEle, pSubCtrl);
 	}
+
+	return pSubCtrl;
 }
 
-cGuiControl* CUIEditorHelper::CreateCtrl(const char* strCtrlType)
+cGuiControl* CUIEditorHelper::CreateCtrl(ControlType ctrl_type, cGuiControl* pFather)
 {
-	if (strcmp("GuiButton", strCtrlType) == 0)
+	switch (ctrl_type)
 	{
-		assert(0);
-		return NULL; //new cGuiButton;
-	}
-	else if (strcmp("CGuiProgress", strCtrlType) == 0)
-	{
-		assert(0);
-		return NULL; //new cGuiProgress;
-	}
-	else if (strcmp("CGuiLable", strCtrlType) == 0)
-	{
-		assert(0);
-		return NULL; //new cGuiLable;
-	}
-	else
-	{
+	case kCT_GuiForm: return new cGuiForm(pFather);
+	case kCT_GuiButton: return new cGuiButton(pFather);
+	case kCT_GuiLable: return new cGuiLable(pFather);
+	case kCT_GuiProcess: return new cGuiProgress(pFather);
+	default:
 		return NULL;
+		break;
 	}
 	
 }

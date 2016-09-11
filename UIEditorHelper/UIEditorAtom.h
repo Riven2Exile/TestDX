@@ -13,7 +13,8 @@ namespace UIEditor
     public:
         CUIAtom() {}
         virtual ~CUIAtom() {}
-        virtual TiXmlElement* Gen(TiXmlElement *pRoot, cGuiControl* pCtrl) ;
+        virtual TiXmlElement* Gen(TiXmlElement *pRoot, cGuiControl* pCtrl) ; //普通属性
+		virtual bool load(TiXmlElement* pEle, cGuiControl* &pCtrl); //从xml中加载
     };
 
 
@@ -34,6 +35,7 @@ namespace UIEditor
     {
     public:
         virtual TiXmlElement* Gen(TiXmlElement *pRoot, cGuiControl* pCtrl);
+		virtual bool load(TiXmlElement* pEle, cGuiControl* &pCtrl); //从xml中加载
     };
 
 

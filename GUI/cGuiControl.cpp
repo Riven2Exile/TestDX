@@ -77,6 +77,14 @@ void cGuiControl::SetHeight(float fh)
     _sprite->setHeight(fh);
 }
 
+int cGuiControl::get_width(){
+	return _sprite->getWidth();
+}
+
+int cGuiControl::get_height(){
+	return _sprite->getHeight();
+}
+
 ControlType cGuiControl::GetCtrlType()
 {
     return _ctrlType;

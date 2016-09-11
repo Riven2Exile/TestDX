@@ -45,8 +45,10 @@ public:
 
     void AddAllOffset(const int& x, const int& y);
 
-    virtual void SetWidth(float fw);
+    virtual void SetWidth(float fw);	//控件的宽高不应该是 精灵的宽高
     virtual void SetHeight(float fh);
+	virtual int get_width();
+	virtual int get_height();
 
     ControlType GetCtrlType();
     void SetCtrlType(ControlType type);
