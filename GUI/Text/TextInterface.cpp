@@ -45,6 +45,7 @@ void TextOutput(const int& xT, const int &yT, const char* str)
 
 	// 2. 找到纹理位置和区域 (需要用到字体size)
 	IDirect3DTexture9* pTex = CTextureMgr::instance().getTexture("font_kai");
+	bool b_english = true;
 	for (int i = 0; i < nLen; ++i)
 	{
 		iSprite *sp;
@@ -69,14 +70,31 @@ void TextOutput(const int& xT, const int &yT, const char* str)
 
 		byte b = (byte)str[i];
 		int nRealWeight = height;
-		if (b < 0xff)
+		if (b < H)
 		{
 			nRealWeight = height / 2; //注意英文宽度是减半的
+			b_english = true;
+		}
+		else{
+			nRealWeight = height; //中文
+			b_english = false;
 		}
 
 		//设置纹理坐标
-		int y = str[i] / low;
-		int x = str[i] % low;
+		int y = 0;
+		int x = 0; 
+		if (b_english)
+		{
+			y = str[i] / low;
+			x = str[i];
+		}
+		else
+		{
+			y = str[i] - 0x7f;
+			x = str[i+1] + 1;
+			++i;
+		}
+		
 
 		float tu1 = (x * nRealWeight) / float(low*height);
 		float tu2 = (x * nRealWeight + nRealWeight) / float(low*height);

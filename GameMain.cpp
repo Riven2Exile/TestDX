@@ -356,6 +356,7 @@ void CGameMain::draw()
 		//test font;
 		const char* pstr = "fly";
 		TextOutput(100, 100, pstr);
+		TextOutput(140, 100, "·Ü¶·");
 
 
         CDrawFlow::Instance().draw(); //»æÖÆÁ÷
