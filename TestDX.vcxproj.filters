@@ -267,6 +267,12 @@
     <ClCompile Include="SDKwavefile.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
+    <ClCompile Include="GUI\cGuiText.cpp">
+      <Filter>GUI\GuiControl</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\cGuiScroll.cpp">
+      <Filter>GUI\GuiControl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hsb.h">
@@ -470,6 +476,12 @@
     <ClInclude Include="SDKwavefile.h">
       <Filter>Sound</Filter>
     </ClInclude>
+    <ClInclude Include="GUI\cGuiText.h">
+      <Filter>GUI\GuiControl</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\cGuiScroll.h">
+      <Filter>GUI\GuiControl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -494,6 +506,7 @@
     <None Include="ToolLib\json\src\lib_json\json_valueiterator.inl">
       <Filter>FileStore\json</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

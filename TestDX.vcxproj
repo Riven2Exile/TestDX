@@ -145,6 +145,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="GUI\cGuiScroll.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="GUI\cGuiText.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="GUI\Manager\GameGuiManager.cpp" />
     <ClCompile Include="GUI\Manager\GuiContainer.cpp" />
     <ClCompile Include="GUI\Manager\GuiLayoutFileMgr.cpp" />
@@ -409,6 +415,8 @@
     <ClInclude Include="GUI\cGuiLable.h" />
     <ClInclude Include="GUI\cGuiMgr.h" />
     <ClInclude Include="GUI\cGuiProgress.h" />
+    <ClInclude Include="GUI\cGuiScroll.h" />
+    <ClInclude Include="GUI\cGuiText.h" />
     <ClInclude Include="GUI\Manager\GameGuiManager.h" />
     <ClInclude Include="GUI\Manager\GuiContainer.h" />
     <ClInclude Include="GUI\Manager\GuiLayoutFileMgr.h" />
@@ -470,6 +478,7 @@
     <ResourceCompile Include="TestDX.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="ToolLib\json\src\lib_json\json_internalarray.inl" />
     <None Include="ToolLib\json\src\lib_json\json_internalmap.inl" />
     <None Include="ToolLib\json\src\lib_json\json_valueiterator.inl" />

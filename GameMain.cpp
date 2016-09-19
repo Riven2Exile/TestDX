@@ -16,6 +16,8 @@
 #include "Camera.h"
 #include "UIEditorHelper\UIEditorHelper.h"
 #include "GUI\Text\TextInterface.h"
+#include "GUI\cGuiText.h"
+#include "GUI\cCommonGuiHead.h"
 
 
 extern IDirect3DDevice9 *g_pDevice;
@@ -138,6 +140,20 @@ void CGameMain::init()
 
 	T.addTexture("MyRes/font_kai.bmp", "font_kai");	// 楷体字体
 
+	T.addTexture("MyRes/scroll_btn_down1.tga", "scroll_btn_down1");// 滚动条
+	T.addTexture("MyRes/scroll_btn_down2.tga", "scroll_btn_down2");
+	T.addTexture("MyRes/scroll_btn_down3.tga", "scroll_btn_down3");
+	T.addTexture("MyRes/scroll_btn_down4.tga", "scroll_btn_down4");
+	T.addTexture("MyRes/scroll_btn_up1.tga", "scroll_btn_up1");
+	T.addTexture("MyRes/scroll_btn_up2.tga", "scroll_btn_up2");
+	T.addTexture("MyRes/scroll_btn_up3.tga", "scroll_btn_up3");
+	T.addTexture("MyRes/scroll_btn_up4.tga", "scroll_btn_up4");
+	T.addTexture("MyRes/scroll_btn_mid1.tga", "scroll_btn_mid1");
+	T.addTexture("MyRes/scroll_btn_mid2.tga", "scroll_btn_mid2");
+	T.addTexture("MyRes/scroll_btn_mid3.tga", "scroll_btn_mid3");
+	T.addTexture("MyRes/scroll_btn_mid4.tga", "scroll_btn_mid4");
+
+
     // 加载纹理 end
     m_pTest->LoadAImage("", g_pDevice);
     m_pTest->setTexture(T.getTexture( "moxia"/*"Riven"*/));
@@ -199,7 +215,7 @@ void CGameMain::init()
     m_pCtrlTest->SetOffSet(300, 10);
     m_pCtrlTest->SetWidth(27);
     m_pCtrlTest->SetHeight(27);
-    m_pCtrlTest->SetTexture("close1");
+    //m_pCtrlTest->SetTexture("close1");
     m_pCtrlTest->SetID(110);
     m_pCtrlTest->SetBtnStateImage(cGuiButton::kBS_Normal, "close1");
     m_pCtrlTest->SetBtnStateImage(cGuiButton::kBS_MouseOn, "close2");
@@ -215,7 +231,6 @@ void CGameMain::init()
 	pPro->SetBarImage("pF");
 	pPro->SetProgress(40);
 	pPro->SetID(11000001);
-	pPro->Show();
 
     cGuiButton *pBtnTemp = new cGuiButton(m_pDlgTest);
     pBtnTemp->SetWidth(18);
@@ -245,11 +260,19 @@ void CGameMain::init()
     fr.bottom = 1.0f;
     //pC->SetClip(fr);//裁剪test 【Bug】 (不应该拿固定位置来裁剪, 应该要拿百分比)
     
+	cGuiText *pLable = new cGuiText(m_pDlgTest);
+	pLable->SetText("test"); //文字
+	pLable->SetPos(0, 200);
+
+	cGuiScroll *pScroll = new cGuiScroll(m_pDlgTest);
+	pScroll->SetScrollType(cGuiScroll::kST_Up_Down);
 
 	m_pDlgTest->AddControl(m_pCtrlTest);
 	m_pDlgTest->AddControl(pPro);
 	m_pDlgTest->AddControl(pBtnTemp);
 	m_pDlgTest->AddControl(pC);
+	m_pDlgTest->AddControl(pLable);
+	m_pDlgTest->AddControl(pScroll);
 
 
     // 对话框2

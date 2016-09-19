@@ -15,7 +15,11 @@ enum ControlType{
     kCT_GuiLable    = 1,
     kCT_GuiButton   = 2,
     kCT_GuiProcess  = 3,
-
+	kCT_GuiText		= 4,
+	kCT_GuiRadio	= 5,
+	kCT_GuiCheck	= 6,
+	kCT_GuiEdit		= 7,
+	kCT_GuiScroll	= 8,	//一般不直接创建
 
     kCT_Num,
 };
@@ -25,6 +29,11 @@ static const char* sssssss[] = {
 	"GuiLable",
 	"GuiButton",
 	"GuiProcess",
+	"GuiText",
+	"GuiRadio",
+	"GuiCheck",
+	"GuiEdit",
+	"GuiScroll",
 };
 
 static int aTest[kCT_Num == (sizeof(sssssss) / sizeof(sssssss[0]))];
@@ -117,19 +126,22 @@ private:
     bool _bShow;    //是否显示
     bool _bDrag;    //是否可拖动
 
-    iSprite* _sprite; //精灵(绘制用)
+    
 	typedef std::list<cGuiControl*> LIST_CTRL;
     std::list<cGuiControl*> _listCtrl; // 子控件列表
 
-    
 
     unsigned int _id;
 	
 	int _offsetX; //局部坐标系
 	int _offsetY;
 
+	// 之后可能需要考虑宽和高单独使用变量来记录
+
 protected:
+	std::string _strText;	//文字
     ControlType _ctrlType;
+	iSprite* _sprite; //精灵(绘制用)
 };
 
 

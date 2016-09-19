@@ -1,17 +1,20 @@
 
 #include "cGuiControl.h"
 #include "cCommonGuiHead.h"
+#include "Text\TextInterface.h"
 
 //#include "..\iSprite.h"
 
 
 cGuiControl::cGuiControl(cGuiControl* pFather): _id(0), _bShow(true), _bDrag(false)
-,_offsetX(0)
-,_offsetY(0)
+//,_offsetX(0)
+//,_offsetY(0)
+,_strText("")
 {
 	_pFather = pFather;
     _sprite = CreateSprite(ST_MX);
     _sprite->LoadAImage("", g_pDevice);
+	SetOffSet(0, 0);
 }
 
 cGuiControl::~cGuiControl()
@@ -193,6 +196,13 @@ void cGuiControl::Draw()
         return ;
 
     _sprite->Draw();
+
+	if (_strText.empty() == false)
+	{
+		int x = 0, y = 0;
+		_pFather->GetOffSet(x, y);
+		TextOutput(x + _sprite->GetX(), y +_sprite->GetY(), _strText.c_str());
+	}
 
     // вс©ь╪Ч
     if (_listCtrl.size())

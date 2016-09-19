@@ -4,6 +4,7 @@
 #include "cGuiForm.h"
 #include "cGuiLable.h"
 #include "cGuiProgress.h"
+#include "cGuiScroll.h"
 
 
 

@@ -1,15 +1,15 @@
-#ifndef _L_GUILABLE_H
-#define _L_GUILABLE_H
+#ifndef _L_GUITEXT_H
+#define _L_GUITEXT_H
 
 #include "cGuiControl.h"
 
 ///// 标签可以加文字, 支持单一颜色
 
-class cGuiLable : public cGuiControl
+class cGuiText : public cGuiControl
 {
 public:
-    explicit cGuiLable(cGuiControl* pFather);
-    virtual ~cGuiLable();
+	explicit cGuiText(cGuiControl* pFather);
+	virtual ~cGuiText();
 
 	void SetText(const char* str);
 	const char* GetText();
@@ -18,7 +18,7 @@ public:
 	DWORD GetTextColor() const;
 
 private:
-	
+
 	DWORD _dwTextColor;		//文字颜色
 };
 
