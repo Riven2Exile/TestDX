@@ -16,20 +16,20 @@ CDrawFlow::CDrawFlow()
     m_pPS = NULL;
 
 
-    ID3DXBuffer *shader = NULL;
-    ID3DXBuffer *err = NULL;
-    D3DXCompileShaderFromFile(_T("MyRes/ps.txt"), 0, 0, 
-                                "Done", "ps_2_0", D3DXSHADER_DEBUG, &shader, &err, &m_pTable);
-    if (err)
-    {
-        MessageBoxA(NULL, (LPCSTR)err->GetBufferPointer(), "着色器", NULL);
-        return ;
-    }
-
-    g_pDevice->CreatePixelShader((DWORD*)shader->GetBufferPointer(), &m_pPS);
-
-    // 初始值
-    m_pTable->SetFloat(g_pDevice, "g_devLine", 382.0f); //明暗分割值
+//     ID3DXBuffer *shader = NULL;
+//     ID3DXBuffer *err = NULL;
+//     D3DXCompileShaderFromFile(_T("MyRes/ps.txt"), 0, 0, 
+//                                 "Done", "ps_2_0", D3DXSHADER_DEBUG, &shader, &err, &m_pTable);
+//     if (err)
+//     {
+//         MessageBoxA(NULL, (LPCSTR)err->GetBufferPointer(), "着色器", NULL);
+//         return ;
+//     }
+// 
+//     g_pDevice->CreatePixelShader((DWORD*)shader->GetBufferPointer(), &m_pPS);
+// 
+//     // 初始值
+//     m_pTable->SetFloat(g_pDevice, "g_devLine", 382.0f); //明暗分割值
 }
 
 CDrawFlow::~CDrawFlow()
@@ -68,17 +68,19 @@ void CDrawFlow::draw()
     DWORD vF3D = Vertex3D::FVF;
 
 
+	g_pDevice->SetTexture(0, NULL);
+
 
     // 上着色器 (注意不要影响到透明度)
     // 1.初始化
-    if (m_pTable && m_pPS)
-    {
-        m_pTable->SetFloat(g_pDevice, "g_fFinWeight", 1.0f);
-        m_pTable->SetFloat(g_pDevice, "g_light", g_light);
-        m_pTable->SetFloat(g_pDevice, "g_duibi", g_duibi); //对比度
-        m_pTable->SetInt(g_pDevice, "g_nCount", 0); //为了计数
-        g_pDevice->SetPixelShader(m_pPS);
-    }
+//     if (m_pTable && m_pPS)
+//     {
+//         m_pTable->SetFloat(g_pDevice, "g_fFinWeight", 1.0f);
+//         m_pTable->SetFloat(g_pDevice, "g_light", g_light);
+//         m_pTable->SetFloat(g_pDevice, "g_duibi", g_duibi); //对比度
+//         m_pTable->SetInt(g_pDevice, "g_nCount", 0); //为了计数
+//         g_pDevice->SetPixelShader(m_pPS);
+//     }
     /// 着色器 end
 
 

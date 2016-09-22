@@ -65,6 +65,13 @@ public:
 
     void increaseIndex(){
         ++m_nIndex;
+#ifdef _DEBUG
+		if (m_nIndex >= DRAW_FLOW_SIZE)
+		{
+			MessageBoxA(0, "d","d", 0);
+		}
+#endif // _DEBUG
+		
     }
 
     void draw();

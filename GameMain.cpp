@@ -83,13 +83,20 @@ void CGameMain::init()
 
     m_pTest = CreateSprite(/*ST_3D*/ ST_MX);
 
+	m_SpriteWhiteCube = CreateSprite(/*ST_3D*/ ST_MX);
+	m_SpriteWhiteCube->LoadAImage("", g_pDevice);
+	m_SpriteWhiteCube->setTexture(NULL);
+	m_SpriteWhiteCube->SetColor(0xaaffffff);
+	m_SpriteWhiteCube->setWidth(36);
+	m_SpriteWhiteCube->setHeight(36);
+	m_SpriteWhiteCube->SetX(40);
+
     for (int i = 0; i < TEST_SIZE; ++i)
     {
         m_sp[i] = CreateSprite(ST_MX);
     }
 
     srand(time(NULL));  //设置种子
-
 
     //m_test.Clip();
 
@@ -152,6 +159,9 @@ void CGameMain::init()
 	T.addTexture("MyRes/scroll_btn_mid2.tga", "scroll_btn_mid2");
 	T.addTexture("MyRes/scroll_btn_mid3.tga", "scroll_btn_mid3");
 	T.addTexture("MyRes/scroll_btn_mid4.tga", "scroll_btn_mid4");
+	T.addTexture("MyRes/slide_btn.tga", "slide_btn");
+	T.addTexture("MyRes/slide_bar.tga", "slide_bar");
+	T.addTexture("MyRes/slide_background.tga", "slide_background");
 
 
     // 加载纹理 end
@@ -224,7 +234,8 @@ void CGameMain::init()
     m_pCtrlTest->Show();
 
 	cGuiProgress* pPro = new cGuiProgress(m_pDlgTest);
-	pPro->SetOffSet(100, 60);
+	//pPro->SetOffSet(100, 60);
+	pPro->SetOffSet(-100, -100);
 	pPro->SetWidth(140);
 	pPro->SetHeight(9);
 	pPro->SetBackImage("pB");
@@ -266,6 +277,8 @@ void CGameMain::init()
 
 	cGuiScroll *pScroll = new cGuiScroll(m_pDlgTest);
 	pScroll->SetScrollType(cGuiScroll::kST_Up_Down);
+	cGuiSlide *pSlide = new cGuiSlide(m_pDlgTest);
+	pSlide->SetOffSet(215, 100);
 
 	m_pDlgTest->AddControl(m_pCtrlTest);
 	m_pDlgTest->AddControl(pPro);
@@ -273,6 +286,7 @@ void CGameMain::init()
 	m_pDlgTest->AddControl(pC);
 	m_pDlgTest->AddControl(pLable);
 	m_pDlgTest->AddControl(pScroll);
+	m_pDlgTest->AddControl(pSlide);
 
 
     // 对话框2
@@ -330,6 +344,7 @@ void CGameMain::update(DWORD elasped)
     
     ////TODO: 处理游戏的一些逻辑
     m_pTest->Update();
+	m_SpriteWhiteCube->Update();
 
     //m_pTest->SetColor(0xffff0000); //变色功能
 
@@ -364,6 +379,8 @@ void CGameMain::draw()
         g_pDevice->BeginScene();
 
         m_pTest->Draw(); //画 瑞雯
+
+		m_SpriteWhiteCube->Draw();
 //         for (int i = 0; i < TEST_SIZE; ++i) //画 绿头
 //         {
 //             m_sp[i]->Draw();
@@ -377,9 +394,9 @@ void CGameMain::draw()
 
 		// 测试字体
 		//test font;
-		const char* pstr = "fly";
-		TextOutput(100, 100, pstr);
-		TextOutput(140, 100, "奋斗");
+// 		const char* pstr = "fly";
+// 		TextOutput(100, 100, pstr);
+// 		TextOutput(140, 100, "奋斗");
 
 
         CDrawFlow::Instance().draw(); //绘制流

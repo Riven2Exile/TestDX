@@ -5,6 +5,7 @@
 #include "cGuiLable.h"
 #include "cGuiProgress.h"
 #include "cGuiScroll.h"
+#include "cGuiSlide.h"
 
 
 

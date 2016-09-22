@@ -20,6 +20,7 @@ enum ControlType{
 	kCT_GuiCheck	= 6,
 	kCT_GuiEdit		= 7,
 	kCT_GuiScroll	= 8,	//一般不直接创建
+	kCT_GuiSlide	= 9,	//滑块
 
     kCT_Num,
 };
@@ -34,6 +35,7 @@ static const char* sssssss[] = {
 	"GuiCheck",
 	"GuiEdit",
 	"GuiScroll",
+	"GuiSlide",
 };
 
 static int aTest[kCT_Num == (sizeof(sssssss) / sizeof(sssssss[0]))];

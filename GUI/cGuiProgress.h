@@ -32,6 +32,7 @@ private:
 
     ///// 绘制元素
     //背景条 用cGuiControl 父类中的东东
+	cGuiLable* _pBack; //背景
     //过程条
     cGuiLable* _pBar;
 

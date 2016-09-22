@@ -84,6 +84,7 @@ private:
 
     //test
     iSprite* m_pTest;
+	iSprite* m_SpriteWhiteCube;
 
     iSprite* m_sp[TEST_SIZE];//test¥Û¡ø
     

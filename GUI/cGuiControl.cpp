@@ -14,6 +14,7 @@ cGuiControl::cGuiControl(cGuiControl* pFather): _id(0), _bShow(true), _bDrag(fal
 	_pFather = pFather;
     _sprite = CreateSprite(ST_MX);
     _sprite->LoadAImage("", g_pDevice);
+	_sprite->SetColor(0x00ffffff);
 	SetOffSet(0, 0);
 }
 
