@@ -35,29 +35,48 @@ void cGuiControl::GetPos(int& x, int& y)
     x = _sprite->GetX();
     y = _sprite->GetY();
 }
+int cGuiControl::GetScreenPosX(){
+	return _sprite->GetX();
+}
+int cGuiControl::GetScreenPosY(){
+	return _sprite->GetY();
+}
 
 void cGuiControl::SetOffSet(const int& x, const int& y)
 {
 	_offsetX = x;
 	_offsetY = y;
+ 
+	int fx = 0, fy = 0; //可以得到最终的屏幕坐标
+	int tx = 0, ty = 0;
 
-	int fx = 0, fy = 0;
-	if (_pFather)
+	cGuiControl *pTempFather = _pFather;
+	while (pTempFather)
 	{
-		_pFather->GetOffSet(fx, fy);
+		pTempFather->GetOffSet(tx, ty);
+		fx += tx;
+		fy += ty;
+		pTempFather = pTempFather->_pFather;
 	}
 
 	_sprite->SetX(fx+x);
-	_sprite->SetY(fx+y);
+	_sprite->SetY(fy+y);
 
-// 	for(LIST_CTRL::iterator itr = _listCtrl.begin(); itr != _listCtrl.end(); ++itr ){
-// 		itr->SetOffSet();
-// 	}
+
+ 	for(LIST_CTRL::iterator itr = _listCtrl.begin(); itr != _listCtrl.end(); ++itr ){
+		(*itr)->AddAllOffset(x, y);
+ 	}
 }
 void cGuiControl::GetOffSet(int& x, int& y)
 {
 	x = _offsetX;
 	y = _offsetY;
+}
+void cGuiControl::SetOffSetX(const int& x){
+	SetOffSet(x, _offsetY);
+}
+void cGuiControl::SetOffSetY(const int& y){
+	SetOffSet(_offsetY, y);
 }
 
 void cGuiControl::AddAllOffset(const int& x, const int& y)

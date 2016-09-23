@@ -49,6 +49,9 @@ int cGuiButton::OnMouseMove(const int& x, const int& y, const unsigned int& nFla
         if (GetBtnState() == kBS_Clicked && nFlag & LMK_LBUTTON)
         {
             // 保持
+			if (_pFunPressedMouseMove){
+				_pFunPressedMouseMove(this, x, y);
+			}
         }
         else
         {
@@ -60,6 +63,9 @@ int cGuiButton::OnMouseMove(const int& x, const int& y, const unsigned int& nFla
         if (GetBtnState() == kBS_Clicked && nFlag & LMK_LBUTTON)
         {
             // 保持
+			if (_pFunPressedMouseMove){
+				_pFunPressedMouseMove(this, x, y);
+			}
         }
         else
         {
@@ -84,6 +90,9 @@ int cGuiButton::OnLButtonDown(const int& x, const int& y, const unsigned int& nF
         {
             SetBtnState(kBS_Clicked);
             SetTexture(_strImage[kBS_Clicked].c_str());
+			if (_pFunPressDown){
+				_pFunPressDown(this, x, y);
+			}
             return 0;
         }
     }
@@ -105,7 +114,10 @@ int cGuiButton::OnLButtonUp(const int& x, const int& y, const unsigned int& nFla
     {
         // 命中按钮.. todo: 自定义函数? 
         OnBtnClicked();
-        
+
+		if (_pFunPressUp){
+			_pFunPressUp(this, x, y);
+		}
     }
     
     SetBtnState(kBS_Normal);
@@ -119,6 +131,16 @@ int cGuiButton::OnLButtonUp(const int& x, const int& y, const unsigned int& nFla
 void cGuiButton::SetClickFun(CtrlClickFun pF)
 {
     _pFun = pF;
+}
+
+void cGuiButton::SetPressDownFun(Fun_BtnMouse func){
+	_pFunPressDown = func;
+}
+void cGuiButton::SetPressUpFun(Fun_BtnMouse func){
+	_pFunPressUp = func;
+}
+void cGuiButton::SetPressedMouseMoveFun(Fun_BtnMouse func){
+	_pFunPressedMouseMove = func;
 }
 
 int cGuiButton::OnBtnClicked()

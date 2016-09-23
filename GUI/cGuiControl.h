@@ -41,6 +41,7 @@ static const char* sssssss[] = {
 static int aTest[kCT_Num == (sizeof(sssssss) / sizeof(sssssss[0]))];
 
 
+typedef unsigned int UINT;
 
 class cGuiControl
 {
@@ -50,9 +51,15 @@ public:
 
     void SetPos(const int& x, const int& y);
     void GetPos(int& x, int& y);
+	int GetScreenPosX();
+	int GetScreenPosY();
 	
 	virtual void SetOffSet(const int& x, const int& y);
 	void GetOffSet(int& x, int& y);
+	void SetOffSetX(const int& x);
+	void SetOffSetY(const int& y);
+	int GetOffSetX() { return _offsetX; }
+	int GetOffSetY() { return _offsetY; }
 
     void AddAllOffset(const int& x, const int& y);
 

@@ -22,7 +22,7 @@ public:
 	virtual void SetWidth(float fw);
 	virtual void SetHeight(float fh);
 
-	virtual void SetOffSet(const int& x, const int& y);
+	//virtual void SetOffSet(const int& x, const int& y);
 
     void SetBarImage(const char* szName);
     void SetBackImage(const char* szName);

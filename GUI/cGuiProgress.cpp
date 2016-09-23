@@ -31,15 +31,15 @@ void cGuiProgress::SetBackImage(const char* szName)
 	_pBack->SetTexture(szName);
 }
 
-void cGuiProgress::SetOffSet(const int& x, const int& y)
-{
-	cGuiControl::SetOffSet(x, y);
-
-	int fx = 0, fy = 0;
-	GetPos(fx, fy);
-	_pBar->SetPos(fx , fy);
-	_pBack->SetPos(fx, fy);
-}
+// void cGuiProgress::SetOffSet(const int& x, const int& y)
+// {
+// 	cGuiControl::SetOffSet(x, y);
+// 
+// // 	int fx = 0, fy = 0;
+// // 	GetPos(fx, fy);
+// // 	_pBar->SetPos(fx , fy);
+// // 	_pBack->SetPos(fx, fy);
+// }
 
 
 void cGuiProgress::SetProgress(unsigned int nPos)

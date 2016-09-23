@@ -3,8 +3,13 @@
 
 
 #include "cGuiControl.h"
+#include <functional>
+
+class cGuiButton;
 
 typedef void (cGuiControl::*CtrlClickFun)(int);
+typedef std::function<void(cGuiButton* pBtn)> Fun_Btn;
+typedef std::function<void(cGuiButton*, const int&, const int&)> Fun_BtnMouse;
 
 class cGuiButton : public cGuiControl
 {
@@ -33,12 +38,21 @@ public:
 
     ///// 消息业务响应
     void SetClickFun(CtrlClickFun);
+	void SetPressDownFun(Fun_BtnMouse func);
+	void SetPressUpFun(Fun_BtnMouse func);
+	void SetPressedMouseMoveFun(Fun_BtnMouse func);
+
+	// 按下, 放开,   ?长按?
 
 private:
 
     /////// 消息的业务响应..
     int OnBtnClicked();
     CtrlClickFun _pFun;
+
+	Fun_BtnMouse _pFunPressDown;
+	Fun_BtnMouse _pFunPressUp;
+	Fun_BtnMouse _pFunPressedMouseMove; //按住的时候鼠标动
 
     //////
     void HandleMouseOn();

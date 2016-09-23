@@ -237,8 +237,8 @@ void CGameMain::init()
     m_pCtrlTest->Show();
 
 	cGuiProgress* pPro = new cGuiProgress(m_pDlgTest);
+	pPro->SetOffSet(0, 0);
 	//pPro->SetOffSet(100, 60);
-	pPro->SetOffSet(-100, -100);
 	pPro->SetWidth(140);
 	pPro->SetHeight(9);
 	pPro->SetBackImage("pB");
@@ -280,6 +280,8 @@ void CGameMain::init()
 
 	cGuiScroll *pScroll = new cGuiScroll(m_pDlgTest);
 	pScroll->SetScrollType(cGuiScroll::kST_Up_Down);
+	pScroll->SetOffSet(0, 80);
+
 	cGuiSlide *pSlide = new cGuiSlide(m_pDlgTest);
 	pSlide->SetOffSet(215, 100);
 
