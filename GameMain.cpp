@@ -86,7 +86,7 @@ void CGameMain::init()
 	m_SpriteWhiteCube = CreateSprite(/*ST_3D*/ ST_MX);
 	m_SpriteWhiteCube->LoadAImage("", g_pDevice);
 	m_SpriteWhiteCube->setTexture(NULL);
-	m_SpriteWhiteCube->SetColor(0xaaffffff);
+	m_SpriteWhiteCube->SetColor(0xffffffff);
 	m_SpriteWhiteCube->setWidth(36);
 	m_SpriteWhiteCube->setHeight(36);
 	m_SpriteWhiteCube->SetX(40);
@@ -109,6 +109,7 @@ void CGameMain::init()
 
     //// 加载一些纹理..
     CTextureMgr& T = CTextureMgr::instance();
+	T.addTexture("MyRes/empty.png", "empty");
     T.addTexture("MyRes/0016.tga", "m1");
     T.addTexture("MyRes/0017.tga", "m2");
     T.addTexture("MyRes/0018.tga", "m3");
@@ -163,6 +164,8 @@ void CGameMain::init()
 	T.addTexture("MyRes/slide_bar.tga", "slide_bar");
 	T.addTexture("MyRes/slide_background.tga", "slide_background");
 
+
+	m_SpriteWhiteCube->setTexture(T.getTexture("greenHead"));
 
     // 加载纹理 end
     m_pTest->LoadAImage("", g_pDevice);

@@ -9,8 +9,8 @@ cGuiProgress::cGuiProgress(cGuiControl* pFather):cGuiControl(pFather)
     _pBar = new cGuiLable(this);
 	_pBack = new cGuiLable(this);
 
-	//AddControl(_pBar);
-	//AddControl(_pBack);
+	AddControl(_pBar);
+	AddControl(_pBack);
     _nPos = max_pos;
 }
 
