@@ -69,7 +69,7 @@ void cGuiSlide::EndDrag(cGuiButton* pBtn, const int& x, const int& y){
 
 void cGuiSlide::SlidePosMove(cGuiButton* pBtn, const int& x, const int& y){
 	//¿ÉÄÜ´¥·¢ SetSlide
-	if (_nRange && _pSlidePro->get_width()){
+	if (_nRange && _pSlidePro->get_width() && x - _pSlidePro->GetScreenPosX() >= 0){
 		//if (_pSlidePro->IsAt(x, y))
 		{
 			float factor = (x - _pSlidePro->GetScreenPosX()) / (float)_pSlidePro->get_width();

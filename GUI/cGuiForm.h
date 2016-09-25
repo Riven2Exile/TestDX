@@ -14,6 +14,8 @@ public:
 
     void Show(bool bShow /* = true */);
 
+	virtual void SetOffSet(const int& x, const int& y);
+
     ////////// 消息处理
     int OnMouseMove(const int& x, const int& y, const unsigned int& nFlag);
     int OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);

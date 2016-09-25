@@ -41,6 +41,25 @@ void cGuiForm::Show(bool bShow /*= true*/)
     cGuiControl::Show(bShow);
 }
 
+void cGuiForm::SetOffSet(const int& x, const int& y){
+	_offsetX = x;
+	_offsetY = y;
+
+	int fx = 0, fy = 0; //可以得到最终的屏幕坐标
+	int tx = 0, ty = 0;
+	cGuiControl *pTempFather = _pFather;
+	while (pTempFather)
+	{
+		pTempFather->GetOffSet(tx, ty);
+		fx += tx;
+		fy += ty;
+		pTempFather = pTempFather->GetFather();
+	}
+
+	_sprite->SetX(fx + x);
+	_sprite->SetY(fy + y);
+}
+
 //////////
 int cGuiForm::OnMouseMove(const int& x, const int& y, const unsigned int& nFlag)
 {
@@ -53,6 +72,10 @@ int cGuiForm::OnMouseMove(const int& x, const int& y, const unsigned int& nFlag)
         // 处理拖动
         int xx = 0, yy = 0;
         GetPos(xx, yy);
+		// 其实这里应该要算上对话框的offset移动
+		_offsetX += (x - _dragX - xx);
+		_offsetY += (y - _dragY - yy);
+		//SetOffSet(_offsetX + (x - _dragX - xx), _offsetY + (y - _dragY - yy));
         AddAllOffset(x - _dragX - xx, y - _dragY - yy);
     }
     else

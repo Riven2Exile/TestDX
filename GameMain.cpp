@@ -276,7 +276,7 @@ void CGameMain::init()
     
 	cGuiText *pLable = new cGuiText(m_pDlgTest);
 	pLable->SetText("test"); //ÎÄ×Ö
-	pLable->SetPos(0, 200);
+	pLable->SetOffSet(0, 200);
 
 	cGuiScroll *pScroll = new cGuiScroll(m_pDlgTest);
 	pScroll->SetScrollType(cGuiScroll::kST_Up_Down);

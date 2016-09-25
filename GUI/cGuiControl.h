@@ -124,9 +124,12 @@ public:
         }
     }
 
+	cGuiControl* GetFather() { return _pFather; }
 
 protected:
 	cGuiControl* _pFather;  //父控件
+	int _offsetX; //局部坐标系
+	int _offsetY;
 
 private:
     // 层次排序
@@ -142,8 +145,7 @@ private:
 
     unsigned int _id;
 	
-	int _offsetX; //局部坐标系
-	int _offsetY;
+	
 
 	// 之后可能需要考虑宽和高单独使用变量来记录
 

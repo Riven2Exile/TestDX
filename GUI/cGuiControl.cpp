@@ -220,8 +220,9 @@ void cGuiControl::Draw()
 	if (_strText.empty() == false)
 	{
 		int x = 0, y = 0;
-		_pFather->GetOffSet(x, y);
-		TextOutput(x + _sprite->GetX(), y +_sprite->GetY(), _strText.c_str());
+// 		_pFather->GetOffSet(x, y);
+// 		TextOutput(x + _sprite->GetX(), y +_sprite->GetY(), _strText.c_str());
+		TextOutput(_sprite->GetX(), _sprite->GetY(), _strText.c_str());
 	}
 
     // вс©ь╪Ч
