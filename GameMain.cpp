@@ -278,8 +278,10 @@ void CGameMain::init()
 	pLable->SetText("test"); //文字
 	pLable->SetOffSet(0, 200);
 
-	cGuiScroll *pScroll = new cGuiScroll(m_pDlgTest);
+	cGuiScroll *pScroll = new cGuiScroll(m_pDlgTest);	//滚动条
 	pScroll->SetScrollType(cGuiScroll::kST_Up_Down);
+	pScroll->SetWidth(100);
+	pScroll->SetHeight(112);
 	pScroll->SetOffSet(0, 80);
 
 	cGuiSlide *pSlide = new cGuiSlide(m_pDlgTest);
@@ -425,7 +427,7 @@ void CGameMain::OnLButtonUp(const WPARAM& wParam, const LPARAM& lParam)
     int x = LOWORD(lParam);
     int y = HIWORD(lParam);
 
-    if( _gui.OnLButtonUp(x, y, wParam) == 0)
+	if (_gui.OnLButtonUp(x, y, (eMouseKeyStateMask)wParam) == 0)
     {
 
     }
@@ -572,10 +574,26 @@ void CGameMain::OnMouseMove(const WPARAM& wParam, const LPARAM& lParam)
 //     else if(MK_LBUTTON == wParam)
 //         printf("The left mouse button is down.\n");
 
-    _gui.OnMouseMove(x, y, wParam);
+	_gui.OnMouseMove(x, y, (eMouseKeyStateMask)wParam);
 }
 
+extern HWND g_hWnd;
 
+void CGameMain::OnMouseWheel(const WPARAM& wParam, const LPARAM& lParam){
+	int delta = GET_WHEEL_DELTA_WPARAM(wParam);
+	eMouseKeyStateMask keyState = (eMouseKeyStateMask)GET_KEYSTATE_WPARAM(wParam);
+
+	///// 鼠标所在的屏幕坐标
+	int x = GET_X_LPARAM(lParam);
+	int y = GET_Y_LPARAM(lParam); //WHEEL_DELTA
+	
+	static POINT pos;
+	pos.x = x;
+	pos.y = y;
+	::ScreenToClient(g_hWnd, &pos); ////--> 转化为客户区坐标
+	//printf("OnMouseWheel %d %d  (%d,%d) (%d,%d) \n", delta, keyState, x, y, pos.x, pos.y);
+	_gui.OnMouseWheel(x, y, delta, keyState);
+}
 
 ///////
 void CGameMain::initAnimation()

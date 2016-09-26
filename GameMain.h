@@ -78,6 +78,7 @@ public:
     void OnKeyUP(const WPARAM& wParam, const LPARAM& lParam);
 
     void OnMouseMove(const WPARAM& wParam, const LPARAM& lParam);
+	void OnMouseWheel(const WPARAM& wParam, const LPARAM& lParam);
 
 
 private:

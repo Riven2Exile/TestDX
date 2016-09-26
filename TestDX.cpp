@@ -493,7 +493,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
-
     // 
    
 
@@ -610,11 +609,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
 
-    case WM_MOUSEMOVE:
-        {
+    case WM_MOUSEMOVE: {
             game.OnMouseMove(wParam, lParam);
         }
         break;
+
+	case WM_MOUSEWHEEL:{
+		game.OnMouseWheel(wParam, lParam);
+	}break;
 
     case WM_ERASEBKGND:
         return 0;

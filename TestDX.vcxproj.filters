@@ -276,6 +276,9 @@
     <ClCompile Include="GUI\cGuiSlide.cpp">
       <Filter>GUI\GuiControl</Filter>
     </ClCompile>
+    <ClCompile Include="GUI\cGuiList.cpp">
+      <Filter>GUI\GuiControl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hsb.h">
@@ -486,6 +489,9 @@
       <Filter>GUI\GuiControl</Filter>
     </ClInclude>
     <ClInclude Include="GUI\cGuiSlide.h">
+      <Filter>GUI\GuiControl</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\cGuiList.h">
       <Filter>GUI\GuiControl</Filter>
     </ClInclude>
   </ItemGroup>

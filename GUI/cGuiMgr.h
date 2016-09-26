@@ -31,8 +31,9 @@ public:
 
 
     // 消息处理
-    int OnMouseMove(const int& x, const int& y, const unsigned int& nFlag);
-    int OnLButtonUp(const int& x, const int& y, const unsigned int& nFlag);
+	int OnMouseMove(const int& x, const int& y, const eMouseKeyStateMask& nFlag);
+	int OnMouseWheel(const int& x, const int& y, const int& delta, const eMouseKeyStateMask& state);
+	int OnLButtonUp(const int& x, const int& y, const eMouseKeyStateMask& nFlag);
     int OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);
 
 private:
@@ -47,7 +48,7 @@ private:
     }
 
     template<typename T>
-    int ForEachUIMsg2(T fn, const int& x, const int& y, const unsigned int& nFlag){
+	int ForEachUIMsg2(T fn, const int& x, const int& y, const eMouseKeyStateMask& nFlag){
         for ( std::list<cGuiControl*>::iterator itr = _listCtrl.begin();
             itr != _listCtrl.end();
             ++itr)
@@ -58,6 +59,19 @@ private:
 
         return 1;
     }
+
+	template<typename T>
+	int ForEachUIMouseWheel(T fn, const int& x, const int& y, const int& delta, const eMouseKeyStateMask& nFlag){
+		for (std::list<cGuiControl*>::iterator itr = _listCtrl.begin();
+			itr != _listCtrl.end();
+			++itr)
+		{
+			if (((*itr)->*fn)(x, y, delta, nFlag) == 0)
+				return 0;
+		}
+
+		return 1;
+	}
 
     //cGuiForm* _pRoot;
     std::list<cGuiControl*> _listCtrl;

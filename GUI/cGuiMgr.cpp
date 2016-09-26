@@ -71,7 +71,7 @@ void cGuiMgr::Resort()
 
 
 /////// 消息处理
-int cGuiMgr::OnMouseMove(const int& x, const int& y, const unsigned int& nFlag)
+int cGuiMgr::OnMouseMove(const int& x, const int& y, const eMouseKeyStateMask& nFlag)
 {
     return ForEachUIMsg2(&cGuiControl::OnMouseMove, x, y, nFlag);
 
@@ -88,6 +88,10 @@ int cGuiMgr::OnMouseMove(const int& x, const int& y, const unsigned int& nFlag)
 //     }
 
     return 1;
+}
+
+int cGuiMgr::OnMouseWheel(const int& x, const int& y, const int& delta, const eMouseKeyStateMask& state){
+	return ForEachUIMouseWheel(&cGuiControl::OnMouseWheel, x, y, delta, state);
 }
 
 int cGuiMgr::OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag)
@@ -116,7 +120,7 @@ int cGuiMgr::OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag
     return 1;
 }
 
-int cGuiMgr::OnLButtonUp(const int& x, const int& y, const unsigned int& nFlag)
+int cGuiMgr::OnLButtonUp(const int& x, const int& y, const eMouseKeyStateMask& nFlag)
 {
     return ForEachUIMsg2(&cGuiControl::OnLButtonUp, x, y, nFlag);
 

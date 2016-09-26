@@ -249,6 +249,7 @@ void CSprite::setTextureV2(const float& t){
 void CSprite::setClipRect(FRECT& cf)
 {
     m_reClip = cf;
+	m_bDirty = true;
 }
 
 bool CSprite::isClip()

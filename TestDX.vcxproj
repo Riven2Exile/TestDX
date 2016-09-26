@@ -137,6 +137,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="GUI\cGuiList.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="GUI\cGuiMgr.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
@@ -420,6 +423,7 @@
     <ClInclude Include="GUI\cGuiControl.h" />
     <ClInclude Include="GUI\cGuiForm.h" />
     <ClInclude Include="GUI\cGuiLable.h" />
+    <ClInclude Include="GUI\cGuiList.h" />
     <ClInclude Include="GUI\cGuiMgr.h" />
     <ClInclude Include="GUI\cGuiProgress.h" />
     <ClInclude Include="GUI\cGuiScroll.h" />

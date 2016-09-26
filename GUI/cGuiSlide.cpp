@@ -91,6 +91,9 @@ void cGuiSlide::SetSlidePos(const UINT& pos){
 			
 			int xx = 0, yy = 0;
 			_pSlideBtn->SetOffSetX( btn_x_start + int(factor * _pSlidePro->get_width()) );
+
+			// 进度条变动
+			_pSlidePro->SetProgress(_nPos / (float)_nRange * 100);
 		}
 		//m_pPro->get_width();
 	}

@@ -160,6 +160,17 @@ void cGuiControl::AddControl(cGuiControl* pCtrl)
     _listCtrl.push_back(pCtrl);
 }
 
+bool cGuiControl::DeleteControl(const int& ctrlid){
+	for (auto itr = _listCtrl.begin(); itr != _listCtrl.end(); ++itr){
+		if ((*itr)->GetID() == ctrlid)
+		{
+			_listCtrl.erase(itr);
+			return true;
+		}
+	}
+	return false;
+}
+
 cGuiControl* cGuiControl::FindControl(int id /* = -1 */)
 {
     if (id == _id)
@@ -310,6 +321,21 @@ int cGuiControl::OnMouseMove(const int& x, const int& y, const unsigned int& nFl
     }
 
     return 1;
+}
+
+int cGuiControl::OnMouseWheel(const int& x, const int& y, const int& delta, const enum eMouseKeyStateMask& state){
+	if (IsShow() == false)
+		return 1;
+
+	for (std::list<cGuiControl*>::iterator itr = _listCtrl.begin();
+		itr != _listCtrl.end();
+		++itr)
+	{
+		if ((*itr)->OnMouseWheel(x, y, delta, state) == 0)
+		{
+			return 0; //如果返回0, 表示后面的UI不用再处理了
+		}
+	}
 }
 
 int cGuiControl::OnLButtonUp(const int& x, const int& y, const unsigned int& nFlag)

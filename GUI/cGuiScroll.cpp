@@ -5,8 +5,11 @@ cGuiScroll::cGuiScroll(cGuiControl *pFather) : cGuiControl(pFather)
 , _pBtnUp(nullptr)
 , _pBtnDown(nullptr)
 , _pBtn_Mid_up_Down(nullptr)
+, _pos(0)
+, _scroll_range(0)
 {
-
+	SetCtrlType(kCT_GuiScroll);
+	SetScrollType(kST_Up_Down);
 }
 
 cGuiScroll::~cGuiScroll(){
@@ -40,6 +43,11 @@ void cGuiScroll::SetScrollType(Scroll_Type eType){
 			int x = 0, y = 0;
 			_pBtnUp->GetOffSet(x, y);
 			_pBtn_Mid_up_Down->SetOffSet(x, y + _pBtnUp->get_height());
+
+			_pBtn_Mid_up_Down->SetPressDownFun(std::bind(&cGuiScroll::StartDrag, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+			_pBtn_Mid_up_Down->SetPressUpFun(std::bind(&cGuiScroll::EndDrag, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+			_pBtn_Mid_up_Down->SetPressedMouseMoveFun(std::bind(&cGuiScroll::ScrollPosMove, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+
 			AddControl(_pBtn_Mid_up_Down);
 		}
 		
@@ -77,8 +85,12 @@ void cGuiScroll::SetScrollType(Scroll_Type eType){
 
 
 
+void cGuiScroll::SetScrollPos(const UINT& pos){
 
-
+}
+void cGuiScroll::SetRange(const UINT& range){
+	_scroll_range = range;
+}
 
 
 
@@ -87,7 +99,18 @@ void cGuiScroll::SetScrollType(Scroll_Type eType){
 
 ///////// ÏûÏ¢
 
-int cGuiScroll::OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag)
+
+void cGuiScroll::StartDrag(cGuiButton*, const int& x, const int& y)
 {
-	return __super::OnLButtonDown(x, y, nFlag);
+	printf("GuiScroll start drag! \n");
+}
+
+void cGuiScroll::EndDrag(cGuiButton*, const int& x, const int& y)
+{
+	printf("GuiScroll end drag! \n");
+}
+
+void cGuiScroll::ScrollPosMove(cGuiButton*, const int& x, const int& y)
+{
+	//»¬¿éÒÆ¶¯
 }

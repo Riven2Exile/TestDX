@@ -21,6 +21,7 @@ enum ControlType{
 	kCT_GuiEdit		= 7,
 	kCT_GuiScroll	= 8,	//一般不直接创建
 	kCT_GuiSlide	= 9,	//滑块
+	kCT_GuiList		= 10,
 
     kCT_Num,
 };
@@ -36,6 +37,7 @@ static const char* sssssss[] = {
 	"GuiEdit",
 	"GuiScroll",
 	"GuiSlide",
+	"GuiList",
 };
 
 static int aTest[kCT_Num == (sizeof(sssssss) / sizeof(sssssss[0]))];
@@ -87,6 +89,7 @@ public:
     }
 
     void AddControl(cGuiControl* pCtrl);
+	bool DeleteControl(const int& ctrlid);
     cGuiControl* FindControl(int id = -1);
     void SetFatherCtrl(cGuiControl* pCtrl);
 
@@ -110,6 +113,7 @@ public:
 
     ///// 消息处理 // 返回0 ..表示消息不继续往下传递了
     virtual int OnMouseMove(const int& x, const int& y, const unsigned int& nFlag ); // 返回0 ..表示消息不继续往下传递了
+	virtual int OnMouseWheel(const int& x, const int& y, const int& delta, const enum eMouseKeyStateMask& state);
     virtual int OnLButtonUp(const int& x, const int& y, const unsigned int& nFlag);
     virtual int OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);
 
