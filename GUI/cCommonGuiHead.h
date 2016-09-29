@@ -9,7 +9,8 @@
 #include "cGuiProgress.h"
 #include "cGuiScroll.h"
 #include "cGuiSlide.h"
-
+#include "cGuiList.h"
+#include "cGuiContainer.h"
 
 
 #define DIR_UI_JSON "UI/"

@@ -119,6 +119,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="GUI\cGuiContainer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="GUI\cGuiControl.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeader>
@@ -420,6 +423,7 @@
     <ClInclude Include="GUI\BusinessLogic\TestDlg.h" />
     <ClInclude Include="GUI\cCommonGuiHead.h" />
     <ClInclude Include="GUI\cGuiButton.h" />
+    <ClInclude Include="GUI\cGuiContainer.h" />
     <ClInclude Include="GUI\cGuiControl.h" />
     <ClInclude Include="GUI\cGuiForm.h" />
     <ClInclude Include="GUI\cGuiLable.h" />

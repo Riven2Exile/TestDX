@@ -284,8 +284,28 @@ void CGameMain::init()
 	pScroll->SetHeight(112);
 	pScroll->SetOffSet(0, 80);
 
-	cGuiSlide *pSlide = new cGuiSlide(m_pDlgTest);
+	cGuiSlide *pSlide = new cGuiSlide(m_pDlgTest);	//滑块
 	pSlide->SetOffSet(215, 100);
+
+	cGuiList *pListGui = new cGuiList(m_pDlgTest);  //列表
+	pListGui->SetWidth(200);
+	pListGui->SetHeight(100);
+	stCustomCtrlPack pack;
+	cGuiLable *pLableList1 = new cGuiLable(pListGui);
+	pLableList1->SetTexture("close1"); //如果有通过纹理得到宽高的接口~ 
+	pLableList1->SetWidth(27);
+	pLableList1->SetHeight(27);
+	pack.listCtrl.push_back(pLableList1);
+	pListGui->AddAListCtrl(pack);
+	pack.listCtrl.clear();
+	cGuiLable *pLableList2 = new cGuiLable(pListGui);
+	pLableList2->SetTexture("close2");
+	pLableList2->SetWidth(27);
+	pLableList2->SetHeight(27);
+	pack.listCtrl.push_back(pLableList2);
+	pListGui->AddAListCtrl(pack);
+
+
 
 	m_pDlgTest->AddControl(m_pCtrlTest);
 	m_pDlgTest->AddControl(pPro);
@@ -294,6 +314,7 @@ void CGameMain::init()
 	m_pDlgTest->AddControl(pLable);
 	m_pDlgTest->AddControl(pScroll);
 	m_pDlgTest->AddControl(pSlide);
+	m_pDlgTest->AddControl(pListGui);
 
 
     // 对话框2

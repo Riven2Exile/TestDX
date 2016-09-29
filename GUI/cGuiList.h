@@ -16,6 +16,9 @@ struct stCustomCtrlPack
 };
 
 
+class cGuiContainer;
+
+
 
 class cGuiList : public cGuiControl
 {
@@ -32,7 +35,7 @@ public:
 protected:
 
 	//自定义控件列表
-	std::list<stCustomCtrlPack> _gui_list_ctrl;
+	std::list<cGuiContainer*> _gui_list_ctrl;
 };
 
 

@@ -1,4 +1,5 @@
 #include "cGuiList.h"
+#include "cGuiContainer.h"
 
 
 cGuiList::cGuiList(cGuiControl* pFather) : cGuiControl(pFather)
@@ -15,10 +16,34 @@ cGuiList::~cGuiList(){
 ////
 void cGuiList::AddAListCtrl(const stCustomCtrlPack& data)
 {
-	_gui_list_ctrl.push_back(data);
+	cGuiContainer* pCon = new cGuiContainer(this);
+	int height = 0;
+	int weight = 0;
+	int yy = 0;
 	for (auto var : data.listCtrl){
-		AddControl(var);
+		pCon->AddControl(var);
+		if (var->GetOffSetY() + var->get_height() > height){
+			height = var->GetOffSetY() + var->get_height();
+		}
+		if (var->GetOffSetX() + var->get_width()> weight) {
+			weight = var->GetOffSetX() + var->get_width();
+		}
 	}
+
+	if (_gui_list_ctrl.size() > 0) {
+		cGuiControl *pCtrl = _gui_list_ctrl.back();
+		if (pCtrl) {
+			yy += (pCtrl->GetOffSetY() + pCtrl->get_height());
+		}
+	}
+
+	pCon->SetWidth(weight);
+	pCon->SetHeight(height);
+	pCon->SetOffSet(0, yy);
+
+	_gui_list_ctrl.push_back(pCon);
+	AddControl(pCon);
+
 }
 
 void cGuiList::AddAListCtrl(const UINT& index, const stCustomCtrlPack& data)
