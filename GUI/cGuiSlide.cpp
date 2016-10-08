@@ -41,6 +41,7 @@ cGuiSlide::cGuiSlide(cGuiControl* pfather) : cGuiControl(pfather)
 	_nPos = 0;
 	_nRange = 100;
 	// 驱动一下滑块的位置
+	SetSlidePos(25);
 
 	//SetOffSet(0, 0);// 【CGuiContrl的构造函数中,不是执行cGuiSlide::SetOffSet】
 }

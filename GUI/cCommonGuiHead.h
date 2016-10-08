@@ -11,6 +11,7 @@
 #include "cGuiSlide.h"
 #include "cGuiList.h"
 #include "cGuiContainer.h"
+#include "cGuiEdit.h"
 
 
 #define DIR_UI_JSON "UI/"

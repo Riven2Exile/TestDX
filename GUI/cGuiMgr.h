@@ -19,7 +19,7 @@ public:
 
     bool Init();
 
-    void Update();
+	void Update(const DWORD& dwElaspe);
     void Draw();
 
     // ²ã´Î
@@ -46,6 +46,16 @@ private:
             ((*itr)->*fn)();
         }
     }
+
+	template<typename T, typename P>
+	void ForEachUIParam(T fn, const P& param){
+		for (std::list<cGuiControl*>::iterator itr = _listCtrl.begin();
+			itr != _listCtrl.end();
+			++itr)
+		{
+			((*itr)->*fn)(param);
+		}
+	}
 
     template<typename T>
 	int ForEachUIMsg2(T fn, const int& x, const int& y, const eMouseKeyStateMask& nFlag){

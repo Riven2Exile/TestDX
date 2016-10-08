@@ -22,9 +22,9 @@ bool cGuiMgr::Init()
     return true;
 }
 
-void cGuiMgr::Update()
+void cGuiMgr::Update(const DWORD& dwElaspe)
 {
-    ForEachUI(&cGuiControl::Update);
+	ForEachUIParam(&cGuiControl::Update, dwElaspe);
 //     if (_pRoot)
 //     {
 //         _pRoot->Update();

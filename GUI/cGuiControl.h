@@ -3,6 +3,8 @@
 
 #include "..\TextureMgr.h"
 
+#include "Text\TextInterface.h"
+
 ///// 不管显示.. 只管数据
 #include <list>
 #include "..\iSprite.h"
@@ -95,7 +97,7 @@ public:
     cGuiControl* FindControl(int id = -1);
     void SetFatherCtrl(cGuiControl* pCtrl);
 
-    void Update();
+	void Update(const DWORD& dwElaspe);
     virtual void Draw();    //加入绘制流..
 
     virtual void Show(bool bShow = true);
@@ -104,6 +106,8 @@ public:
     void SetDrag(bool bDrag); //设置是否可以拖动
     bool CanDrag();
 
+	bool IsFocus();
+	void SetFocus(bool b);
 
     // 判断
     virtual bool IsAt(const int& x, const int& y);
@@ -133,6 +137,9 @@ public:
 	cGuiControl* GetFather() { return _pFather; }
 
 protected:
+	virtual void run(const DWORD& dwElaspe) {}
+
+	bool _bFocus; //是否焦点
 	cGuiControl* _pFather;  //父控件
 	int _offsetX; //局部坐标系
 	int _offsetY;

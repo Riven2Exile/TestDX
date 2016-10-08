@@ -305,6 +305,11 @@ void CGameMain::init()
 	pack.listCtrl.push_back(pLableList2);
 	pListGui->AddAListCtrl(pack);
 
+	cGuiEdit *pEdit = new cGuiEdit(m_pDlgTest); // 编辑框
+	pEdit->SetWidth(200);
+	pEdit->SetHeight(20);
+	pEdit->SetOffSet(150,40);
+
 
 
 	m_pDlgTest->AddControl(m_pCtrlTest);
@@ -315,6 +320,7 @@ void CGameMain::init()
 	m_pDlgTest->AddControl(pScroll);
 	m_pDlgTest->AddControl(pSlide);
 	m_pDlgTest->AddControl(pListGui);
+	m_pDlgTest->AddControl(pEdit);
 
 
     // 对话框2
@@ -384,7 +390,7 @@ void CGameMain::update(DWORD elasped)
 
     m_AniAuto.update(elasped);
 
-    _gui.Update();
+    _gui.Update(elasped);
     //m_pDlgTest->Update();
 
     //test
@@ -422,9 +428,10 @@ void CGameMain::draw()
 
 		// 测试字体
 		//test font;
-// 		const char* pstr = "fly";
-// 		TextOutput(100, 100, pstr);
-// 		TextOutput(140, 100, "奋斗");
+		const char* pstr = "fly";
+		TextOutput(0, 100, pstr);
+		TextOutput(10, 120, "t");
+ 		TextOutput(0, 200, "不布");
 
 
         CDrawFlow::Instance().draw(); //绘制流

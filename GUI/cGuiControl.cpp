@@ -10,6 +10,7 @@ cGuiControl::cGuiControl(cGuiControl* pFather): _id(0), _bShow(true), _bDrag(fal
 //,_offsetX(0)
 //,_offsetY(0)
 ,_strText("")
+, _bFocus(false)
 {
 	_pFather = pFather;
     _sprite = CreateSprite(ST_MX);
@@ -205,7 +206,7 @@ void cGuiControl::SetFatherCtrl(cGuiControl* pCtrl)
 }
 
 
-void cGuiControl::Update()
+void cGuiControl::Update(const DWORD& dwElaspe)
 {
     _sprite->Update();
 
@@ -215,9 +216,11 @@ void cGuiControl::Update()
         std::list<cGuiControl*>::iterator itr = _listCtrl.begin();
         for ( ; itr != _listCtrl.end(); ++itr)
         {
-            (*itr)->Update();
+            (*itr)->Update(dwElaspe);
         }
     }
+
+	run(dwElaspe);
 }
 
 void cGuiControl::Draw()
@@ -250,6 +253,13 @@ void cGuiControl::Draw()
 void cGuiControl::Show(bool bShow /* = true */)
 {
     _bShow = bShow;
+}
+
+void cGuiControl::SetFocus(bool b){
+	_bFocus = b;
+}
+bool cGuiControl::IsFocus(){
+	return _bFocus;
 }
 
 ////////// еп╤о

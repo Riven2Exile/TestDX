@@ -16,10 +16,15 @@ int Textinterface_nTextIndex = 0;
 int TextInterface_nIncrease = 100;
 std::vector<iSprite*> Textinterface_vecText;
 
+DWORD g_font_color = 0xffffffff;
 
 void TextInterface_InitText()
 {
 	
+}
+
+void TextSetColorNext(const DWORD& dw){
+	g_font_color = dw;
 }
 
 void Textinterface_ResetTextoutOneFrame()
@@ -39,7 +44,9 @@ void TextOutput(const int& xT, const int &yT, const char* str)
 	// 1. 对str进行词汇的拆解成单个字,英文是单字节(宽度也减半),中文是双字节 (注意效率)
 	static const byte low = 0xff;
 	static const byte H = 0x80;
-	int height = 24; //高度
+	static const int x_edge = 1;
+	static const int y_edge = 0;
+	int height = 12; //高度
 	int weight = 12; //
 	int x_start = xT; 
 
@@ -69,24 +76,26 @@ void TextOutput(const int& xT, const int &yT, const char* str)
 		++Textinterface_nTextIndex;
 
 		byte b = (byte)str[i];
-		int nRealWeight = height;
+		int nRealWeight = weight;
 		if (b < H)
 		{
-			nRealWeight = height / 2; //注意英文宽度是减半的
+			nRealWeight = weight / 2; //注意英文宽度是减半的
 			b_english = true;
 		}
 		else{
-			nRealWeight = height; //中文
+			nRealWeight = weight; //中文
 			b_english = false;
 		}
 
 		//设置纹理坐标
 		int y = 0;
 		int x = 0; 
+		int fix = 0;
 		if (b_english)
 		{
 			y = str[i] / low;
 			x = str[i];
+			fix = 2;
 		}
 		else
 		{
@@ -96,8 +105,10 @@ void TextOutput(const int& xT, const int &yT, const char* str)
 		}
 		
 
-		float tu1 = (x * nRealWeight) / float(low*height);
-		float tu2 = (x * nRealWeight + nRealWeight) / float(low*height);
+		static float bitmap_width = float(low*weight + x_edge * 2); //位图宽度
+
+		float tu1 = (x * nRealWeight + x_edge + fix) / bitmap_width;
+		float tu2 = (x * nRealWeight + nRealWeight + x_edge + fix) / bitmap_width;
 
 		float tv1 = y / (float)H;
 		float tv2 = (y*height + height) / float(H*height);
@@ -110,7 +121,7 @@ void TextOutput(const int& xT, const int &yT, const char* str)
 		sp->SetY(yT);
 		sp->setWidth(nRealWeight);
 		sp->setHeight(height);
-		sp->SetColor(0xffffffff);
+		sp->SetColor(g_font_color);
 		sp->Update();
 		sp->Draw();		// 3. 压入绘制流
 
