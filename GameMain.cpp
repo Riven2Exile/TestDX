@@ -27,7 +27,7 @@ extern CCamera g_camera;
 
 
 
-CGameMain::CGameMain() : _gui(cGuiMgr::Instance())
+CGameMain::CGameMain() //: _gui(cGuiMgr::Instance())
 {
     
 
@@ -186,7 +186,7 @@ void CGameMain::init()
 
     
     //
-	m_pDlgTest = new CTestLogicDlg/*cGuiControl*/;
+	m_pDlgTest = new CTestLogicDlg(&_gui);/*cGuiControl*/;
 	m_pDlgTest->SetOffSet(250,250);
 	//m_pDlgTest->SetPos(50, 50); // 如果是子控件的话，这个位置就需要加上父控件的偏移
 	m_pDlgTest->SetWidth(328);
@@ -336,6 +336,11 @@ void CGameMain::init()
 	}
 }
 
+void CGameMain::SetWndSize(int width, int height){
+	_gui.SetWidth(width);
+	_gui.SetHeight(height);
+	_gui.SetAlpha(0);
+}
 
 void CGameMain::AddGui(cGuiControl* pCtrl)
 {

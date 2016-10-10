@@ -1,10 +1,12 @@
+
 #ifndef _TEST_DLG_H
 #define _TEST_DLG_H
+#include "..\cGuiForm.h"
 
 class CTestDlg : public cGuiForm
 {
 public:
-    CTestDlg();
+    //CTestDlg(cGuiControl* p);
     virtual ~CTestDlg();
 
 

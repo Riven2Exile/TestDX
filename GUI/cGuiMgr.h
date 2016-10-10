@@ -1,21 +1,23 @@
+
 #ifndef _L_GUI_MGR_H
 #define _L_GUI_MGR_H
+
+#include "cGuiForm.h"
 
 class cGuiControl;
 class cGuiForm;
 
-class cGuiMgr
+class cGuiMgr : public cGuiForm
 {
-private:
-    cGuiMgr();
-public:
     
+public:
+	cGuiMgr();
     virtual ~cGuiMgr();
 
-    static cGuiMgr& Instance(){
-        static cGuiMgr inst;
-        return inst;
-    }
+//     static cGuiMgr& Instance(){
+//         static cGuiMgr inst;
+//         return inst;
+//     }
 
     bool Init();
 

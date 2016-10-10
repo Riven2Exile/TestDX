@@ -7,7 +7,13 @@
 
 ///// 不管显示.. 只管数据
 #include <list>
+#include <functional>
 #include "..\iSprite.h"
+
+class cGuiControl;
+
+typedef std::function<void(cGuiControl* pCtrl)> focus_cb_fun;
+
 enum SpriteType;
 
 
@@ -108,6 +114,7 @@ public:
 
 	bool IsFocus();
 	void SetFocus(bool b);
+	void ClearChildFocus(cGuiControl* pFocusCtrl);
 
     // 判断
     virtual bool IsAt(const int& x, const int& y);
@@ -124,6 +131,12 @@ public:
     virtual int OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);
 
 
+
+	///// evevt and callback
+	void SetGainFocusCallBack(focus_cb_fun fun);
+	void SetLoseFocusCallBack(focus_cb_fun fun);
+
+
     template<typename T>
     void ForEachCtrl(T obj){
         for (std::list<cGuiControl*>::iterator itr = _listCtrl.begin();
@@ -134,6 +147,16 @@ public:
         }
     }
 
+	template<typename T>
+	void ForEachCtrlEx(T obj){
+		for (std::list<cGuiControl*>::iterator itr = _listCtrl.begin();
+			itr != _listCtrl.end();
+			++itr)
+		{
+			obj(*itr);
+		}
+	}
+
 	cGuiControl* GetFather() { return _pFather; }
 
 protected:
@@ -143,6 +166,9 @@ protected:
 	cGuiControl* _pFather;  //父控件
 	int _offsetX; //局部坐标系
 	int _offsetY;
+
+	focus_cb_fun _cb_gain_focus;
+	focus_cb_fun _cb_lose_focus;
 
 private:
     // 层次排序

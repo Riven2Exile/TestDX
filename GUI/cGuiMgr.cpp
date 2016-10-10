@@ -2,7 +2,7 @@
 #include "cGuiMgr.h"
 #include "cCommonGuiHead.h"
 
-cGuiMgr::cGuiMgr(){
+cGuiMgr::cGuiMgr():cGuiForm(nullptr){
 }
 
 cGuiMgr::~cGuiMgr(){
@@ -75,18 +75,6 @@ int cGuiMgr::OnMouseMove(const int& x, const int& y, const eMouseKeyStateMask& n
 {
     return ForEachUIMsg2(&cGuiControl::OnMouseMove, x, y, nFlag);
 
-//     for ( std::list<cGuiControl*>::iterator itr = _listCtrl.begin();
-//         itr != _listCtrl.end();
-//         ++itr)
-//     {
-//         (*itr)->OnMouseMove(x, y, nFlag);
-//     }
-
-//     if (_pRoot)
-//     {
-//         return _pRoot->OnMouseMove(x, y, nFlag);
-//     }
-
     return 1;
 }
 
@@ -124,17 +112,5 @@ int cGuiMgr::OnLButtonUp(const int& x, const int& y, const eMouseKeyStateMask& n
 {
     return ForEachUIMsg2(&cGuiControl::OnLButtonUp, x, y, nFlag);
 
-//     for ( std::list<cGuiControl*>::iterator itr = _listCtrl.begin();
-//         itr != _listCtrl.end();
-//         ++itr)
-//     {
-//         (*itr)->OnLButtonUp(x, y, nFlag);
-//     }
-
-
-//     if (_pRoot)
-//     {
-//         return _pRoot->OnLButtonUp(x, y, nFlag);
-//     }
-    return 1;
+    //return 1;
 }

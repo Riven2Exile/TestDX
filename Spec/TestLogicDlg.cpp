@@ -6,10 +6,11 @@
 */
 
 
-CTestLogicDlg::CTestLogicDlg()
-{
-    
+
+CTestLogicDlg::CTestLogicDlg(cGuiControl* pFather) : cGuiForm(pFather){
+
 }
+
 CTestLogicDlg::~CTestLogicDlg()
 {
 

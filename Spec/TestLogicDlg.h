@@ -9,7 +9,7 @@ class cGuiButton;
 class CTestLogicDlg : public cGuiForm
 {
 public:
-    CTestLogicDlg();
+	explicit CTestLogicDlg(cGuiControl* pFather);
     virtual ~CTestLogicDlg();
 
     void Init();

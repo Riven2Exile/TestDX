@@ -17,8 +17,13 @@ public:
 
 
 protected:
+
+	int OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);
+
 	virtual void run(const DWORD& dwElaspe);
 
+	void callback_get_focus(cGuiControl* pCtrl);
+	void callback_lose_focus(cGuiControl* pCtrl);
 
 	bool _bShowCursor;
 	int _cursor_pos;	//π‚±ÍŒª÷√

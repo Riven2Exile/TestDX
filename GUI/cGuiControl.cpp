@@ -261,6 +261,18 @@ void cGuiControl::SetFocus(bool b){
 bool cGuiControl::IsFocus(){
 	return _bFocus;
 }
+void cGuiControl::ClearChildFocus(cGuiControl* pFocusCtrl){
+	auto fun = [&](cGuiControl* p){
+		if (p != pFocusCtrl && p->IsFocus())
+		{
+			p->SetFocus(false);
+			if (_cb_lose_focus){
+				_cb_lose_focus(p);
+			}
+		}
+	};
+	ForEachCtrlEx(fun);
+}
 
 ////////// 判断
 bool cGuiControl::IsAt(const int& x, const int& y)
@@ -375,10 +387,43 @@ int cGuiControl::OnLButtonDown(const int& x, const int& y, const unsigned int& n
         itr != _listCtrl.end(); 
         ++itr)
     {
-        if( (*itr)->OnLButtonDown(x, y, nFlag) == 0)
-        {
-            return 0; //如果返回0, 表示后面的UI不用再处理了
-        }
+		cGuiControl *pCtrl = (*itr);
+		if (pCtrl->IsAt(x, y))
+		{
+			if (pCtrl->OnLButtonDown(x, y, nFlag) == 0) //子控件自定义的
+			{
+				if (IsFocus() == false)
+				{
+					if (pCtrl->GetFather()){
+						pCtrl->GetFather()->ClearChildFocus(pCtrl); //清除掉兄弟的焦点
+					}
+
+					pCtrl->SetFocus(true); //获得焦点
+					if (_cb_gain_focus){
+						_cb_gain_focus(this);
+					}
+				}
+
+				return 0; //如果返回0, 表示后面的UI不用再处理了
+			}
+		}
     }
+
+// 	if (IsAt(x, y))
+// 	{
+// 		return 0;
+// 	}
+
     return 1;
+}
+
+
+
+///// event
+void cGuiControl::SetGainFocusCallBack(focus_cb_fun fun){
+	_cb_gain_focus = fun;
+}
+
+void cGuiControl::SetLoseFocusCallBack(focus_cb_fun fun){
+	_cb_lose_focus = fun;
 }

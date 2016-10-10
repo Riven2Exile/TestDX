@@ -21,6 +21,7 @@
 #include <time.h>
 
 #include "Tetris/TetrisWorldView.h"
+#include "GUI/cGuiMgr.h"
 
 #define TEST_SIZE 200
 
@@ -60,6 +61,7 @@ public:
     void AddGui(cGuiControl* pCtrl);
 
     void init();
+	void SetWndSize(int width, int height);
 
     void update(DWORD elasped);
     
@@ -101,7 +103,7 @@ private:
 
 
     // GUI¹ÜÀí
-    cGuiMgr& _gui;
+    cGuiMgr _gui;
 
     //»ýÄ¾
     /*Tetris::*/TetrisWorldView* _pTWorld;

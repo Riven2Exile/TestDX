@@ -91,8 +91,17 @@ int cGuiForm::OnLButtonDown(const int& x, const int& y, const unsigned int& nFla
         return 1;
 
     //先给子控件继续传消息
-    if (cGuiControl::OnLButtonDown(x, y, nFlag) == 0)
-        return 0;
+	if (cGuiControl::OnLButtonDown(x, y, nFlag) == 0){
+		//有子控件处理了, 所以自身作为父控件也有获得焦点
+		if (GetFather() && GetFather()->IsFocus() == false){
+			GetFather()->ClearChildFocus(this); //清除掉兄弟的焦点
+			SetFocus(true); //自己获得焦点
+			if (_cb_gain_focus){
+				_cb_gain_focus(this);
+			}
+		}
+		return 0;
+	}
 
     if (IsAt(x, y))
     {
