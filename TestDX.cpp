@@ -498,11 +498,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
     // ∂¡»°Œ∆¿Ì
  //   D3DXCreateTextureFromFileA(g_pDevice, "Riven_Splash_0.jpg", &g_pTexture);
-    D3DXCreateTextureFromFileExA(g_pDevice, "MyRes/Riven_Splash_0.jpg", D3DX_DEFAULT_NONPOW2,D3DX_DEFAULT_NONPOW2,1, D3DUSAGE_DYNAMIC,D3DFMT_R8G8B8, 
-        D3DPOOL_DEFAULT, 
-        D3DX_FILTER_TRIANGLE, 
-        D3DX_FILTER_TRIANGLE, 
-        D3DCOLOR_ARGB(255,0,0,0), NULL, NULL, &g_pTexture);
+//     D3DXCreateTextureFromFileExA(g_pDevice, "MyRes/Riven_Splash_0.jpg", D3DX_DEFAULT_NONPOW2,D3DX_DEFAULT_NONPOW2,1, D3DUSAGE_DYNAMIC,D3DFMT_R8G8B8, 
+//         D3DPOOL_DEFAULT, 
+//         D3DX_FILTER_TRIANGLE, 
+//         D3DX_FILTER_TRIANGLE, 
+//         D3DCOLOR_ARGB(255,0,0,0), NULL, NULL, &g_pTexture);
     
 
     Setup();    //∆Ù∂Ø

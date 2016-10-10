@@ -40,7 +40,7 @@ void CFAnimation::initWithA(stFAnimation& stAn)
 
     for (int i = 0; i < stAn.vecTex.size(); ++i)
     {
-        m_vecTex.push_back( CTextureMgr::instance().getTexture(stAn.vecTex[i]) );
+        m_vecTex.push_back( (stTexInfo*)CTextureMgr::instance().getTexture(stAn.vecTex[i]) );
     }
     
     m_pSprite->LoadAImage("", g_pDevice); //œ»’‚—˘°£°£

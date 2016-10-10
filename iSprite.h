@@ -5,6 +5,7 @@
 typedef unsigned long DWORD;
 struct IDirect3DDevice9;
 struct IDirect3DTexture9;
+struct stTexInfo;
 
 enum SpriteType{
     ST_MX,  //
@@ -56,7 +57,7 @@ public:
     virtual void setStretchX(float x) = 0; //1.0f表示不缩放
     virtual void setStretchY(float y) = 0; //1.0f表示不缩放
 
-    virtual void setTexture(IDirect3DTexture9* pTexture) = 0; //设置纹理
+    virtual void setTexture(const stTexInfo* pTexture) = 0; //设置纹理
 
 	// 设置纹理坐标
 	virtual void setTextureU1(const float& t) = 0;

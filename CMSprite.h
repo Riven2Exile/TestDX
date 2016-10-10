@@ -58,7 +58,8 @@ public:
     virtual void setStretchX(float x) ; //1.0f表示不缩放
     virtual void setStretchY(float y) ; //1.0f表示不缩放
 
-    virtual void setTexture(IDirect3DTexture9* pTexture) ; //设置纹理
+    virtual void setTexture(const stTexInfo* pTexture) ; //设置纹理
+	//virtual void setTexture(stTexInfo* p) {}
 	virtual void setTextureU1(const float& t) {}
 	virtual void setTextureU2(const float& t) {}
 	virtual void setTextureV1(const float& t) {}

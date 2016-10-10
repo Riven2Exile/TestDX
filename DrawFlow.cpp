@@ -6,7 +6,7 @@
 
 
 extern IDirect3DDevice9 *g_pDevice;
-
+extern D3DPRESENT_PARAMETERS g_d3dpp;
 
 CDrawFlow::CDrawFlow()
 {
@@ -135,4 +135,29 @@ void CDrawFlow::draw()
 
 
 
+	////// 先检查设备的有效性
+	HRESULT hr_device = g_pDevice->TestCooperativeLevel();
+	if (hr_device == D3DERR_DEVICELOST){
+		printf("设备丢失\n");
+		//todo: 释放资源
+		CTextureMgr::instance().DeviceReset(); //释放纹理,
+
+		//解除纹理引用
+
+		if (g_pDevice->Reset(&g_d3dpp) == D3D_OK){
+
+			// Store render target surface desc
+			LPDIRECT3DSURFACE9 pBackBuffer;
+			g_pDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &pBackBuffer);
+			//pBackBuffer->GetDesc(&m_d3dsdBackBuffer);
+			pBackBuffer->Release();
+
+			//todo: 重新加载纹理, (恢复)  or 绘制的时候再去
+
+		}
+	}
+	else if (D3DERR_DEVICENOTRESET == hr_device)
+	{
+		printf("这个又是啥?\n");
+	}
 }

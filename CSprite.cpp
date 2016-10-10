@@ -12,7 +12,7 @@ const DWORD VertexS::FVF = D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1;
     图元拓扑 从 D3DPT_TRIANGLESTRIP 改成  D3DPT_TRIANGLELIST -- >  是为了可以优化批次绘制
 */
 
-
+static bool bUSESelfMemory = true; //不使用dx的顶点内存
 
 CSprite::CSprite(): m_bVisible(true)
 , m_x(0.0f)
@@ -30,11 +30,16 @@ CSprite::CSprite(): m_bVisible(true)
 , m_StretchY(1.0f)
 , m_color(0xffffffff)
 , m_bClip(false)
-, m_pTexture(NULL)
+//, m_Texture(NULL)
 , m_pVb(NULL)
 , m_pTest(NULL)
+, m_pSelfVertex(NULL)
 {
     m_bDirty = false;
+	if (bUSESelfMemory)
+	{
+		m_pSelfVertex = new VertexS[6];
+	}
 }
 
 CSprite::~CSprite()
@@ -56,11 +61,11 @@ bool CSprite::LoadAImage(const char* pszName, IDirect3DDevice9* pDev)
 
     HRESULT hr = D3DXCreateTextureFromFileExA(pDev, pszName, info.Width, info.Height, 
         info.MipLevels, usage, info.Format, (D3DPOOL)pool, D3DX_FILTER_NONE,  // D3DPOOL_DEFAULT才可行。。
-        D3DX_FILTER_NONE, D3DCOLOR_ARGB(255,255,255,255), NULL, NULL, &m_pTexture);
+        D3DX_FILTER_NONE, D3DCOLOR_ARGB(255,255,255,255), NULL, NULL, &m_Texture.pTex);
 
     if (FAILED(hr) )
     {
-        m_pTexture = NULL;
+        m_Texture.pTex = NULL;
     }
 	else{
 		m_x = 0;
@@ -74,60 +79,64 @@ bool CSprite::LoadAImage(const char* pszName, IDirect3DDevice9* pDev)
     
 
     int jie = 6;  // 4
+	m_reClip.left = 0.f;
+	m_reClip.top = 0.f;
+	m_reClip.right = 1.0f;
+	m_reClip.bottom = 1.0f;
 
-    pDev->CreateVertexBuffer(jie*sizeof(VertexS),
-        D3DUSAGE_WRITEONLY,
-        VertexS::FVF,
-        D3DPOOL_MANAGED,
-        &m_pVb,
-        0);
+	m_z = 0.f;
 
-    
+	m_color = 0xffffffff;
 
-    m_reClip.left = 0.f;
-    m_reClip.top = 0.f;
-    m_reClip.right = 1.0f;
-    m_reClip.bottom = 1.0f;
+	m_StretchX = 1.0f;
+	m_StretchY = 1.0f;
+	
 
-    m_StretchX = 1.0f;
-    m_StretchY = 1.0f;
-
+	// 如果 使用 CreateVertexBuffer 就需要配合  Lock 和  Unlock
 
     VertexS *pVec;
-    m_pVb->Lock(0, sizeof(VertexS)*jie, (void**)&pVec, 0);
+	if (bUSESelfMemory)
+	{
+	}
+	else{
+		pDev->CreateVertexBuffer(jie*sizeof(VertexS),
+			D3DUSAGE_WRITEONLY,
+			VertexS::FVF,
+			D3DPOOL_MANAGED,
+			&m_pVb,
+			0);
+		m_pVb->Lock(0, sizeof(VertexS)*jie, (void**)&pVec, 0);
 
-    float fix = -0.5f;
-    m_z = 0.f;
+		float fix = -0.5f;
 
-    m_color = 0xffffffff;
+		/*   三角形带
+		0   1
 
-    /*   三角形带
-        0   1
+		2   3
+		*/
+		//     pVec[0] = VertexS(m_x + fix, m_y + fix, m_z, 1.0f, m_color, 0.0f, 0.0f);
+		//     pVec[1] = VertexS(m_x + (float)info.Width + fix, m_y + fix, m_z, 1.0f, m_color, 1.0f, 0.0f);
+		//     pVec[2] = VertexS(m_x + fix, m_y + (float)info.Height + fix, m_z, 1.0f, m_color, 0.0f, 1.0f);
+		// 
+		//     pVec[3] = VertexS(m_x + (float)info.Width + fix, m_y + (float)info.Height + fix, m_z, 1.0f, m_color, 1.0f, 1.0f);
 
-        2   3
-    */
-//     pVec[0] = VertexS(m_x + fix, m_y + fix, m_z, 1.0f, m_color, 0.0f, 0.0f);
-//     pVec[1] = VertexS(m_x + (float)info.Width + fix, m_y + fix, m_z, 1.0f, m_color, 1.0f, 0.0f);
-//     pVec[2] = VertexS(m_x + fix, m_y + (float)info.Height + fix, m_z, 1.0f, m_color, 0.0f, 1.0f);
-// 
-//     pVec[3] = VertexS(m_x + (float)info.Width + fix, m_y + (float)info.Height + fix, m_z, 1.0f, m_color, 1.0f, 1.0f);
+		/*  三角形列表
+		0   1/4
 
-    /*  三角形列表
-        0   1/4
+		2/3  5
+		*/
+		pVec[0] = VertexS(m_x + fix, m_y + fix, m_z, 1.0f, m_color, 0.0f, 0.0f);
+		pVec[1] = VertexS(m_x + (float)info.Width + fix, m_y + fix, m_z, 1.0f, m_color, 1.0f, 0.0f);
+		pVec[2] = VertexS(m_x + fix, m_y + (float)info.Height + fix, m_z, 1.0f, m_color, 0.0f, 1.0f);
 
-        2/3  5
-    */
-    pVec[0] = VertexS(m_x + fix, m_y + fix, m_z, 1.0f, m_color, 0.0f, 0.0f);
-    pVec[1] = VertexS(m_x + (float)info.Width + fix, m_y + fix, m_z, 1.0f, m_color, 1.0f, 0.0f);
-    pVec[2] = VertexS(m_x + fix, m_y + (float)info.Height + fix, m_z, 1.0f, m_color, 0.0f, 1.0f);
+		pVec[3] = VertexS(m_x + fix, m_y + fix, m_z, 1.0f, m_color, 0.0f, 0.0f);
+		pVec[4] = VertexS(m_x + (float)info.Width + fix, m_y + fix, m_z, 1.0f, m_color, 1.0f, 0.0f);
+		pVec[5] = VertexS(m_x + (float)info.Width + fix, m_y + (float)info.Height + fix, m_z, 1.0f, m_color, 0.0f, 1.0f);
 
-    pVec[3] = VertexS(m_x + fix, m_y + fix, m_z, 1.0f, m_color, 0.0f, 0.0f);
-    pVec[4] = VertexS(m_x + (float)info.Width + fix, m_y + fix, m_z, 1.0f, m_color, 1.0f, 0.0f);
-    pVec[5] = VertexS(m_x + (float)info.Width + fix, m_y + (float)info.Height + fix, m_z, 1.0f, m_color, 0.0f, 1.0f);
+		m_pVb->Unlock();
 
-
-
-    m_pVb->Unlock();
+	}
+    
 
 	m_bDirty = true; //标记为脏
 
@@ -224,9 +233,20 @@ void CSprite::setStretchY(float y)
     m_bDirty = true;
 }
 
-void CSprite::setTexture(IDirect3DTexture9* pTexture)
+void CSprite::setTexture(const stTexInfo* pTexture)
 {
-    m_pTexture = pTexture;
+	if (pTexture)
+	{
+		m_Texture.pTex = pTexture->pTex;
+		m_Texture.szKey = pTexture->szKey;
+		m_Texture.szfilename = pTexture->szfilename;
+		m_Texture.weight = pTexture->weight;
+		m_Texture.height = pTexture->height;
+	}
+	else
+	{
+		m_Texture.LightClear();
+	}
 }
 
 void CSprite::setTextureU1(const float& t){
@@ -276,7 +296,11 @@ void CSprite::Update()
     if (m_bDirty)
     {
         VertexS *pVec;
-        m_pVb->Lock(0, sizeof(VertexS)*6, (void**)&pVec, 0);
+		if (bUSESelfMemory == false)
+			m_pVb->Lock(0, sizeof(VertexS)*6, (void**)&pVec, 0);
+		else{
+			pVec = (VertexS*)m_pSelfVertex;
+		}
 
         float fix = -0.5f;
 
@@ -354,7 +378,9 @@ void CSprite::Update()
 
         m_pTest = /*m_pVb;*/pVec;//test
 
-        m_pVb->Unlock();
+		if (bUSESelfMemory == false){
+			m_pVb->Unlock();
+		}
 
         m_bDirty = false;
     }
@@ -374,7 +400,7 @@ void CSprite::Draw()
     {
         pDraw->src_blend = D3DBLEND_SRCALPHA;
         pDraw->dest_blend = D3DBLEND_INVSRCALPHA;
-        pDraw->pTexture = m_pTexture;
+        pDraw->pTexture = m_Texture.pTex;
         pDraw->shape =  D3DPT_TRIANGLELIST; //D3DPT_TRIANGLESTRIP;
         pDraw->vFormat = VertexS::FVF;
         pDraw->nCount = 2;

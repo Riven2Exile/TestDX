@@ -139,9 +139,15 @@ void CMSprite::setStretchY(float y) //1.0f表示不缩放
 
 }
 
-void CMSprite::setTexture(IDirect3DTexture9* pTexture) //设置纹理
+void CMSprite::setTexture(const stTexInfo* pTexture) //设置纹理
 {
-    m_pTexture = pTexture;
+	if (pTexture)
+	{
+		m_pTexture = pTexture->pTex;
+	}
+	else{
+		m_pTexture = nullptr;
+	}
 }
 
 bool CMSprite::isClip()

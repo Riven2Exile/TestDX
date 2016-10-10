@@ -22,6 +22,7 @@ void RoundProcess::init()
 
 void RoundProcess::loadImage(const char* pszName, IDirect3DDevice9* pDev)
 {
+	return;
     D3DXIMAGE_INFO info;
     D3DXGetImageInfoFromFileA(pszName, &info);
 

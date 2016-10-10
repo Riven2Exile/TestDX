@@ -3,6 +3,7 @@
 #define CSPRITE_H
 
 #include "iSprite.h"
+#include "TextureMgr.h"
 
 
 ////// vertex2 RHW
@@ -63,7 +64,7 @@ public:
     void setStretchX(float x); //1.0f表示不缩放
     void setStretchY(float y); //1.0f表示不缩放
 
-    void setTexture(IDirect3DTexture9* pTexture); //设置纹理
+    void setTexture(const stTexInfo* pTexture); //设置纹理
 
 	// 设置纹理坐标
 	virtual void setTextureU1(const float& t);
@@ -114,10 +115,12 @@ private:
     bool m_bClip;   //是否需要被裁剪
     bool m_bDirty; 
 
-    IDirect3DTexture9* m_pTexture;
+	stTexInfo m_Texture;
     IDirect3DVertexBuffer9 *m_pVb;
 
     void *m_pTest; //自定义的顶点结构
+
+	void *m_pSelfVertex; //自定义的顶点结构，放在内存中
 };
 
 

@@ -37,7 +37,12 @@ void CTextureMgr::addTexture(const char* szName, std::string strKey)
     D3DXIMAGE_INFO info;
     D3DXGetImageInfoFromFileA(szName, &info);
 
-    IDirect3DTexture9 *pTexture = NULL;
+
+	stTexInfo tInfo;
+	tInfo.weight = info.Width;
+	tInfo.height = info.Height;
+	tInfo.szKey = strKey;
+	tInfo.szfilename = szName;
 
     //// 原来的 D3DUSAGE_DYNAMIC ， D3DPOOL_DEFAULT
     int usage = 0; D3DUSAGE_DYNAMIC;
@@ -45,16 +50,13 @@ void CTextureMgr::addTexture(const char* szName, std::string strKey)
 
     D3DXCreateTextureFromFileExA(g_pDevice, szName, info.Width, info.Height, 
         info.MipLevels, usage, info.Format, (D3DPOOL)pool, D3DX_FILTER_NONE/*D3DX_FILTER_TRIANGLE*/,  // D3DPOOL_DEFAULT才可行。。
-        D3DX_FILTER_NONE/*D3DX_FILTER_TRIANGLE*/, 0/*D3DCOLOR_ARGB(255,255,255,255)*/, NULL, NULL, &pTexture); //坑.. D3DCOLOR_ARGB(255,255,255,255) --> 会将纹理中白色的点替换成黑色,0 禁用之
+		D3DX_FILTER_NONE/*D3DX_FILTER_TRIANGLE*/, 0/*D3DCOLOR_ARGB(255,255,255,255)*/, NULL, NULL, &tInfo.pTex); //坑.. D3DCOLOR_ARGB(255,255,255,255) --> 会将纹理中白色的点替换成黑色,0 禁用之
 
-	stTexInfo tInfo;
-	tInfo.pTex = pTexture;
-	tInfo.weight = info.Width;
-	tInfo.height = info.Height;
+	
 
 	const unsigned int& n = BKDRHash(strKey.c_str());
 
-    if (pTexture)
+	if (tInfo.pTex)
     {
 #ifdef _DEBUG
 		if (m_data.find(n) != m_data.end())
@@ -76,24 +78,46 @@ void CTextureMgr::addTexture(IDirect3DTexture9* pTex, std::string strKey)
 }
 
 
-IDirect3DTexture9* CTextureMgr::getTexture(const char* szName)
-{
-    MAP_TEX::iterator itr = m_data.find(BKDRHash(szName));
-    if (itr != m_data.end())
-    {
-        return itr->second.pTex;
-    }
-    else
-        return NULL;
+// IDirect3DTexture9* CTextureMgr::getTexture(const char* szName)
+// {
+//     MAP_TEX::iterator itr = m_data.find(BKDRHash(szName));
+//     if (itr != m_data.end())
+//     {
+//         return itr->second.pTex;
+//     }
+//     else
+//         return NULL;
+// }
+
+// IDirect3DTexture9* CTextureMgr::getTexture(std::string szName)
+// {
+//     MAP_TEX::iterator itr = m_data.find(BKDRHash(szName.c_str()));
+//     if (itr != m_data.end())
+//     {
+//         return itr->second.pTex;
+//     }
+//     else
+//         return NULL;
+// }
+
+const stTexInfo* CTextureMgr::getTexture(std::string strKey) const{
+	return getTexture(strKey.c_str());
 }
 
-IDirect3DTexture9* CTextureMgr::getTexture(std::string szName)
-{
-    MAP_TEX::iterator itr = m_data.find(BKDRHash(szName.c_str()));
-    if (itr != m_data.end())
-    {
-        return itr->second.pTex;
-    }
-    else
-        return NULL;
+const stTexInfo* CTextureMgr::getTexture(const char* strKey) const{
+	auto itr = m_data.find(BKDRHash(strKey));
+	if (itr != m_data.end())
+	{
+		return &itr->second;
+	}
+	else
+		return NULL;
+}
+
+void CTextureMgr::DeviceReset(){
+	for (auto & info : m_data) {
+		info.second.pTex->Release();
+		info.second.pTex = nullptr;
+		addTexture(info.second.szfilename.c_str(), info.second.szKey.c_str());
+	}
 }

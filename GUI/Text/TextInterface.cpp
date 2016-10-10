@@ -51,7 +51,7 @@ void TextOutput(const int& xT, const int &yT, const char* str)
 	int x_start = xT; 
 
 	// 2. 找到纹理位置和区域 (需要用到字体size)
-	IDirect3DTexture9* pTex = CTextureMgr::instance().getTexture("font_kai");
+	const stTexInfo* pTex = CTextureMgr::instance().getTexture("font_kai");
 	bool b_english = true;
 	for (int i = 0; i < nLen; ++i)
 	{

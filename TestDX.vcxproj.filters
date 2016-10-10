@@ -285,6 +285,9 @@
     <ClCompile Include="GUI\cGuiEdit.cpp">
       <Filter>GUI\GuiControl</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteFactory.cpp">
+      <Filter>Mine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hsb.h">
@@ -505,6 +508,9 @@
     </ClInclude>
     <ClInclude Include="GUI\cGuiEdit.h">
       <Filter>GUI\GuiControl</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteFactory.h">
+      <Filter>Mine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

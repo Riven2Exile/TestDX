@@ -82,7 +82,7 @@ private:
     // 当前帧纹理(?)
     iSprite* m_pSprite;
 
-    std::vector<IDirect3DTexture9* >m_vecTex;    // 记录帧对应的纹理 --> (这个东西)
+    std::vector<stTexInfo*>m_vecTex;    // 记录帧对应的纹理 --> (这个东西)
 };
 
 
