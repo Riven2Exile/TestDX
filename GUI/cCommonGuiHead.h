@@ -38,6 +38,34 @@ enum eMouseKeyStateMask
 };
 
 
+enum eVirtualKey{
+	LVK_BACK	= VK_BACK,	//BACKSPACE key
+	LVK_TAB		= VK_TAB,	//TAB key
+	LVK_CLEAR	= VK_CLEAR,	//CLEAR key
+	LVK_RETURN	= VK_RETURN,	//ENTER key
+	LVK_SHIFT	= VK_SHIFT,	//SHIFT key
+	LVK_CONTROL = VK_CONTROL,	//CTRL key
+	LVK_ALT		= VK_MENU,	//ALT key
+	LVK_PAUSE = VK_PAUSE,	//PAUSE key
+	LVK_CAPITAL = VK_CAPITAL,	//CAPS LOCK key
+	LVK_ESCAPE = VK_ESCAPE,	//ESC key
+	LVK_SPACE = VK_SPACE,	//SPACEBAR
+	LVK_PageUp = VK_PRIOR,	//PAGE UP key
+	LVK_PageDown = VK_NEXT,	//PAGE DOWN key
+	LVK_END = VK_END,	//END key
+	LVK_HOME = VK_HOME, //HOME key
+	LVK_LEFT = VK_LEFT,	//LEFT ARROW key
+	LVK_UP = VK_UP,		//UP ARROW key
+	LVK_RIGHT = VK_RIGHT,	//RIGHT ARROW key
+	LVK_DOWN = VK_DOWN,		//DOWN ARROW key
+
+
+	LVK_SNAPSHOT = VK_SNAPSHOT, // PRINT SCREEN key
+	LVK_INSERT = VK_INSERT,	//INS key
+	LVK_DELETE = VK_DELETE,	//DEL key
+};
+
+
 #else
 // in the future 写其他平台相关性的东西
 

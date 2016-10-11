@@ -1,7 +1,14 @@
 
 #include "cGuiEdit.h"
+#include "cCommonGuiHead.h"
+
+
+extern char_code edit_char_code;
+
 
 cGuiEdit::cGuiEdit(cGuiControl* pFather) : cGuiControl(pFather)
+, _word_size(0)
+, _cursor_pos(0)
 {
 	SetCtrlType(kCT_GuiEdit);
 	_bShowCursor = false;
@@ -26,9 +33,9 @@ void cGuiEdit::Draw(){
 		TextOutput(GetScreenPosX(), GetScreenPosY(), _strText.c_str());
 	}
 	
-	if (_bShowCursor)
+	if (_bFocus && _bShowCursor)
 	{
-		TextOutput(GetScreenPosX(), GetScreenPosY(), "|");
+		TextOutput(GetScreenPosX() + _cursor_pos * 6 - 1, GetScreenPosY(), "|"); //字体宽度
 	}
 }
 
@@ -43,36 +50,135 @@ void cGuiEdit::run(const DWORD& dwElaspe)
 		_bShowCursor = !_bShowCursor;
 		e -= 500;
 	}
-
-
 }
 
 
 
-
-int cGuiEdit::OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag){
-	if (__super::OnLButtonDown(x, y, nFlag) == 0)
-	{
+int cGuiEdit::OnChar(const unsigned int& wparam, const unsigned long& lparam){
+	if (__super::OnChar(wparam, lparam) == 0){
 		return 0;
 	}
 
-	// 如果命中本控件， 也当做处理
-	if (IsAt(x, y))
+	if (_bFocus)
 	{
-		if (IsFocus() == false)
+		// 开始处理
+ 		static char wc[3] = "";
+		edit_char_code(wparam, sizeof(wparam), (char*)&wc, sizeof(wc));
+// 		WideCharToMultiByte(CP_ACP, WC_COMPOSITECHECK, (LPCWCH)&wparam, sizeof(wparam), wc, 3, NULL, NULL);
+// 		char *p = "一";
+		char ch = wc[0];
+		bool zhongwen = (byte)wc[0] > 0x7f;
+		
+		if (zhongwen == false)
 		{
-			if (GetFather()){
-				GetFather()->ClearChildFocus(this); //清除掉兄弟的焦点
+			if (LVK_BACK == ch) //退格
+			{
+				if (_cursor_pos > 0 && _strText.length() >= _cursor_pos) {
+					//如果有两个char,则需要判断是否为中文
+					if (_cursor_pos >= 2) {
+						if ((byte)_strText.at(_cursor_pos - 2) > 0x7f)
+						{
+							if ((byte)_strText.at(_cursor_pos - 1) <= 0x7f)
+							{
+								//英文
+								_strText = _strText.erase(_cursor_pos - 1, 1);
+								_cursor_pos -= 1;
+							}
+							else{
+								//中文
+								_strText = _strText.erase(_cursor_pos - 2, 2);
+								_cursor_pos -= 2;
+							}
+							
+						}
+						else{
+							_strText = _strText.erase(_cursor_pos - 1, 1);
+							--_cursor_pos;
+						}
+					}
+					else{
+						//肯定是英文
+						_strText = _strText.erase(_cursor_pos - 1, 1);
+						--_cursor_pos;
+					}
+				}
+				return 0; 
 			}
-
-			SetFocus(true); //获得焦点
-			if (_cb_gain_focus){
-				_cb_gain_focus(this);
-			}
+			
+	
+			//英文
+			++this->_cursor_pos;
 		}
+		else{
+			//中文
+			_cursor_pos += 2;
+		}
+
+
+		_strText.append(wc);
+		
+		++this->_word_size;
+#ifdef _DEBUG
+		printf("on char :%s  是否中文:%d\n", wc, zhongwen);
+#endif
+	}
+
+	return 1;
+}
+
+int cGuiEdit::OnKeyDown(const unsigned int& wparam, const unsigned long& lparam){
+	if (__super::OnKeyDown(wparam, lparam) == 0){
 		return 0;
 	}
+
+	if (_bFocus)
+	{
+		if (VK_LEFT == wparam)
+		{
+			if (_cursor_pos > 0)
+			{
+				//可能有bug
+				if ((byte)_strText.at(_cursor_pos - 1) > 0x7f)
+				{
+					_cursor_pos -= 2;
+				}
+				else{
+					--_cursor_pos;
+				}
+			}
+			return 0;
+		}
+		else if(VK_RIGHT == wparam){
+			if (_strText.length() > _cursor_pos)
+			{
+				if ((byte)_strText.at(_cursor_pos) > 0x7f)
+				{
+					_cursor_pos += 2;
+				}
+				else{
+					++_cursor_pos;
+				}
+			}
+			return 0;
+		}
+		else if (LVK_DELETE == wparam) //删除键
+		{
+			if (_cursor_pos < _strText.length())
+			{
+				if ((byte)_strText.at(_cursor_pos) > 0x7f)
+				{
+					_strText = _strText.erase(_cursor_pos, 2);
+				}
+				else{
+					_strText = _strText.erase(_cursor_pos, 1);
+				}
+			}
+			return 0;
+		}
+	}
+	return 1;
 }
+
 
 void cGuiEdit::callback_get_focus(cGuiControl* pCtrl){
 	_bShowCursor = true;

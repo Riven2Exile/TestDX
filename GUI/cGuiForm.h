@@ -17,15 +17,12 @@ public:
 	virtual void SetOffSet(const int& x, const int& y);
 
     ////////// 消息处理
-    int OnMouseMove(const int& x, const int& y, const unsigned int& nFlag);
-    int OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);
-    int OnLButtonUp(const int& x, const int& y, const unsigned int& nFlag);
+    //int OnMouseMove(const int& x, const int& y, const unsigned int& nFlag);
+    //int OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);
+    //int OnLButtonUp(const int& x, const int& y, const unsigned int& nFlag);
 
 private:
-    bool _bClicked;
-
-    int _dragX;     // 拖动时， 在对话框的相对偏移
-    int _dragY;
+    
 
     std::string _strName;   //界面名
 };

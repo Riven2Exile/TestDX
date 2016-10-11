@@ -373,6 +373,7 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="MsgMgr.cpp" />
+    <ClCompile Include="Platform\Windows\win_char_code.cpp" />
     <ClCompile Include="SDKwavefile.cpp" />
     <ClCompile Include="Spec\RoundProcess.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

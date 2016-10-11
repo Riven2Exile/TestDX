@@ -129,7 +129,8 @@ public:
 	virtual int OnMouseWheel(const int& x, const int& y, const int& delta, const enum eMouseKeyStateMask& state);
     virtual int OnLButtonUp(const int& x, const int& y, const unsigned int& nFlag);
     virtual int OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);
-
+	virtual int OnChar(const unsigned int& wparam, const unsigned long& lparam);
+	virtual int OnKeyDown(const unsigned int& wparam, const unsigned long& lparam);
 
 
 	///// evevt and callback
@@ -167,8 +168,16 @@ protected:
 	int _offsetX; //局部坐标系
 	int _offsetY;
 
+	bool _bClicked;
+
+	int _dragX;     // 拖动时， 在对话框的相对偏移
+	int _dragY;
+
 	focus_cb_fun _cb_gain_focus;
 	focus_cb_fun _cb_lose_focus;
+
+	typedef std::list<cGuiControl*> LIST_CTRL;
+	std::list<cGuiControl*> _listCtrl; // 子控件列表
 
 private:
     // 层次排序
@@ -178,8 +187,7 @@ private:
     bool _bDrag;    //是否可拖动
 
     
-	typedef std::list<cGuiControl*> LIST_CTRL;
-    std::list<cGuiControl*> _listCtrl; // 子控件列表
+	
 
 
     unsigned int _id;

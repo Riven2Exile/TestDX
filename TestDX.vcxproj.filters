@@ -61,6 +61,12 @@
     <Filter Include="Sound">
       <UniqueIdentifier>{89702b58-bbaf-4c2b-9dc5-60d7fbb32ec4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{5b7f5d1c-f086-4abe-b022-40aaf3403b7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{99c3a843-194c-44e6-b368-244d6bbfbf09}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="hsb.cpp">
@@ -287,6 +293,9 @@
     </ClCompile>
     <ClCompile Include="SpriteFactory.cpp">
       <Filter>Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform\Windows\win_char_code.cpp">
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

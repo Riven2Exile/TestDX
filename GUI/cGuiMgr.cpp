@@ -114,3 +114,14 @@ int cGuiMgr::OnLButtonUp(const int& x, const int& y, const eMouseKeyStateMask& n
 
     //return 1;
 }
+
+int cGuiMgr::OnChar(const unsigned int& wparam, const unsigned long& lparam){
+	for ( auto& p : _listCtrl)
+	{
+		if (p->OnChar(wparam, lparam) == 0)
+		{
+			return 0;
+		}
+	}
+	return 1;
+}

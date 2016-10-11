@@ -11,6 +11,9 @@ cGuiControl::cGuiControl(cGuiControl* pFather): _id(0), _bShow(true), _bDrag(fal
 //,_offsetY(0)
 ,_strText("")
 , _bFocus(false)
+,_bClicked(false)
+,_dragX(0)
+,_dragY(0)
 {
 	_pFather = pFather;
     _sprite = CreateSprite(ST_MX);
@@ -266,8 +269,8 @@ void cGuiControl::ClearChildFocus(cGuiControl* pFocusCtrl){
 		if (p != pFocusCtrl && p->IsFocus())
 		{
 			p->SetFocus(false);
-			if (_cb_lose_focus){
-				_cb_lose_focus(p);
+			if (p->_cb_lose_focus){
+				p->_cb_lose_focus(p);
 			}
 		}
 	};
@@ -325,12 +328,6 @@ int cGuiControl::OnMouseMove(const int& x, const int& y, const unsigned int& nFl
     if(IsShow() == false)
         return 1;
 
-//     if ( CanDrag() && nFlag & LMK_LBUTTON) //处理拖动
-//     {
-//         int xx = 0, yy = 0;
-//         GetPos(xx, yy);
-//         AddAllOffset(x - xx, y - yy);
-//     }
 
     for (std::list<cGuiControl*>::iterator itr = _listCtrl.begin(); 
         itr != _listCtrl.end(); 
@@ -341,6 +338,24 @@ int cGuiControl::OnMouseMove(const int& x, const int& y, const unsigned int& nFl
             return 0; //如果返回0, 表示后面的UI不用再处理了
         }
     }
+
+
+	//控件本身
+	if (CanDrag() && _bClicked && nFlag & LMK_LBUTTON)
+	{
+		// 处理拖动
+		int xx = 0, yy = 0;
+		GetPos(xx, yy);
+		// 其实这里应该要算上对话框的offset移动
+		_offsetX += (x - _dragX - xx);
+		_offsetY += (y - _dragY - yy);
+		//SetOffSet(_offsetX + (x - _dragX - xx), _offsetY + (y - _dragY - yy));
+		AddAllOffset(x - _dragX - xx, y - _dragY - yy);
+	}
+	else
+	{
+		_bClicked = false;
+	}
 
     return 1;
 }
@@ -399,8 +414,8 @@ int cGuiControl::OnLButtonDown(const int& x, const int& y, const unsigned int& n
 					}
 
 					pCtrl->SetFocus(true); //获得焦点
-					if (_cb_gain_focus){
-						_cb_gain_focus(this);
+					if (pCtrl->_cb_gain_focus){
+						pCtrl->_cb_gain_focus(this);
 					}
 				}
 
@@ -409,15 +424,49 @@ int cGuiControl::OnLButtonDown(const int& x, const int& y, const unsigned int& n
 		}
     }
 
-// 	if (IsAt(x, y))
-// 	{
-// 		return 0;
-// 	}
+
+	//控件自身
+	if (IsAt(x, y))
+	{
+		_bClicked = true;
+		int xx = 0, yy = 0;
+		GetPos(xx, yy);
+		_dragX = x - xx;
+		_dragY = y - yy;
+
+		return 0; //消息被捕获，不再往下传递
+	}
 
     return 1;
 }
 
+int cGuiControl::OnChar(const unsigned int& wparam, const unsigned long& lparam){
+	if (IsShow() == false){
+		return 1;
+	}
 
+	for (auto& p : _listCtrl) {
+		if (p->OnChar(wparam, lparam) == 0){
+			return 0;
+		}
+	}
+
+	return 1;
+}
+
+int cGuiControl::OnKeyDown(const unsigned int& wparam, const unsigned long& lparam){
+	if (IsShow() == false){
+		return 1;
+	}
+
+	for (auto& p : _listCtrl) {
+		if (p->OnKeyDown(wparam, lparam) == 0){
+			return 0;
+		}
+	}
+
+	return 1;
+}
 
 ///// event
 void cGuiControl::SetGainFocusCallBack(focus_cb_fun fun){

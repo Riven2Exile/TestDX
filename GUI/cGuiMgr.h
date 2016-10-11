@@ -37,6 +37,7 @@ public:
 	int OnMouseWheel(const int& x, const int& y, const int& delta, const eMouseKeyStateMask& state);
 	int OnLButtonUp(const int& x, const int& y, const eMouseKeyStateMask& nFlag);
     int OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);
+	int OnChar(const unsigned int& wparam, const unsigned long& lparam);
 
 private:
     template<typename T>
@@ -86,7 +87,7 @@ private:
 	}
 
     //cGuiForm* _pRoot;
-    std::list<cGuiControl*> _listCtrl;
+    //std::list<cGuiControl*> _listCtrl;
 };
 
 

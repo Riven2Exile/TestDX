@@ -258,7 +258,7 @@ void CGameMain::init()
 	pSlide->SetOffSet(215, 100);
 
 	cGuiList *pListGui = new cGuiList(m_pDlgTest);  //列表
-	pListGui->SetWidth(200);
+	pListGui->SetWidth(75);
 	pListGui->SetHeight(100);
 	stCustomCtrlPack pack;
 	cGuiLable *pLableList1 = new cGuiLable(pListGui);
@@ -276,6 +276,7 @@ void CGameMain::init()
 	pListGui->AddAListCtrl(pack);
 
 	cGuiEdit *pEdit = new cGuiEdit(m_pDlgTest); // 编辑框
+	pEdit->SetID(108);
 	pEdit->SetWidth(200);
 	pEdit->SetHeight(20);
 	pEdit->SetOffSet(150,40);
@@ -425,8 +426,6 @@ void CGameMain::draw()
 ////// 消息相关...
 void CGameMain::OnLButtonUp(const WPARAM& wParam, const LPARAM& lParam)
 {
-    
-
     int x = LOWORD(lParam);
     int y = HIWORD(lParam);
 
@@ -469,7 +468,14 @@ void CGameMain::OnRButtonUp(const WPARAM& wParam, const LPARAM& lParam)
 void CGameMain::OnChar(const WPARAM& wParam, const LPARAM& lParam)
 {
     ///// 字符的ascii码 
-    printf("char: %c\n", wParam);
+    //printf("char: %c\n", wParam);
+#ifdef _DEBUG
+
+	_gui.OnChar(wParam, lParam);
+	
+
+	// 先当做32位
+#endif
 }
 
 extern float g_light;
@@ -480,6 +486,7 @@ float fixDui = 0.005f;
 
 void CGameMain::OnKeyDown(const WPARAM& wParam, const LPARAM& lParam)
 {
+	_gui.OnKeyDown(wParam, lParam);
     printf("KD:  w:%d \n", wParam);
 
     if (VK_UP == wParam)

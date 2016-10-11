@@ -6,6 +6,10 @@
 
 // 普通编辑框
 
+
+typedef int(*char_code) (unsigned int, unsigned long, char*, int);
+
+
 class cGuiEdit : public cGuiControl
 {
 public:
@@ -17,8 +21,9 @@ public:
 
 
 protected:
-
-	int OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);
+	virtual int OnChar(const unsigned int& wparam, const unsigned long& lparam);
+	virtual int OnKeyDown(const unsigned int& wparam, const unsigned long& lparam);
+	//int OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);
 
 	virtual void run(const DWORD& dwElaspe);
 
@@ -27,8 +32,12 @@ protected:
 
 	bool _bShowCursor;
 	int _cursor_pos;	//光标位置
+	int _word_size;		//文字个数, 汉字和子母都当做一个 word
 
 	std::string _edit_string; //编辑框的内容
+
+
+	// 字母和汉字的判断相关
 };
 
 
