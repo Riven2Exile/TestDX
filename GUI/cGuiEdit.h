@@ -16,9 +16,11 @@ public:
 	explicit cGuiEdit(cGuiControl*);
 	virtual ~cGuiEdit();
 
+	const char* GetText();
 
 	virtual void Draw();
 
+	void SetEnterReturnCallback(normal_cb_fun cb);
 
 protected:
 	virtual int OnChar(const unsigned int& wparam, const unsigned long& lparam);
@@ -36,6 +38,7 @@ protected:
 
 	std::string _edit_string; //编辑框的内容
 
+	normal_cb_fun _edit_enter_cb_fun;
 
 	// 字母和汉字的判断相关
 };

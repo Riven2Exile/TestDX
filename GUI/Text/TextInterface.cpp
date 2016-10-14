@@ -38,7 +38,7 @@ void Textinterface_ResetTextoutOneFrame()
 }
 
 
-void TextOutput(const int& xT, const int &yT, const char* str)
+void TextOutput(const int& xT, const int &yT, const char* str, FRECT* p_re_clip)
 {
 	int nLen = strlen(str);
 	// 1. 对str进行词汇的拆解成单个字,英文是单字节(宽度也减半),中文是双字节 (注意效率)
@@ -127,6 +127,4 @@ void TextOutput(const int& xT, const int &yT, const char* str)
 
 		x_start += nRealWeight;
 	}
-	
 }
-

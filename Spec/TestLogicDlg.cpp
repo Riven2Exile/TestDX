@@ -22,10 +22,13 @@ void CTestLogicDlg::Init()
     ////
     _btn = (cGuiButton *)FindControl(110);
     _btnAdd = (cGuiButton *)FindControl(111);
+	_edit_ctrl = (cGuiEdit*)FindControl(108);
 
     //// 控件注册函数... 函数为成员函数 m_btn->SetClickFun(CTestLogicDlg::funName);
     _btn->SetClickFun((CtrlClickFun)&CTestLogicDlg::OnButtonClick);
     _btnAdd->SetClickFun((CtrlClickFun)&CTestLogicDlg::OnButtonClick);
+
+	_edit_ctrl->SetEnterReturnCallback(std::bind(&CTestLogicDlg::OnEditComplate, this, std::placeholders::_1)); //注册编辑结束函数
 }
 
 // 可以多个按钮用同一个响应函数
@@ -40,4 +43,10 @@ void CTestLogicDlg::OnButtonClick(int id)
         // todo: 进度条加
     }
     //return 1;
+}
+
+void CTestLogicDlg::OnEditComplate(cGuiControl* pCtrl)
+{
+
+	printf("edit ok,  text is  %s\n", ((cGuiEdit*)pCtrl)->GetText());
 }

@@ -133,6 +133,7 @@ void CGameMain::init()
 	T.addTexture("MyRes/slide_btn.tga", "slide_btn");
 	T.addTexture("MyRes/slide_bar.tga", "slide_bar");
 	T.addTexture("MyRes/slide_background.tga", "slide_background");
+	T.addTexture("MyRes/gui_edit3.tga", "gui_edit3"); //ctrl edit
 
 
 	m_SpriteWhiteCube->setTexture(T.getTexture("greenHead"));
@@ -277,8 +278,9 @@ void CGameMain::init()
 
 	cGuiEdit *pEdit = new cGuiEdit(m_pDlgTest); // ±à¼­¿ò
 	pEdit->SetID(108);
-	pEdit->SetWidth(200);
-	pEdit->SetHeight(20);
+	pEdit->SetTexture("gui_edit3");
+	pEdit->SetWidth(90);
+	pEdit->SetHeight(22);
 	pEdit->SetOffSet(150,40);
 
 

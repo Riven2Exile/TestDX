@@ -4,6 +4,7 @@
 /////// 对应业务的控件id
 
 class cGuiButton;
+class cGuiEdit;
 
 
 class CTestLogicDlg : public cGuiForm
@@ -15,10 +16,14 @@ public:
     void Init();
 
     void OnButtonClick(int id);
+	
 
 private:
+	void OnEditComplate(cGuiControl*);
+
     cGuiButton* _btn;
     cGuiButton* _btnAdd;
+	cGuiEdit* _edit_ctrl;
 };
 
 

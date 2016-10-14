@@ -9,7 +9,7 @@
 
 
 //要不要返回值?
-void TextOutput(const int& x, const int &y, const char* str);
+void TextOutput(const int& x, const int &y, const char* str, struct FRECT* p_re_clip = NULL);
 
 void TextSetColorNext(const unsigned long& dw); //设置文本颜色
 

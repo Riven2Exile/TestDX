@@ -24,6 +24,10 @@ cGuiEdit::~cGuiEdit(){
 
 ///////
 
+const char* cGuiEdit::GetText(){
+	return _strText.c_str();
+}
+
 void cGuiEdit::Draw(){
 	__super::Draw();
 
@@ -52,6 +56,9 @@ void cGuiEdit::run(const DWORD& dwElaspe)
 	}
 }
 
+void cGuiEdit::SetEnterReturnCallback(normal_cb_fun cb){
+	_edit_enter_cb_fun = cb;
+}
 
 
 int cGuiEdit::OnChar(const unsigned int& wparam, const unsigned long& lparam){
@@ -103,6 +110,14 @@ int cGuiEdit::OnChar(const unsigned int& wparam, const unsigned long& lparam){
 					}
 				}
 				return 0; 
+			}
+			else if (LVK_RETURN == wparam) //回车键
+			{
+				if (_edit_enter_cb_fun){
+					_edit_enter_cb_fun(this);
+				}
+				//再考虑要不要失去焦点一次?
+				return 0;
 			}
 			
 	

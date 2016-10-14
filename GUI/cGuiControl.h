@@ -13,6 +13,7 @@
 class cGuiControl;
 
 typedef std::function<void(cGuiControl* pCtrl)> focus_cb_fun;
+typedef std::function<void(cGuiControl* pCtrl)> normal_cb_fun;
 
 enum SpriteType;
 

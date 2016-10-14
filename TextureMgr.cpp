@@ -48,11 +48,16 @@ void CTextureMgr::addTexture(const char* szName, std::string strKey)
     int usage = 0; D3DUSAGE_DYNAMIC;
     int pool = D3DPOOL_MANAGED; D3DPOOL_DEFAULT;
 
+	//IDirect3DTexture9* pTemp = NULL;
+
     D3DXCreateTextureFromFileExA(g_pDevice, szName, info.Width, info.Height, 
         info.MipLevels, usage, info.Format, (D3DPOOL)pool, D3DX_FILTER_NONE/*D3DX_FILTER_TRIANGLE*/,  // D3DPOOL_DEFAULT才可行。。
-		D3DX_FILTER_NONE/*D3DX_FILTER_TRIANGLE*/, 0/*D3DCOLOR_ARGB(255,255,255,255)*/, NULL, NULL, &tInfo.pTex); //坑.. D3DCOLOR_ARGB(255,255,255,255) --> 会将纹理中白色的点替换成黑色,0 禁用之
+		D3DX_FILTER_NONE/*D3DX_FILTER_TRIANGLE*/, 0/*D3DCOLOR_ARGB(255,255,255,255)*/, NULL, NULL, /*&pTemp*/&tInfo.pTex); //坑.. D3DCOLOR_ARGB(255,255,255,255) --> 会将纹理中白色的点替换成黑色,0 禁用之
 
 	
+// 	g_pDevice->CreateTexture(info.Width, info.Height, info.MipLevels, 0, info.Format, D3DPOOL_SYSTEMMEM, &tInfo.pTex, NULL);
+// 	g_pDevice->UpdateTexture(pTemp, tInfo.pTex);
+
 
 	const unsigned int& n = BKDRHash(strKey.c_str());
 
