@@ -66,6 +66,11 @@ enum eVirtualKey{
 };
 
 
+enum eGuiEventResult{
+	kGER_None		= 0,	//未处理,继续往下传递
+	kGER_Processed	= 1,	//已经处理
+};
+
 #else
 // in the future 写其他平台相关性的东西
 

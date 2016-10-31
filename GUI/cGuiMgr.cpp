@@ -71,18 +71,18 @@ void cGuiMgr::Resort()
 
 
 /////// 消息处理
-int cGuiMgr::OnMouseMove(const int& x, const int& y, const eMouseKeyStateMask& nFlag)
+eGuiEventResult cGuiMgr::OnMouseMove(const int& x, const int& y, const eMouseKeyStateMask& nFlag)
 {
     return ForEachUIMsg2(&cGuiControl::OnMouseMove, x, y, nFlag);
 
-    return 1;
+    //return 1;
 }
 
-int cGuiMgr::OnMouseWheel(const int& x, const int& y, const int& delta, const eMouseKeyStateMask& state){
+eGuiEventResult cGuiMgr::OnMouseWheel(const int& x, const int& y, const int& delta, const eMouseKeyStateMask& state){
 	return ForEachUIMouseWheel(&cGuiControl::OnMouseWheel, x, y, delta, state);
 }
 
-int cGuiMgr::OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag)
+eGuiEventResult cGuiMgr::OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag)
 {
     //return ForEachUIMsg2(&cGuiControl::OnLButtonDown, x, y, nFlag);
 
@@ -90,13 +90,13 @@ int cGuiMgr::OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag
         itr != _listCtrl.end();
         ++itr)
     {
-        if( (*itr)->OnLButtonDown(x, y, nFlag) == 0)
+        if( (*itr)->OnLButtonDown(x, y, nFlag) == kGER_Processed)
         {
             cGuiControl *pCtrl = (*itr);
             itr = _listCtrl.erase(itr);
 
             _listCtrl.push_front(pCtrl);
-            return 0;
+			return kGER_Processed;
         }
     }
 
@@ -105,23 +105,23 @@ int cGuiMgr::OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag
 //     {
 //         return _pRoot->OnLButtonDown(x, y, nFlag);
 //     }
-    return 1;
+    return kGER_None;
 }
 
-int cGuiMgr::OnLButtonUp(const int& x, const int& y, const eMouseKeyStateMask& nFlag)
+eGuiEventResult cGuiMgr::OnLButtonUp(const int& x, const int& y, const eMouseKeyStateMask& nFlag)
 {
     return ForEachUIMsg2(&cGuiControl::OnLButtonUp, x, y, nFlag);
 
     //return 1;
 }
 
-int cGuiMgr::OnChar(const unsigned int& wparam, const unsigned long& lparam){
+eGuiEventResult cGuiMgr::OnChar(const unsigned int& wparam, const unsigned long& lparam){
 	for ( auto& p : _listCtrl)
 	{
-		if (p->OnChar(wparam, lparam) == 0)
+		if (p->OnChar(wparam, lparam) == kGER_Processed)
 		{
-			return 0;
+			return kGER_Processed;
 		}
 	}
-	return 1;
+	return kGER_None;
 }

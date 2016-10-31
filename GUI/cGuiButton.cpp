@@ -21,6 +21,11 @@ void cGuiButton::SetBtnStateImage(eBtnState state, const char* szName)
         return ;
 
     _strImage[state] = szName;
+
+	if (GetBtnState() == state)
+	{
+		SetTexture(szName);
+	}
 }
 void cGuiButton::SetBtnState(eBtnState e)
 {
@@ -33,14 +38,14 @@ cGuiButton::eBtnState cGuiButton::GetBtnState()
 }
 
 /////////////
-int cGuiButton::OnMouseMove(const int& x, const int& y, const unsigned int& nFlag)
+eGuiEventResult cGuiButton::OnMouseMove(const int& x, const int& y, const unsigned int& nFlag)
 {
     if (IsShow() == false)
-        return 1;
+        return kGER_None;
 
     if (GetBtnState() == kBS_Disable)
     {
-        return 0;
+		return kGER_None;
     }
 
     // TODO .. 最好以触发的形式来
@@ -57,6 +62,8 @@ int cGuiButton::OnMouseMove(const int& x, const int& y, const unsigned int& nFla
         {
             HandleMouseOn();
         }
+
+		
     }
     else
     {
@@ -73,42 +80,63 @@ int cGuiButton::OnMouseMove(const int& x, const int& y, const unsigned int& nFla
         }
     }
 
+	if (CanDrag() && _bClicked && nFlag & LMK_LBUTTON)
+	{
+		// 处理拖动
+		int xx = 0, yy = 0;
+		GetPos(xx, yy);
+		// 其实这里应该要算上对话框的offset移动
+		_offsetX += (x - _dragX - xx);
+		_offsetY += (y - _dragY - yy);
+		//SetOffSet(_offsetX + (x - _dragX - xx), _offsetY + (y - _dragY - yy));
+		AddAllOffset(x - _dragX - xx, y - _dragY - yy);
+		return kGER_Processed;
+	}
 }
 
-int cGuiButton::OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag)
+eGuiEventResult cGuiButton::OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag)
 {
     if (IsShow() == false)
-        return 1;
+		return kGER_None;
 
     if (IsAt(x, y))
     {
         if (GetBtnState() == kBS_Disable)
         {
-            return 0;
+			return kGER_None;
         }
         else
         {
+			_bClicked = true;
             SetBtnState(kBS_Clicked);
             SetTexture(_strImage[kBS_Clicked].c_str());
+			//控件自身
+
+			{
+				int xx = 0, yy = 0;
+				GetPos(xx, yy);
+				_dragX = x - xx;
+				_dragY = y - yy;
+			}
 			if (_pFunPressDown){
 				_pFunPressDown(this, x, y);
 			}
-            return 0;
+			return kGER_Processed;
         }
     }
 
-    return 1;
+	return kGER_None;
 }
 
-int cGuiButton::OnLButtonUp(const int& x, const int& y, const unsigned int& nFlag)
+eGuiEventResult cGuiButton::OnLButtonUp(const int& x, const int& y, const unsigned int& nFlag)
 {
     if (IsShow() == false)
-        return 1;
+        return kGER_None;
 
     bool bAt = IsAt(x, y);
 
     if(GetBtnState() == kBS_Disable && bAt)
-        return 0;   //消息终止
+        return kGER_None;   //消息终止
 
     if (GetBtnState() == kBS_Clicked && bAt )
     {
@@ -120,11 +148,12 @@ int cGuiButton::OnLButtonUp(const int& x, const int& y, const unsigned int& nFla
 		}
     }
     
+	_bClicked = false;
     SetBtnState(kBS_Normal);
     SetTexture(_strImage[kBS_Normal].c_str());
     
     
-    return 1;
+    return kGER_Processed;
 }
 
 /////// 消息的业务响应

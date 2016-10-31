@@ -31,13 +31,18 @@ public:
     void AddCtrl(cGuiControl *pCtrl); //加一个对话框.. 后面再考虑id
     void RemoveCtrl(unsigned int id);
 
+	void SetWindowHandle(HWND h){
+		_hwnd = h;
+	}
+
+	HWND GetWindowHandle() { return _hwnd; }
 
     // 消息处理
-	int OnMouseMove(const int& x, const int& y, const eMouseKeyStateMask& nFlag);
-	int OnMouseWheel(const int& x, const int& y, const int& delta, const eMouseKeyStateMask& state);
-	int OnLButtonUp(const int& x, const int& y, const eMouseKeyStateMask& nFlag);
-    int OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);
-	int OnChar(const unsigned int& wparam, const unsigned long& lparam);
+	eGuiEventResult OnMouseMove(const int& x, const int& y, const eMouseKeyStateMask& nFlag);
+	eGuiEventResult OnMouseWheel(const int& x, const int& y, const int& delta, const eMouseKeyStateMask& state);
+	eGuiEventResult OnLButtonUp(const int& x, const int& y, const eMouseKeyStateMask& nFlag);
+    eGuiEventResult OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);
+	eGuiEventResult OnChar(const unsigned int& wparam, const unsigned long& lparam);
 
 private:
     template<typename T>
@@ -61,33 +66,34 @@ private:
 	}
 
     template<typename T>
-	int ForEachUIMsg2(T fn, const int& x, const int& y, const eMouseKeyStateMask& nFlag){
+	eGuiEventResult ForEachUIMsg2(T fn, const int& x, const int& y, const eMouseKeyStateMask& nFlag){
         for ( std::list<cGuiControl*>::iterator itr = _listCtrl.begin();
             itr != _listCtrl.end();
             ++itr)
         {
-            if( ((*itr)->*fn)(x, y, nFlag) == 0)
-                return 0;
+			if (((*itr)->*fn)(x, y, nFlag) == kGER_Processed)
+				return kGER_Processed;
         }
 
-        return 1;
+        return kGER_None;
     }
 
 	template<typename T>
-	int ForEachUIMouseWheel(T fn, const int& x, const int& y, const int& delta, const eMouseKeyStateMask& nFlag){
+	eGuiEventResult ForEachUIMouseWheel(T fn, const int& x, const int& y, const int& delta, const eMouseKeyStateMask& nFlag){
 		for (std::list<cGuiControl*>::iterator itr = _listCtrl.begin();
 			itr != _listCtrl.end();
 			++itr)
 		{
-			if (((*itr)->*fn)(x, y, delta, nFlag) == 0)
-				return 0;
+			if (((*itr)->*fn)(x, y, delta, nFlag) == kGER_Processed)
+				return kGER_Processed;
 		}
 
-		return 1;
+		return kGER_None;
 	}
 
     //cGuiForm* _pRoot;
     //std::list<cGuiControl*> _listCtrl;
+	HWND _hwnd;
 };
 
 

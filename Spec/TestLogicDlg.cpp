@@ -25,10 +25,14 @@ void CTestLogicDlg::Init()
 	_edit_ctrl = (cGuiEdit*)FindControl(108);
 
     //// 控件注册函数... 函数为成员函数 m_btn->SetClickFun(CTestLogicDlg::funName);
-    _btn->SetClickFun((CtrlClickFun)&CTestLogicDlg::OnButtonClick);
-    _btnAdd->SetClickFun((CtrlClickFun)&CTestLogicDlg::OnButtonClick);
+    if(_btn)_btn->SetClickFun((CtrlClickFun)&CTestLogicDlg::OnButtonClick);
+    if(_btnAdd) _btnAdd->SetClickFun((CtrlClickFun)&CTestLogicDlg::OnButtonClick);
 
-	_edit_ctrl->SetEnterReturnCallback(std::bind(&CTestLogicDlg::OnEditComplate, this, std::placeholders::_1)); //注册编辑结束函数
+	if (_edit_ctrl)
+	{
+		_edit_ctrl->SetEnterReturnCallback(std::bind(&CTestLogicDlg::OnEditComplate, this, std::placeholders::_1)); //注册编辑结束函数
+	}
+	
 }
 
 // 可以多个按钮用同一个响应函数

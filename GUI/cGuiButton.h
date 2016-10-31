@@ -32,9 +32,9 @@ public:
     inline eBtnState GetBtnState();
 
     ////// 消息处理
-    int OnMouseMove(const int& x, const int& y, const unsigned int& nFlag);
-    int OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);
-    int OnLButtonUp(const int& x, const int& y, const unsigned int& nFlag);
+    eGuiEventResult OnMouseMove(const int& x, const int& y, const unsigned int& nFlag);
+    eGuiEventResult OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);
+    eGuiEventResult OnLButtonUp(const int& x, const int& y, const unsigned int& nFlag);
 
     ///// 消息业务响应
     void SetClickFun(CtrlClickFun);

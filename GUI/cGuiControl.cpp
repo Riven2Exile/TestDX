@@ -14,6 +14,7 @@ cGuiControl::cGuiControl(cGuiControl* pFather): _id(0), _bShow(true), _bDrag(fal
 ,_bClicked(false)
 ,_dragX(0)
 ,_dragY(0)
+, _bMouseOn(false)
 {
 	_pFather = pFather;
     _sprite = CreateSprite(ST_MX);
@@ -322,20 +323,20 @@ void cGuiControl::Resort()
 
 
 ////////// 消息
-int cGuiControl::OnMouseMove(const int& x, const int& y, const unsigned int& nFlag)
+eGuiEventResult cGuiControl::OnMouseMove(const int& x, const int& y, const unsigned int& nFlag)
 {
     
     if(IsShow() == false)
-        return 1;
+        return kGER_None;
 
 
     for (std::list<cGuiControl*>::iterator itr = _listCtrl.begin(); 
         itr != _listCtrl.end(); 
         ++itr)
     {
-        if( (*itr)->OnMouseMove(x, y, nFlag) == 0)
+        if( (*itr)->OnMouseMove(x, y, nFlag) == kGER_Processed)
         {
-            return 0; //如果返回0, 表示后面的UI不用再处理了
+			return kGER_Processed; //  表示后面的UI不用再处理了
         }
     }
 
@@ -351,52 +352,54 @@ int cGuiControl::OnMouseMove(const int& x, const int& y, const unsigned int& nFl
 		_offsetY += (y - _dragY - yy);
 		//SetOffSet(_offsetX + (x - _dragX - xx), _offsetY + (y - _dragY - yy));
 		AddAllOffset(x - _dragX - xx, y - _dragY - yy);
+		return kGER_Processed;
 	}
 	else
 	{
 		_bClicked = false;
+		return kGER_None;
 	}
 
-    return 1;
+	
 }
 
-int cGuiControl::OnMouseWheel(const int& x, const int& y, const int& delta, const enum eMouseKeyStateMask& state){
+eGuiEventResult cGuiControl::OnMouseWheel(const int& x, const int& y, const int& delta, const enum eMouseKeyStateMask& state){
 	if (IsShow() == false)
-		return 1;
+		return kGER_None;
 
 	for (std::list<cGuiControl*>::iterator itr = _listCtrl.begin();
 		itr != _listCtrl.end();
 		++itr)
 	{
-		if ((*itr)->OnMouseWheel(x, y, delta, state) == 0)
+		if ((*itr)->OnMouseWheel(x, y, delta, state) == kGER_Processed)
 		{
-			return 0; //如果返回0, 表示后面的UI不用再处理了
+			return kGER_Processed; //表示后面的UI不用再处理了
 		}
 	}
 }
 
-int cGuiControl::OnLButtonUp(const int& x, const int& y, const unsigned int& nFlag)
+eGuiEventResult cGuiControl::OnLButtonUp(const int& x, const int& y, const unsigned int& nFlag)
 {
     if (IsShow() == false)
-        return 1;
+        return kGER_None;
 
     for (std::list<cGuiControl*>::iterator itr = _listCtrl.begin(); 
         itr != _listCtrl.end(); 
         ++itr)
     {
-        if( (*itr)->OnLButtonUp(x, y, nFlag) == 0)
+		if ((*itr)->OnLButtonUp(x, y, nFlag) == kGER_Processed)
         {
-            return 0; //如果返回0, 表示后面的UI不用再处理了
+			return kGER_Processed; //如果返回0, 表示后面的UI不用再处理了
         }
     }
 
-    return 1;
+    return kGER_None;
 }
 
-int cGuiControl::OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag)
+eGuiEventResult cGuiControl::OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag)
 {
     if (IsShow() == false)
-        return 1;
+		return kGER_None;
 
     for (std::list<cGuiControl*>::iterator itr = _listCtrl.begin(); 
         itr != _listCtrl.end(); 
@@ -405,7 +408,7 @@ int cGuiControl::OnLButtonDown(const int& x, const int& y, const unsigned int& n
 		cGuiControl *pCtrl = (*itr);
 		if (pCtrl->IsAt(x, y))
 		{
-			if (pCtrl->OnLButtonDown(x, y, nFlag) == 0) //子控件自定义的
+			if (pCtrl->OnLButtonDown(x, y, nFlag) == kGER_Processed) //子控件自定义的
 			{
 				if (IsFocus() == false)
 				{
@@ -419,7 +422,7 @@ int cGuiControl::OnLButtonDown(const int& x, const int& y, const unsigned int& n
 					}
 				}
 
-				return 0; //如果返回0, 表示后面的UI不用再处理了
+				return kGER_Processed; //如果返回0, 表示后面的UI不用再处理了
 			}
 		}
     }
@@ -434,38 +437,38 @@ int cGuiControl::OnLButtonDown(const int& x, const int& y, const unsigned int& n
 		_dragX = x - xx;
 		_dragY = y - yy;
 
-		return 0; //消息被捕获，不再往下传递
+		return kGER_Processed; //消息被捕获，不再往下传递
 	}
 
-    return 1;
+	return kGER_None;
 }
 
-int cGuiControl::OnChar(const unsigned int& wparam, const unsigned long& lparam){
+eGuiEventResult cGuiControl::OnChar(const unsigned int& wparam, const unsigned long& lparam){
 	if (IsShow() == false){
-		return 1;
+		return kGER_None;
 	}
 
 	for (auto& p : _listCtrl) {
-		if (p->OnChar(wparam, lparam) == 0){
-			return 0;
+		if (p->OnChar(wparam, lparam) == kGER_Processed){
+			return kGER_Processed;
 		}
 	}
 
-	return 1;
+	return kGER_None;
 }
 
-int cGuiControl::OnKeyDown(const unsigned int& wparam, const unsigned long& lparam){
+eGuiEventResult cGuiControl::OnKeyDown(const unsigned int& wparam, const unsigned long& lparam){
 	if (IsShow() == false){
-		return 1;
+		return kGER_None;
 	}
 
 	for (auto& p : _listCtrl) {
-		if (p->OnKeyDown(wparam, lparam) == 0){
-			return 0;
+		if (p->OnKeyDown(wparam, lparam) == kGER_Processed){
+			return kGER_Processed;
 		}
 	}
 
-	return 1;
+	return kGER_None;
 }
 
 ///// event

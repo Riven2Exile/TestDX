@@ -62,6 +62,8 @@ public:
 
     void init();
 	void SetWndSize(int width, int height);
+	void SetPos(const int& x, const int& y);
+	void SetWindowsHandle(HWND h);
 
     void update(DWORD elasped);
     

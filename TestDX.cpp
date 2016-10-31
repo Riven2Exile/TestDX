@@ -495,6 +495,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    UpdateWindow(hWnd);
     // 
    
+   CGameMain::Instance().SetWindowsHandle(hWnd);
+   CGameMain::Instance().SetWndSize(rc.right-rc.left, rc.bottom-rc.top);
+   CGameMain::Instance().SetPos(0, 0);
 
     // ∂¡»°Œ∆¿Ì
  //   D3DXCreateTextureFromFileA(g_pDevice, "Riven_Splash_0.jpg", &g_pTexture);

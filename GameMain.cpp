@@ -225,8 +225,12 @@ void CGameMain::init()
     pBtnTemp->SetBtnStateImage(cGuiButton::kBS_MouseOn, "+2");
     pBtnTemp->SetBtnStateImage(cGuiButton::kBS_Clicked, "+3");
     pBtnTemp->SetBtnStateImage(cGuiButton::kBS_Disable, "+4");
+	pBtnTemp->SetPressedMouseMoveFun([](cGuiButton* pBtn, const int& x, const int &y){
+// 		printf("he (%d, %d)\n", x, y);
+// 		CGameMain::Instance().SetPos(x, y);
+	});
     pBtnTemp->Show();
-    //pBtnTemp->SetPos(100, 90);
+	pBtnTemp->SetDrag(true);
 	pBtnTemp->SetOffSet(100, 90);
     pBtnTemp->SetID(111);
 
@@ -285,7 +289,7 @@ void CGameMain::init()
 
 
 
-	m_pDlgTest->AddControl(m_pCtrlTest);
+	m_pDlgTest->AddControl(m_pCtrlTest); //关闭按钮
 	m_pDlgTest->AddControl(pPro);
 	m_pDlgTest->AddControl(pBtnTemp);
 	m_pDlgTest->AddControl(pC);
@@ -297,12 +301,12 @@ void CGameMain::init()
 
 
     // 对话框2
-    m_pCtrlDlg2 = new cGuiForm;
-    m_pCtrlDlg2->SetOffSet(50, 50);
-    m_pCtrlDlg2->SetWidth(328);
-    m_pCtrlDlg2->SetHeight(232);
-    m_pCtrlDlg2->SetTexture("dlg");
-    m_pCtrlDlg2->Show(true);
+//     m_pCtrlDlg2 = new cGuiForm;
+//     m_pCtrlDlg2->SetOffSet(50, 50);
+//     m_pCtrlDlg2->SetWidth(328);
+//     m_pCtrlDlg2->SetHeight(232);
+//     m_pCtrlDlg2->SetTexture("dlg");
+//     m_pCtrlDlg2->Show(true);
     //m_pCtrlDlg2->SetDrag(false); //设置不可拖动
 
     _gui.AddCtrl(m_pDlgTest);    //对话框加入管理器
@@ -343,6 +347,15 @@ void CGameMain::SetWndSize(int width, int height){
 	_gui.SetWidth(width);
 	_gui.SetHeight(height);
 	_gui.SetAlpha(0);
+}
+
+void CGameMain::SetWindowsHandle(HWND h){
+	_gui.SetWindowHandle(h);
+}
+
+void CGameMain::SetPos(const int& x, const int& y){
+	// 设置windows 位置
+	::SetWindowPos(_gui.GetWindowHandle(), NULL, x, y, _gui.get_width(), _gui.get_height(), SWP_SHOWWINDOW);
 }
 
 void CGameMain::AddGui(cGuiControl* pCtrl)
@@ -431,7 +444,7 @@ void CGameMain::OnLButtonUp(const WPARAM& wParam, const LPARAM& lParam)
     int x = LOWORD(lParam);
     int y = HIWORD(lParam);
 
-	if (_gui.OnLButtonUp(x, y, (eMouseKeyStateMask)wParam) == 0)
+	if (_gui.OnLButtonUp(x, y, (eMouseKeyStateMask)wParam) == kGER_None)
     {
 
     }
@@ -446,7 +459,7 @@ void CGameMain::OnLButtonDown(const WPARAM& wParam, const LPARAM& lParam)
     int x = LOWORD(lParam);
     int y = HIWORD(lParam);
 
-    if( _gui.OnLButtonDown(x, y, wParam) == 0)
+    if( _gui.OnLButtonDown(x, y, wParam) == kGER_None)
     {
 
     }

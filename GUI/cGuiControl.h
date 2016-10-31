@@ -126,12 +126,12 @@ public:
 
 
     ///// 消息处理 // 返回0 ..表示消息不继续往下传递了
-    virtual int OnMouseMove(const int& x, const int& y, const unsigned int& nFlag ); // 返回0 ..表示消息不继续往下传递了
-	virtual int OnMouseWheel(const int& x, const int& y, const int& delta, const enum eMouseKeyStateMask& state);
-    virtual int OnLButtonUp(const int& x, const int& y, const unsigned int& nFlag);
-    virtual int OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);
-	virtual int OnChar(const unsigned int& wparam, const unsigned long& lparam);
-	virtual int OnKeyDown(const unsigned int& wparam, const unsigned long& lparam);
+	virtual enum eGuiEventResult OnMouseMove(const int& x, const int& y, const unsigned int& nFlag); // 返回0 ..表示消息不继续往下传递了
+	virtual enum eGuiEventResult OnMouseWheel(const int& x, const int& y, const int& delta, const enum eMouseKeyStateMask& state);
+	virtual enum eGuiEventResult OnLButtonUp(const int& x, const int& y, const unsigned int& nFlag);
+	virtual enum eGuiEventResult OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);
+	virtual enum eGuiEventResult OnChar(const unsigned int& wparam, const unsigned long& lparam);
+	virtual enum eGuiEventResult OnKeyDown(const unsigned int& wparam, const unsigned long& lparam);
 
 
 	///// evevt and callback
@@ -201,6 +201,10 @@ protected:
 	std::string _strText;	//文字
     ControlType _ctrlType;
 	iSprite* _sprite; //精灵(绘制用)
+	bool _bMouseOn;	  //鼠标是否在上面
+
+//////事件:
+	// inline_clicked   //拖动的事件的优先级别应该要最高 -> 其次才是控件自定义的东西
 };
 
 

@@ -61,9 +61,9 @@ void cGuiEdit::SetEnterReturnCallback(normal_cb_fun cb){
 }
 
 
-int cGuiEdit::OnChar(const unsigned int& wparam, const unsigned long& lparam){
-	if (__super::OnChar(wparam, lparam) == 0){
-		return 0;
+eGuiEventResult cGuiEdit::OnChar(const unsigned int& wparam, const unsigned long& lparam){
+	if (__super::OnChar(wparam, lparam) == kGER_Processed){
+		return kGER_Processed;
 	}
 
 	if (_bFocus)
@@ -109,7 +109,7 @@ int cGuiEdit::OnChar(const unsigned int& wparam, const unsigned long& lparam){
 						--_cursor_pos;
 					}
 				}
-				return 0; 
+				return kGER_Processed;
 			}
 			else if (LVK_RETURN == wparam) //回车键
 			{
@@ -117,7 +117,7 @@ int cGuiEdit::OnChar(const unsigned int& wparam, const unsigned long& lparam){
 					_edit_enter_cb_fun(this);
 				}
 				//再考虑要不要失去焦点一次?
-				return 0;
+				return kGER_Processed;
 			}
 			
 	
@@ -138,12 +138,12 @@ int cGuiEdit::OnChar(const unsigned int& wparam, const unsigned long& lparam){
 #endif
 	}
 
-	return 1;
+	return kGER_None;
 }
 
-int cGuiEdit::OnKeyDown(const unsigned int& wparam, const unsigned long& lparam){
-	if (__super::OnKeyDown(wparam, lparam) == 0){
-		return 0;
+eGuiEventResult cGuiEdit::OnKeyDown(const unsigned int& wparam, const unsigned long& lparam){
+	if (__super::OnKeyDown(wparam, lparam) == kGER_Processed){
+		return kGER_Processed;
 	}
 
 	if (_bFocus)
@@ -161,7 +161,7 @@ int cGuiEdit::OnKeyDown(const unsigned int& wparam, const unsigned long& lparam)
 					--_cursor_pos;
 				}
 			}
-			return 0;
+			return kGER_Processed;
 		}
 		else if(VK_RIGHT == wparam){
 			if (_strText.length() > _cursor_pos)
@@ -174,7 +174,7 @@ int cGuiEdit::OnKeyDown(const unsigned int& wparam, const unsigned long& lparam)
 					++_cursor_pos;
 				}
 			}
-			return 0;
+			return kGER_Processed;
 		}
 		else if (LVK_DELETE == wparam) //删除键
 		{
@@ -188,10 +188,10 @@ int cGuiEdit::OnKeyDown(const unsigned int& wparam, const unsigned long& lparam)
 					_strText = _strText.erase(_cursor_pos, 1);
 				}
 			}
-			return 0;
+			return kGER_Processed;
 		}
 	}
-	return 1;
+	return kGER_None;
 }
 
 

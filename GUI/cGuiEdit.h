@@ -23,8 +23,8 @@ public:
 	void SetEnterReturnCallback(normal_cb_fun cb);
 
 protected:
-	virtual int OnChar(const unsigned int& wparam, const unsigned long& lparam);
-	virtual int OnKeyDown(const unsigned int& wparam, const unsigned long& lparam);
+	virtual eGuiEventResult OnChar(const unsigned int& wparam, const unsigned long& lparam);
+	virtual eGuiEventResult OnKeyDown(const unsigned int& wparam, const unsigned long& lparam);
 	//int OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag);
 
 	virtual void run(const DWORD& dwElaspe);
