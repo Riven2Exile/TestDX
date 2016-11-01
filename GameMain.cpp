@@ -420,8 +420,12 @@ void CGameMain::draw()
 		//test font;
 		const char* pstr = "fly";
 		TextOutput(0, 100, pstr);
-		TextOutput(10, 120, "t");
  		TextOutput(0, 200, "不布");
+
+		static char textArr[100];
+		sprintf(textArr, "窗体位置 (%d, %d)", _gui.GetScreenPosX(), _gui.GetScreenPosY());
+		TextOutput(0, 120, textArr);
+
 
 
         CDrawFlow::Instance().draw(); //绘制流

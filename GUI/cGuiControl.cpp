@@ -56,7 +56,7 @@ void cGuiControl::SetOffSet(const int& x, const int& y)
 	int tx = 0, ty = 0;
 
 	cGuiControl *pTempFather = _pFather;
-	while (pTempFather)
+	while (pTempFather && pTempFather->_pFather) //最最顶层不算偏移,所以有 && pTempFather->_pFather
 	{
 		pTempFather->GetOffSet(tx, ty);
 		fx += tx;

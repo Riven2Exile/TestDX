@@ -94,14 +94,17 @@ eGuiEventResult cGuiMgr::OnMouseMove(const int& x, const int& y, const eMouseKey
     if (kGER_None == rt)
     {
 		//控件本身
+		static POINT pos_screen;
+		::GetCursorPos(&pos_screen);
+		//printf("screen %d,%d\n", pos_screen.x, pos_screen.y);
 		if (CanDrag() && _bClicked && nFlag & LMK_LBUTTON)
 		{
 			// 处理拖动
 			int xx = 0, yy = 0;
 			GetPos(xx, yy);
 			// 其实这里应该要算上对话框的offset移动
-			_offsetX += (x - _dragX - xx);
-			_offsetY += (y - _dragY - yy);
+			_offsetX += (pos_screen.x - _dragX - xx);
+			_offsetY += (pos_screen.y - _dragY - yy);
 			//AddAllOffset(x - _dragX - xx, y - _dragY - yy);
 			SetPos(_offsetX, _offsetY);
 			return kGER_Processed;
@@ -136,15 +139,17 @@ eGuiEventResult cGuiMgr::OnLButtonDown(const int& x, const int& y, const unsigne
         }
     }
 
-	// 自身
-	//控件自身
-	if (IsAt(x, y))
+
+	//控件自身(转化成屏幕坐标)
+	static POINT pos_screen;
+	::GetCursorPos(&pos_screen);
+	if (IsAt(pos_screen.x, pos_screen.y))
 	{
 		_bClicked = true;
 		int xx = 0, yy = 0;
 		GetPos(xx, yy);
-		_dragX = x - xx;
-		_dragY = y - yy;
+		_dragX = pos_screen.x - xx;
+		_dragY = pos_screen.y - yy;
 
 		return kGER_Processed; //消息被捕获，不再往下传递
 	}

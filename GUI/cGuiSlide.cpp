@@ -55,7 +55,7 @@ cGuiSlide::~cGuiSlide()
 
 ////////////////
 void cGuiSlide::StartDrag(cGuiButton* pBtn, const int& x, const int& y){
-	printf("guiSlide start drag!\n");
+	printf("guiSlide start drag! %d, %d\n", x, y);
 	//调用自定义函数
 	_isDragging = true;
 	_x_screen_start_drag = x;
@@ -63,7 +63,7 @@ void cGuiSlide::StartDrag(cGuiButton* pBtn, const int& x, const int& y){
 }
 
 void cGuiSlide::EndDrag(cGuiButton* pBtn, const int& x, const int& y){
-	printf("guiSlied end drag!\n");
+	printf("guiSlide end drag!\n");
 	//调用自定义函数
 	_isDragging = false;
 }
