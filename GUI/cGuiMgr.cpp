@@ -2,11 +2,27 @@
 #include "cGuiMgr.h"
 #include "cCommonGuiHead.h"
 
-cGuiMgr::cGuiMgr():cGuiForm(nullptr){
+cGuiMgr::cGuiMgr(cGuiControl* pFather) :cGuiForm(pFather){
+	SetDrag(true);
+	SetID(10086);
 }
 
 cGuiMgr::~cGuiMgr(){
 
+}
+
+void cGuiMgr::SetPos(const int& x, const int& y)
+{
+	__super::SetPos(x, y);
+
+	::SetWindowPos(_hwnd, NULL, x, y, get_width(), get_height(), SWP_SHOWWINDOW);
+}
+
+void cGuiMgr::SetSize(const int& w, const int& h){
+	__super::SetWidth(w);
+	__super::SetHeight(h);
+
+	::SetWindowPos(_hwnd, NULL, GetScreenPosX(), GetScreenPosY(), get_width(), get_height(), SWP_SHOWWINDOW);
 }
 
 bool cGuiMgr::Init()
@@ -73,9 +89,31 @@ void cGuiMgr::Resort()
 /////// 消息处理
 eGuiEventResult cGuiMgr::OnMouseMove(const int& x, const int& y, const eMouseKeyStateMask& nFlag)
 {
-    return ForEachUIMsg2(&cGuiControl::OnMouseMove, x, y, nFlag);
+    eGuiEventResult rt = ForEachUIMsg2(&cGuiControl::OnMouseMove, x, y, nFlag);
 
-    //return 1;
+    if (kGER_None == rt)
+    {
+		//控件本身
+		if (CanDrag() && _bClicked && nFlag & LMK_LBUTTON)
+		{
+			// 处理拖动
+			int xx = 0, yy = 0;
+			GetPos(xx, yy);
+			// 其实这里应该要算上对话框的offset移动
+			_offsetX += (x - _dragX - xx);
+			_offsetY += (y - _dragY - yy);
+			//AddAllOffset(x - _dragX - xx, y - _dragY - yy);
+			SetPos(_offsetX, _offsetY);
+			return kGER_Processed;
+		}
+		else
+		{
+			_bClicked = false;
+			return kGER_None;
+		}
+    }
+
+	return rt;
 }
 
 eGuiEventResult cGuiMgr::OnMouseWheel(const int& x, const int& y, const int& delta, const eMouseKeyStateMask& state){
@@ -84,8 +122,6 @@ eGuiEventResult cGuiMgr::OnMouseWheel(const int& x, const int& y, const int& del
 
 eGuiEventResult cGuiMgr::OnLButtonDown(const int& x, const int& y, const unsigned int& nFlag)
 {
-    //return ForEachUIMsg2(&cGuiControl::OnLButtonDown, x, y, nFlag);
-
     for ( std::list<cGuiControl*>::iterator itr = _listCtrl.begin();
         itr != _listCtrl.end();
         ++itr)
@@ -100,19 +136,32 @@ eGuiEventResult cGuiMgr::OnLButtonDown(const int& x, const int& y, const unsigne
         }
     }
 
+	// 自身
+	//控件自身
+	if (IsAt(x, y))
+	{
+		_bClicked = true;
+		int xx = 0, yy = 0;
+		GetPos(xx, yy);
+		_dragX = x - xx;
+		_dragY = y - yy;
 
-//     if (_pRoot)
-//     {
-//         return _pRoot->OnLButtonDown(x, y, nFlag);
-//     }
-    return kGER_None;
+		return kGER_Processed; //消息被捕获，不再往下传递
+	}
+
+    //return kGER_None;
 }
 
 eGuiEventResult cGuiMgr::OnLButtonUp(const int& x, const int& y, const eMouseKeyStateMask& nFlag)
 {
-    return ForEachUIMsg2(&cGuiControl::OnLButtonUp, x, y, nFlag);
+    eGuiEventResult rt = ForEachUIMsg2(&cGuiControl::OnLButtonUp, x, y, nFlag);
 
-    //return 1;
+	if (rt == kGER_None)
+	{
+		rt = __super::OnLButtonUp(x, y, nFlag);
+	}
+
+	return rt;
 }
 
 eGuiEventResult cGuiMgr::OnChar(const unsigned int& wparam, const unsigned long& lparam){

@@ -153,7 +153,7 @@ eGuiEventResult cGuiButton::OnLButtonUp(const int& x, const int& y, const unsign
     SetTexture(_strImage[kBS_Normal].c_str());
     
     
-    return kGER_Processed;
+	return kGER_None;
 }
 
 /////// 消息的业务响应

@@ -297,6 +297,9 @@
     <ClCompile Include="Platform\Windows\win_char_code.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="Platform\Windows\win_form.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hsb.h">
@@ -520,6 +523,9 @@
     </ClInclude>
     <ClInclude Include="SpriteFactory.h">
       <Filter>Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Windows\win_form.hpp">
+      <Filter>Platform\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

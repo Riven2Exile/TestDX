@@ -383,6 +383,8 @@ eGuiEventResult cGuiControl::OnLButtonUp(const int& x, const int& y, const unsig
     if (IsShow() == false)
         return kGER_None;
 
+	_bClicked = false;
+
     for (std::list<cGuiControl*>::iterator itr = _listCtrl.begin(); 
         itr != _listCtrl.end(); 
         ++itr)

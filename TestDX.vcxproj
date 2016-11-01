@@ -374,6 +374,7 @@
     </ClCompile>
     <ClCompile Include="MsgMgr.cpp" />
     <ClCompile Include="Platform\Windows\win_char_code.cpp" />
+    <ClCompile Include="Platform\Windows\win_form.cpp" />
     <ClCompile Include="SDKwavefile.cpp" />
     <ClCompile Include="Spec\RoundProcess.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -474,6 +475,7 @@
     <ClInclude Include="lua\lvm.h" />
     <ClInclude Include="lua\lzio.h" />
     <ClInclude Include="MsgMgr.h" />
+    <ClInclude Include="Platform\Windows\win_form.hpp" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SDKwavefile.h" />
     <ClInclude Include="Spec\RoundProcess.h" />

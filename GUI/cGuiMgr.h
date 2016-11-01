@@ -11,13 +11,8 @@ class cGuiMgr : public cGuiForm
 {
     
 public:
-	cGuiMgr();
+	explicit cGuiMgr(cGuiControl* pFather);
     virtual ~cGuiMgr();
-
-//     static cGuiMgr& Instance(){
-//         static cGuiMgr inst;
-//         return inst;
-//     }
 
     bool Init();
 
@@ -34,6 +29,8 @@ public:
 	void SetWindowHandle(HWND h){
 		_hwnd = h;
 	}
+	virtual void SetPos(const int& x, const int& y);
+	void SetSize(const int& w, const int& h);
 
 	HWND GetWindowHandle() { return _hwnd; }
 

@@ -34,8 +34,8 @@ IDirectSoundBuffer *g_DSBuff = NULL;
 
 
 
-extern int g_nWidth = 1200;
-extern int g_nHeight = 800;
+extern int g_nWidth = 800;
+extern int g_nHeight = 600;
 
 
 // 图2
@@ -310,7 +310,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 	wcex.hIcon			= LoadIcon(hInstance, MAKEINTRESOURCE(IDI_TESTDX));
 	wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
-	wcex.lpszMenuName	= MAKEINTRESOURCE(IDC_TESTDX);
+	wcex.lpszMenuName	= NULL/*MAKEINTRESOURCE(IDC_TESTDX)*/; //不要菜单
 	wcex.lpszClassName	= szWindowClass;
 	wcex.hIconSm		= LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -344,7 +344,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 
     RECT rc = {0,0,g_nWidth,g_nHeight};
-    AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, TRUE);
+    //AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, TRUE);
 
 
     //////// 试着创建对话框!!
@@ -362,11 +362,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
     hWnd = CreateWindow(szWindowClass, 
         szTitle, 
-        WS_OVERLAPPEDWINDOW,
+		WS_VISIBLE/*WS_OVERLAPPEDWINDOW*/,
         CW_USEDEFAULT, 
         0, 
-        rc.right-rc.left, 
-        rc.bottom-rc.top, 
+		g_nWidth, //rc.right-rc.left, 
+		g_nHeight, //rc.bottom-rc.top, 
         NULL, 
         NULL, 
         hInstance,
@@ -379,13 +379,14 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     }
 
 	// 可以改变窗口风格
-// 	LONG nLong = GetWindowLongA(hWnd,GWL_STYLE);
-// 	SetWindowLongA(hWnd, GWL_STYLE, nLong & (/*WS_OVERLAPPED |*/ WS_VISIBLE| WS_SYSMENU |WS_MINIMIZEBOX|WS_MAXIMIZEBOX/*|WS_CLIPCHILDREN|WS_CLIPSIBLINGS*/) );
-// 	
-// 	nLong = GetWindowLongA(hWnd, GWL_EXSTYLE);
-// 	SetWindowLongA(hWnd, GWL_EXSTYLE, nLong & (WS_EX_LEFT |WS_EX_LTRREADING |WS_EX_RIGHTSCROLLBAR));
-// 	
-// 	SetWindowPos(hWnd, NULL, 100, 100, g_nWidth, g_nHeight, SWP_SHOWWINDOW);
+	LONG nLong = GetWindowLongA(hWnd,GWL_STYLE);
+	nLong = nLong & ~WS_SYSMENU;
+	nLong = nLong & ~WS_CAPTION;
+	SetWindowLongA(hWnd, GWL_STYLE, nLong & (/*WS_OVERLAPPED |*/ WS_VISIBLE/*| WS_SYSMENU | WS_MINIMIZEBOX|WS_MAXIMIZEBOX *//*|WS_CLIPCHILDREN|WS_CLIPSIBLINGS*/) );
+	
+	nLong = GetWindowLongA(hWnd, GWL_EXSTYLE);
+	SetWindowLongA(hWnd, GWL_EXSTYLE, nLong & (WS_EX_LEFT |WS_EX_LTRREADING |WS_EX_RIGHTSCROLLBAR));
+	SetWindowPos(hWnd, NULL, 100, 100, g_nWidth, g_nHeight, SWP_SHOWWINDOW);
 
 
     // D3D的初始化
@@ -496,8 +497,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     // 
    
    CGameMain::Instance().SetWindowsHandle(hWnd);
-   CGameMain::Instance().SetWndSize(rc.right-rc.left, rc.bottom-rc.top);
-   CGameMain::Instance().SetPos(0, 0);
+   CGameMain::Instance().SetPos(100, 100);
+   CGameMain::Instance().SetWndSize(g_nWidth, g_nHeight);
+   
 
     // 读取纹理
  //   D3DXCreateTextureFromFileA(g_pDevice, "Riven_Splash_0.jpg", &g_pTexture);

@@ -27,7 +27,7 @@ extern CCamera g_camera;
 
 
 
-CGameMain::CGameMain() //: _gui(cGuiMgr::Instance())
+CGameMain::CGameMain() : _gui(NULL)
 {
     
 
@@ -344,8 +344,7 @@ void CGameMain::init()
 }
 
 void CGameMain::SetWndSize(int width, int height){
-	_gui.SetWidth(width);
-	_gui.SetHeight(height);
+	_gui.SetSize(width, height);
 	_gui.SetAlpha(0);
 }
 
@@ -355,7 +354,7 @@ void CGameMain::SetWindowsHandle(HWND h){
 
 void CGameMain::SetPos(const int& x, const int& y){
 	// …Ë÷√windows Œª÷√
-	::SetWindowPos(_gui.GetWindowHandle(), NULL, x, y, _gui.get_width(), _gui.get_height(), SWP_SHOWWINDOW);
+	_gui.SetPos(x, y);
 }
 
 void CGameMain::AddGui(cGuiControl* pCtrl)
