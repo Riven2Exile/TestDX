@@ -300,6 +300,9 @@
     <ClCompile Include="Platform\Windows\win_form.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="Platform\Windows\win_clipboard.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hsb.h">
@@ -525,6 +528,9 @@
       <Filter>Mine</Filter>
     </ClInclude>
     <ClInclude Include="Platform\Windows\win_form.hpp">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Windows\win_clipboard.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
   </ItemGroup>

@@ -18,6 +18,7 @@
 #include "GUI\Text\TextInterface.h"
 #include "GUI\cGuiText.h"
 #include "GUI\cCommonGuiHead.h"
+#include "Platform\Windows\win_clipboard.h"
 
 
 extern IDirect3DDevice9 *g_pDevice;
@@ -69,12 +70,6 @@ void CGameMain::init()
     srand(time(NULL));  //设置种子
 
     //m_test.Clip();
-
-	// 一些编码
-	
-// 	byte a = 0x41;
-// 	byte a2[2] = {0x80, 0x41};
-// 	printf("%s  %s \n", &a, a2);
 
 
     //// 加载一些纹理..
@@ -199,7 +194,6 @@ void CGameMain::init()
     m_pCtrlTest->SetOffSet(300, 10);
     m_pCtrlTest->SetWidth(27);
     m_pCtrlTest->SetHeight(27);
-    //m_pCtrlTest->SetTexture("close1");
     m_pCtrlTest->SetID(110);
     m_pCtrlTest->SetBtnStateImage(cGuiButton::kBS_Normal, "close1");
     m_pCtrlTest->SetBtnStateImage(cGuiButton::kBS_MouseOn, "close2");
@@ -209,7 +203,6 @@ void CGameMain::init()
 
 	cGuiProgress* pPro = new cGuiProgress(m_pDlgTest);
 	pPro->SetOffSet(0, 0);
-	//pPro->SetOffSet(100, 60);
 	pPro->SetWidth(140);
 	pPro->SetHeight(9);
 	pPro->SetBackImage("pB");
@@ -230,7 +223,7 @@ void CGameMain::init()
 // 		CGameMain::Instance().SetPos(x, y);
 	});
     pBtnTemp->Show();
-	pBtnTemp->SetDrag(true);
+	//pBtnTemp->SetDrag(true);
 	pBtnTemp->SetOffSet(100, 90);
     pBtnTemp->SetID(111);
 
@@ -287,7 +280,9 @@ void CGameMain::init()
 	pEdit->SetHeight(22);
 	pEdit->SetOffSet(150,40);
 
-
+	pBtnTemp->SetClickFun([pEdit](cGuiButton*){
+		CWinClipBoard::Instance().Copy(pEdit->GetText());
+	});
 
 	m_pDlgTest->AddControl(m_pCtrlTest); //关闭按钮
 	m_pDlgTest->AddControl(pPro);

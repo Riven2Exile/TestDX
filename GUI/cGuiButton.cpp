@@ -7,7 +7,7 @@ cGuiButton::cGuiButton(cGuiControl* pFather):cGuiControl(pFather)
     SetCtrlType(kCT_GuiButton);
 
     _btnState = kBS_Normal;
-    _pFun = NULL;
+    _pFun = nullptr;
 }
 
 cGuiButton::~cGuiButton()
@@ -157,7 +157,7 @@ eGuiEventResult cGuiButton::OnLButtonUp(const int& x, const int& y, const unsign
 }
 
 /////// 消息的业务响应
-void cGuiButton::SetClickFun(CtrlClickFun pF)
+void cGuiButton::SetClickFun(Fun_Btn pF)
 {
     _pFun = pF;
 }
@@ -177,7 +177,7 @@ int cGuiButton::OnBtnClicked()
     printf("cGuiButton::OnBtnClicked\n");
     if (_pFun)
     {
-        (this->*_pFun)(GetID());
+        _pFun(this);
     }
     return 1;
 }

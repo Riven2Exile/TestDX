@@ -15,7 +15,7 @@ public:
 
     void Init();
 
-    void OnButtonClick(int id);
+	void OnButtonClick(cGuiButton *pBtn);
 	
 
 private:

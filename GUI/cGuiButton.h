@@ -7,7 +7,7 @@
 
 class cGuiButton;
 
-typedef void (cGuiControl::*CtrlClickFun)(int);
+// typedef void (cGuiControl::*CtrlClickFun)(int);
 typedef std::function<void(cGuiButton* pBtn)> Fun_Btn;
 typedef std::function<void(cGuiButton*, const int&, const int&)> Fun_BtnMouse;
 
@@ -37,7 +37,7 @@ public:
     eGuiEventResult OnLButtonUp(const int& x, const int& y, const unsigned int& nFlag);
 
     ///// 消息业务响应
-    void SetClickFun(CtrlClickFun);
+	void SetClickFun(Fun_Btn func);
 	void SetPressDownFun(Fun_BtnMouse func);
 	void SetPressUpFun(Fun_BtnMouse func);
 	void SetPressedMouseMoveFun(Fun_BtnMouse func);
@@ -48,7 +48,7 @@ private:
 
     /////// 消息的业务响应..
     int OnBtnClicked();
-    CtrlClickFun _pFun;
+	Fun_Btn _pFun;
 
 	Fun_BtnMouse _pFunPressDown;
 	Fun_BtnMouse _pFunPressUp;

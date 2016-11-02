@@ -21,12 +21,12 @@ void CTestLogicDlg::Init()
 {
     ////
     _btn = (cGuiButton *)FindControl(110);
-    _btnAdd = (cGuiButton *)FindControl(111);
+    //_btnAdd = (cGuiButton *)FindControl(111);
 	_edit_ctrl = (cGuiEdit*)FindControl(108);
 
     //// 控件注册函数... 函数为成员函数 m_btn->SetClickFun(CTestLogicDlg::funName);
-    if(_btn)_btn->SetClickFun((CtrlClickFun)&CTestLogicDlg::OnButtonClick);
-    if(_btnAdd) _btnAdd->SetClickFun((CtrlClickFun)&CTestLogicDlg::OnButtonClick);
+    if(_btn)_btn->SetClickFun(std::bind( &CTestLogicDlg::OnButtonClick, this, std::placeholders::_1));
+    //if(_btnAdd) _btnAdd->SetClickFun(std::bind( &CTestLogicDlg::OnButtonClick, this,std::placeholders::_1));
 
 	if (_edit_ctrl)
 	{
@@ -36,8 +36,9 @@ void CTestLogicDlg::Init()
 }
 
 // 可以多个按钮用同一个响应函数
-void CTestLogicDlg::OnButtonClick(int id)
+void CTestLogicDlg::OnButtonClick(cGuiButton *pBtn)
 {
+	int id = pBtn->GetID();
     if (id == 110)
     {
         printf("CTestLogicDlg::OnButtonClick 110\n");

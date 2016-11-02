@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "YanZhengMa\YanZheng.h"
 #include "SDKwavefile.h"
+#include "Platform\Windows\win_clipboard.h"
 
 #define MAX_LOADSTRING 100
 
@@ -388,6 +389,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	SetWindowLongA(hWnd, GWL_EXSTYLE, nLong & (WS_EX_LEFT |WS_EX_LTRREADING |WS_EX_RIGHTSCROLLBAR));
 	SetWindowPos(hWnd, NULL, 100, 100, g_nWidth, g_nHeight, SWP_SHOWWINDOW);
 
+	CWinClipBoard::Instance().SetHandle(hWnd); //设置剪切板
 
     // D3D的初始化
     g_pD3D9 = Direct3DCreate9( D3D_SDK_VERSION ); // 初始化 D3D接口
