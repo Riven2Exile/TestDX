@@ -23,7 +23,7 @@ struct VertexS{
         _u = u;
         _v = v;
     }
-    VertexS(){} //没有实现
+	VertexS(){ _u = 0.0f; _v = 0.0f; color = 0xffffffff; rhw = 1.0f; z = 1.0f; x = 0.0f, y = 0.0f; } //没有实现
 };
 
 

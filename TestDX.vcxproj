@@ -167,6 +167,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="GUI\draw\draw_something.cpp" />
     <ClCompile Include="GUI\Manager\GameGuiManager.cpp" />
     <ClCompile Include="GUI\Manager\GuiContainer.cpp" />
     <ClCompile Include="GUI\Manager\GuiLayoutFileMgr.cpp" />
@@ -179,6 +180,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="LineSprite.cpp" />
     <ClCompile Include="LuaMgr.cpp" />
     <ClCompile Include="lua\lapi.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -443,6 +445,7 @@
     <ClInclude Include="GUI\cGuiScroll.h" />
     <ClInclude Include="GUI\cGuiSlide.h" />
     <ClInclude Include="GUI\cGuiText.h" />
+    <ClInclude Include="GUI\draw\draw_something.h" />
     <ClInclude Include="GUI\Manager\GameGuiManager.h" />
     <ClInclude Include="GUI\Manager\GuiContainer.h" />
     <ClInclude Include="GUI\Manager\GuiLayoutFileMgr.h" />
@@ -451,6 +454,7 @@
     <ClInclude Include="GUI\Text\TextMgr.h" />
     <ClInclude Include="hsb.h" />
     <ClInclude Include="iSprite.h" />
+    <ClInclude Include="LineSprite.h" />
     <ClInclude Include="LuaMgr.h" />
     <ClInclude Include="lua\lapi.h" />
     <ClInclude Include="lua\lauxlib.h" />

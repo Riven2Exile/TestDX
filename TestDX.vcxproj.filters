@@ -67,6 +67,9 @@
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{99c3a843-194c-44e6-b368-244d6bbfbf09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUI\draw">
+      <UniqueIdentifier>{b09b1ed9-0e0c-445f-8c83-036323c82def}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="hsb.cpp">
@@ -303,6 +306,12 @@
     <ClCompile Include="Platform\Windows\win_clipboard.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="GUI\draw\draw_something.cpp">
+      <Filter>GUI\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="LineSprite.cpp">
+      <Filter>Mine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hsb.h">
@@ -532,6 +541,12 @@
     </ClInclude>
     <ClInclude Include="Platform\Windows\win_clipboard.h">
       <Filter>Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\draw\draw_something.h">
+      <Filter>GUI\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="LineSprite.h">
+      <Filter>Mine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
