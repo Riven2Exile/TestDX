@@ -56,8 +56,8 @@
 
 #else
 
-#pragma comment(lib, "D:\\Cplusplus_Workplace\\TestDX\\Lib\\d3d9.lib")
-#pragma comment(lib, "D:\\Cplusplus_Workplace\\TestDX\\Lib\\D3dx9.lib")
+#pragma comment(lib, "lib\\d3d9.lib")
+#pragma comment(lib, "lib\\D3dx9.lib")
 
 #endif // _DEBUG
 

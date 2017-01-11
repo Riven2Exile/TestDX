@@ -312,6 +312,9 @@
     <ClCompile Include="LineSprite.cpp">
       <Filter>Mine</Filter>
     </ClCompile>
+    <ClCompile Include="Platform\Windows\wm_crash_dump.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hsb.h">
@@ -547,6 +550,9 @@
     </ClInclude>
     <ClInclude Include="LineSprite.h">
       <Filter>Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Windows\wm_crash_dump.h">
+      <Filter>Platform\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

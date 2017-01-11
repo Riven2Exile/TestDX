@@ -121,15 +121,16 @@
     </ClCompile>
     <ClCompile Include="GUI\cGuiContainer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="GUI\cGuiControl.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="GUI\cGuiEdit.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="GUI\cGuiForm.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -145,6 +146,7 @@
     </ClCompile>
     <ClCompile Include="GUI\cGuiList.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="GUI\cGuiMgr.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
@@ -378,6 +380,7 @@
     <ClCompile Include="Platform\Windows\win_char_code.cpp" />
     <ClCompile Include="Platform\Windows\win_clipboard.cpp" />
     <ClCompile Include="Platform\Windows\win_form.cpp" />
+    <ClCompile Include="Platform\Windows\wm_crash_dump.cpp" />
     <ClCompile Include="SDKwavefile.cpp" />
     <ClCompile Include="Spec\RoundProcess.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -388,6 +391,7 @@
     <ClCompile Include="Spec\TestLogicDlg.cpp" />
     <ClCompile Include="SpriteFactory.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -482,6 +486,7 @@
     <ClInclude Include="MsgMgr.h" />
     <ClInclude Include="Platform\Windows\win_clipboard.h" />
     <ClInclude Include="Platform\Windows\win_form.hpp" />
+    <ClInclude Include="Platform\Windows\wm_crash_dump.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SDKwavefile.h" />
     <ClInclude Include="Spec\RoundProcess.h" />
