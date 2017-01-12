@@ -7,6 +7,7 @@
 #include "YanZhengMa\YanZheng.h"
 #include "SDKwavefile.h"
 #include "Platform\Windows\win_clipboard.h"
+#include "Platform\Windows\wm_crash_dump.h"
 
 #define MAX_LOADSTRING 100
 
@@ -330,6 +331,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     //strPath.Find()
     printf("Î»ÖÃ: %s \n Ä¿Â¼: %s\n", szPath, strPath.c_str());
     ::SetCurrentDirectoryA(strPath.c_str());
+
+	CCrashDump dump;
 
     HWND hWnd;
     hInst = hInstance; // Store instance handle in our global variable

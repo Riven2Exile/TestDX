@@ -19,6 +19,7 @@
 #include "GUI\cGuiText.h"
 #include "GUI\cCommonGuiHead.h"
 #include "Platform\Windows\win_clipboard.h"
+#include "GUI\draw\draw_something.h"
 
 
 extern IDirect3DDevice9 *g_pDevice;
@@ -407,6 +408,12 @@ void CGameMain::draw()
 
         //m_AniAuto.draw(); //¶¯»­
         //m_pDlgTest->Draw();
+
+// 		set_current_line_color(0xff00ff00);
+// 		draw_line(10, 10, 200, 10);
+// 
+// 		draw_rect_frame(20, 20, 200, 200);
+
         _gui.Draw();
 
         _pTWorld->draw();
