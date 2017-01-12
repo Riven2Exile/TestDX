@@ -489,13 +489,11 @@ void CGameMain::OnChar(const WPARAM& wParam, const LPARAM& lParam)
 {
     ///// 字符的ascii码 
     //printf("char: %c\n", wParam);
-#ifdef _DEBUG
 
 	_gui.OnChar(wParam, lParam);
 	
 
 	// 先当做32位
-#endif
 }
 
 extern float g_light;

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "TestLogicDlg.h"
+#include "TestCrash.h"
 
 /*
 不同控件的响应形式不一样, 响应的话，可能应该需要在不同的子类去做
@@ -8,7 +9,7 @@
 
 
 CTestLogicDlg::CTestLogicDlg(cGuiControl* pFather) : cGuiForm(pFather){
-
+	pTestCrash = new CTestCrash;
 }
 
 CTestLogicDlg::~CTestLogicDlg()
@@ -42,10 +43,14 @@ void CTestLogicDlg::OnButtonClick(cGuiButton *pBtn)
     if (id == 110)
     {
         printf("CTestLogicDlg::OnButtonClick 110\n");
+
+		int n = atoi(_edit_ctrl->GetText());
+		pTestCrash->set_crash((CTestCrash::CrashType)n);
     }
     else if (id == 111)
     {
         // todo: 进度条加
+		
     }
     //return 1;
 }

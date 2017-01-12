@@ -315,6 +315,9 @@
     <ClCompile Include="Platform\Windows\wm_crash_dump.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="Spec\TestCrash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hsb.h">
@@ -553,6 +556,9 @@
     </ClInclude>
     <ClInclude Include="Platform\Windows\wm_crash_dump.h">
       <Filter>Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Spec\TestCrash.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

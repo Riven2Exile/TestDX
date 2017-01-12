@@ -388,6 +388,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Spec\TestCrash.cpp" />
     <ClCompile Include="Spec\TestLogicDlg.cpp" />
     <ClCompile Include="SpriteFactory.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -490,6 +491,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SDKwavefile.h" />
     <ClInclude Include="Spec\RoundProcess.h" />
+    <ClInclude Include="Spec\TestCrash.h" />
     <ClInclude Include="Spec\TestLogicDlg.h" />
     <ClInclude Include="SpriteFactory.h" />
     <ClInclude Include="stdafx.h" />

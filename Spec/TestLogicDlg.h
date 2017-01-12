@@ -5,7 +5,7 @@
 
 class cGuiButton;
 class cGuiEdit;
-
+class CTestCrash;
 
 class CTestLogicDlg : public cGuiForm
 {
@@ -24,6 +24,9 @@ private:
     cGuiButton* _btn;
     cGuiButton* _btnAdd;
 	cGuiEdit* _edit_ctrl;
+
+
+	CTestCrash *pTestCrash;
 };
 
 

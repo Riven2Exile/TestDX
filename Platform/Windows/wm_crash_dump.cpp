@@ -117,7 +117,7 @@ DWORD WINAPI CCrashDump::threadFunc(LPVOID lpParam)
 
     TCHAR chDumpModule[MAX_PATH] = {0};
 
-    wsprintf(chDumpModule, L"%s%s%s-%x", DUMP_PATH, "my_app"/*AfxGetApp()->m_pszExeName*/, "_ver_"/*GetVersion().GetString()*/, ExceptionInfo->ExceptionRecord->ExceptionAddress);
+    wsprintf(chDumpModule, L"%s%s%s-%x", DUMP_PATH, L"my_app"/*AfxGetApp()->m_pszExeName*/, L"_ver_"/*GetVersion().GetString()*/, ExceptionInfo->ExceptionRecord->ExceptionAddress);
 
     AddTime(chDumpModule);
     HANDLE hFile = CreateFile(
