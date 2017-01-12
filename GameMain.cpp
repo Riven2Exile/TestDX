@@ -393,7 +393,7 @@ void CGameMain::draw()
 
 		Textinterface_ResetTextoutOneFrame();
 
-        g_pDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0xffaaaaaa, 1.0f, 0);
+		g_pDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0xfff3f2ee, 1.0f, 0);
 
         g_pDevice->BeginScene();
 
